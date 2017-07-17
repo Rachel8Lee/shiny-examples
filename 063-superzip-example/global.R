@@ -32,9 +32,9 @@ simp_full_dur <- read.csv("data/simp_data_full_vol_90_duration.csv")
 simp_imp_dur <- read.csv("data/simp_data_full_vol_90_duration.csv")
 
 # FULL YEAR INTRA
-simp_full_intra <- read.csv("data/simp_data_full_vol_90_intraanual_frequency.csv")
+simp_full_intra <- read.csv("data/simp_data_full_vol_90_intraannual_frequency.csv")
 # POST IMP INTRA
-simp_imp_intra <- read.csv("data/simp_data_imp_vol_90_intraanual_frequency.csv")
+simp_imp_intra <- read.csv("data/simp_data_imp_vol_90_intraannual_frequency.csv")
 
 allzips$college <- allzips$college * 100
 allzips$zipcode <- formatC(allzips$zipcode, width=7, format="d", flag="0")

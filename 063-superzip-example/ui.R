@@ -12,8 +12,7 @@ site_type <- c(
   "Include both" = "full"
 )
 
-# metric
-vars <- c(
+metric <- c(
   "Magnitude" = "avg",
   "Duration" = "duration",
   "Inter-Annual Frequency" = "college",
@@ -21,7 +20,7 @@ vars <- c(
   "Timing" = "adultpop"
 )
 
-yeartype <- c(
+year_type <- c(
   "All" = "all",
   "Above Normal" = "AN",
   "Below Normal" = "BN",
@@ -48,12 +47,10 @@ navbarPage("Availability of high-magnitude streamflow for groundwater banking in
         width = 330, height = "auto",
 
         h2("Site Manager"),
+        selectInput("record length","Record Length", record_length), 
         selectInput("sites", "Sites Included", site_type),
-        selectInput("color", "Color", vars),
-        selectInput("size", "Size", vars, selected = "avg"),
-        conditionalPanel("input.color == 'avg' || input.size == 'avg'",
-          # Only prompt for threshold when coloring or sizing by superzip
-          numericInput("threshold", "SuperZIP threshold (top n percentile)", 5)
+        selectInput("yeartype", "Year Type", year_type),
+        selectInput("metric", "Metric", metric, selected = "avg"),
         ),
 
         plotOutput("histCentile", height = 200),

@@ -78,12 +78,12 @@ function(input, output, session) {
       pal <- colorFactor(palette=colorlist, domain=seq(1,11,1), na.color="black")
 #    }
 
-    if (sizeBy == "avg") {
+    #if (sizeBy == "avg") {
       # Radius is treated specially in the "superzip" case.
-      radius <- ifelse(zipdata$centile >= (100 - input$threshold), 30000, 3000)
-    } else {
+     # radius <- ifelse(zipdata$centile >= (100 - input$threshold), 30000, 3000)
+    #} else {
       radius <- zipdata[[sizeBy]] / max(zipdata[[sizeBy]]) * 30000
-    }
+    #}
 library(gplots)
     leafletProxy("map", data = zipdata) %>%
       clearShapes() %>%

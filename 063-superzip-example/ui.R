@@ -9,9 +9,10 @@ record_length <- c(
 site_type <- c(
   "Impaired" = "impaired",
   "Unimpaired" = "unimpaired",
-  "Full" = "full"
+  "Include both" = "full"
 )
 
+# metric
 vars <- c(
   "Magnitude" = "avg",
   "Duration" = "duration",
@@ -19,6 +20,14 @@ vars <- c(
   "Intra-Annual Frequency" = "intraanual_frequency",
   "Timing" = "adultpop"
 )
+
+yeartype <- c(
+  "All" = "all",
+  "Above Normal" = "AN",
+  "Below Normal" = "BN",
+  "Critical" = "C",
+  "Dry" = "D"
+) 
 
 navbarPage("Availability of high-magnitude streamflow for groundwater banking in the Central Valley, California", id="nav",
 

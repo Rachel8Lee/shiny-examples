@@ -9,9 +9,9 @@ site_type <- c(
 
 vars <- c(
   "Magnitude" = "avg",
-  "Duration" = "centile",
+  "Duration" = "duration",
   "Inter-Annual Frequency" = "college",
-  "Intra-Annual Frequency" = "income",
+  "Intra-Annual Frequency" = "intraanual_frequency",
   "Timing" = "adultpop"
 )
 

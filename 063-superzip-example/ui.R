@@ -50,7 +50,7 @@ navbarPage("Availability of high-magnitude streamflow for groundwater banking in
         selectInput("record length","Record Length", record_length), 
         selectInput("sites", "Sites Included", site_type),
         selectInput("yeartype", "Year Type", year_type),
-        selectInput("metric", "Metric", metric, selected = "avg"),
+        selectInput("metric", "Metric", metric),
 
         plotOutput("histCentile", height = 200),
         plotOutput("scatterCollegeIncome", height = 250),

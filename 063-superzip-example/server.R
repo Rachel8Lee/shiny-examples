@@ -63,16 +63,11 @@ function(input, output, session) {
    observe({
     colorBy <- input$metric
     sizeBy <- input$metric
-	##add if statement for  metric variables
+	#add if statement for  metric variables
 	colorlist <-  c("black","orangered","khaki1","olivedrab1","chartreuse3","green4","aquamarine2","deepskyblue4","blue","royalblue4","navyblue")
 	bounds <- c(0,1000,10000,50000,125000,200000,400000,800000,1500000,2500000,3500000)
 	labs <-  c("0","1 AF - 1 TAF","1000 - 10000","10000 - 50000","50000 - 125000","125000 - 200000","200000 - 400000","400000 - 800000","800000 - 1500000","1500000 - 2500000","2500000 - 3500000")
-#    if (colorBy == "avg") {
-#      # Color and palette are treated specially in the "superzip" case, because
-#      # the values are categorical instead of continuous.
-#      colorData <- ifelse(zipdata$centile >= (100 - input$threshold), "yes", "no")
-#      pal <- colorFactor("viridis", colorData)
-#    } else {
+
       colorData <- zipdata[[colorBy]]
 	  classdata <- rep(NA,length(colorData))
 	  classdata[which(colorData== bounds[[1]])] <- 1
@@ -83,19 +78,19 @@ function(input, output, session) {
       pal <- colorFactor(palette=colorlist, domain=seq(1,11,1), na.color="black")
 #    }
 
-#    if (sizeBy == "avg") {
-#      # Radius is treated specially in the "superzip" case.
-#      radius <- ifelse(zipdata$centile >= (100 - input$threshold), 30000, 3000)
-#    } else {
-      radius <-  3000
-#    }
+    if (sizeBy == "avg") {
+      # Radius is treated specially in the "superzip" case.
+      radius <- ifelse(zipdata$centile >= (100 - input$threshold), 30000, 3000)
+    } else {
+      radius <- zipdata[[sizeBy]] / max(zipdata[[sizeBy]]) * 30000
+    }
 library(gplots)
     leafletProxy("map", data = zipdata) %>%
       clearShapes() %>%
       addCircles(~longitude, ~latitude, radius=radius, layerId=~zipcode,
         stroke=FALSE, fillOpacity=1, fillColor=pal(classdata)) %>%
       addLegend("bottomleft", values=seq(1,11,1), colors=col2hex(colorlist), title=colorBy,
-        layerId="colorLegend", opacity=1, labels=labs)
+        layerId="colorLegend", opacity=0.9, labels=labs)
 	
   })
 

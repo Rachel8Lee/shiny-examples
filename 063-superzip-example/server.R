@@ -49,8 +49,6 @@ function(input, output, session) {
       xlab = "X Lavel",
       xlim = range(allzips$centile),
       col = '#00DD00',
-    
- Edit file  
       border = 'white')
   })
 

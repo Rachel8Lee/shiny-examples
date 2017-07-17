@@ -49,6 +49,8 @@ function(input, output, session) {
       xlab = "X Lavel",
       xlim = range(allzips$centile),
       col = '#00DD00',
+    
+ Edit file  
       border = 'white')
   })
 
@@ -90,7 +92,7 @@ library(gplots)
       addCircles(~longitude, ~latitude, radius=radius, layerId=~zipcode,
         stroke=FALSE, fillOpacity=1, fillColor=pal(classdata)) %>%
       addLegend("bottomleft", values=seq(1,11,1), colors=col2hex(colorlist), title=colorBy,
-        layerId="colorLegend", opacity=0.9, labels=labs)
+        layerId="colorLegend", opacity=0.75, labels=labs)
 	
   })
 

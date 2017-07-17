@@ -84,24 +84,23 @@ function(input, output, session) {
 
     leafletProxy("map", data = zipdata) %>%
       clearShapes() %>%
-      addCircles(~longitude, ~latitude, radius=radius, layerId=~zipcode,
+      addCircles(~longitude, ~latitude, radius=radius, layerId=~site_no,
         stroke=FALSE, fillOpacity=0.4, fillColor=pal(colorData)) %>%
       addLegend("bottomleft", pal=pal, values=colorData, title=colorBy,
         layerId="colorLegend")
   })
 
   # Show a popup at the given location
-  showZipcodePopup <- function(zipcode, lat, lng) {
-    selectedZip <- allzips[allzips$zipcode == zipcode,]
+  showZipcodePopup <- function(site_no, lat, lng) {
+    selectedZip <- allzips[allzips$site_no == site_no,]
     content <- as.character(tagList(
-      tags$h4("Site Number:", as.integer(selectedZip$zipcode)),
-      tags$br(),
+      tags$h4("Site Number:", as.integer(selectedZip$site_no)), tags$br(),
       sprintf("Station Name: %s", selectedZip$statname), tags$br(),
       sprintf("Longitude: %s", selectedZip$longitude), tags$br(),
       sprintf("Latitude: %s", selectedZip$latitude), tags$br(),
       sprintf("Status: Impaired or Unimpaired")
     ))
-    leafletProxy("map") %>% addPopups(lng, lat, content, layerId = zipcode)
+    leafletProxy("map") %>% addPopups(lng, lat, content, layerId = site_no)
   }
 
   # When map is clicked, show a popup with city info
@@ -132,16 +131,16 @@ function(input, output, session) {
   })
 
   observe({
-    zipcodes <- if (is.null(input$states)) character(0) else {
+    site_nos <- if (is.null(input$states)) character(0) else {
       cleantable %>%
         filter(State %in% input$states,
           is.null(input$cities) | City %in% input$cities) %>%
-        `$`('Zipcode') %>%
+        `$`('Site_No') %>%
         unique() %>%
         sort()
     }
-    stillSelected <- isolate(input$zipcodes[input$zipcodes %in% zipcodes])
-    updateSelectInput(session, "zipcodes", choices = zipcodes,
+    stillSelected <- isolate(input$site_nos[input$site_nos %in% site_nos])
+    updateSelectInput(session, "site_nos", choices = site_nos,
       selected = stillSelected)
   })
 
@@ -167,9 +166,9 @@ function(input, output, session) {
         Score <= input$maxScore,
         is.null(input$states) | State %in% input$states,
         is.null(input$cities) | City %in% input$cities,
-        is.null(input$zipcodes) | Zipcode %in% input$zipcodes
+        is.null(input$site_nos) | Site_No %in% input$site_nos
       ) %>%
-      mutate(Action = paste('<a class="go-map" href="" data-lat="', Lat, '" data-long="', Long, '" data-zip="', Zipcode, '"><i class="fa fa-crosshairs"></i></a>', sep=""))
+      mutate(Action = paste('<a class="go-map" href="" data-lat="', Lat, '" data-long="', Long, '" data-zip="', Site_No, '"><i class="fa fa-crosshairs"></i></a>', sep=""))
     action <- DT::dataTableAjax(session, df)
 
     DT::datatable(df, options = list(ajax = list(url = action)), escape = FALSE)

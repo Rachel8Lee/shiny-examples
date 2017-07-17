@@ -59,48 +59,57 @@ function(input, output, session) {
     print(xyplot(income ~ college, data = zipsInBounds(), xlim = range(allzips$college), ylim = range(allzips$income)))
   })
 
-  # This observer is responsible for maintaining the circles and legend,
-  # according to the variables the user has chosen to map to color and size.
-  observe({
+   observe({
     colorBy <- input$metric
     sizeBy <- input$metric
-
-    if (colorBy == "superzip") {
-      # Color and palette are treated specially in the "superzip" case, because
-      # the values are categorical instead of continuous.
-      colorData <- ifelse(zipdata$centile >= (100 - input$threshold), "yes", "no")
-      pal <- colorFactor("viridis", colorData)
-    } else {
+	##add if statement for  metric variables
+	colorlist <-  c("black","orangered","khaki1","olivedrab1","chartreuse3","green4","aquamarine2","deepskyblue4","blue","royalblue4","navyblue")
+	bounds <- c(0,1000,10000,50000,125000,200000,400000,800000,1500000,2500000,3500000)
+	labs <-  c("0","1 AF - 1 TAF","1000 - 10000","10000 - 50000","50000 - 125000","125000 - 200000","200000 - 400000","400000 - 800000","800000 - 1500000","1500000 - 2500000","2500000 - 3500000")
+#    if (colorBy == "avg") {
+#      # Color and palette are treated specially in the "superzip" case, because
+#      # the values are categorical instead of continuous.
+#      colorData <- ifelse(zipdata$centile >= (100 - input$threshold), "yes", "no")
+#      pal <- colorFactor("viridis", colorData)
+#    } else {
       colorData <- zipdata[[colorBy]]
-      pal <- colorBin("viridis", colorData, 7, pretty = FALSE)
-    }
+	  classdata <- rep(NA,length(colorData))
+	  classdata[which(colorData== bounds[[1]])] <- 1
+	  for(i in 2:length(bounds)){
+		  classdata[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- i
+	  }
+#		levs <- factor(seq(1,11,1), levels=seq(1,11,1), labels=as.character(bounds))
+      pal <- colorFactor(palette=colorlist, domain=seq(1,11,1), na.color="black")
+#    }
 
-    if (sizeBy == "avg") {
-      # Radius is treated specially in the "superzip" case.
-      radius <- ifelse(zipdata$centile >= (100 - input$threshold), 30000, 3000)
-    } else {
-      radius <- zipdata[[sizeBy]] / max(zipdata[[sizeBy]]) * 30000
-    }
-
+#    if (sizeBy == "avg") {
+#      # Radius is treated specially in the "superzip" case.
+#      radius <- ifelse(zipdata$centile >= (100 - input$threshold), 30000, 3000)
+#    } else {
+      radius <-  3000
+#    }
+library(gplots)
     leafletProxy("map", data = zipdata) %>%
       clearShapes() %>%
-      addCircles(~longitude, ~latitude, radius=radius, layerId=~site_no,
-        stroke=FALSE, fillOpacity=0.4, fillColor=pal(colorData)) %>%
-      addLegend("bottomleft", pal=pal, values=colorData, title=colorBy,
-        layerId="colorLegend")
+      addCircles(~longitude, ~latitude, radius=radius, layerId=~zipcode,
+        stroke=FALSE, fillOpacity=1, fillColor=pal(classdata)) %>%
+      addLegend("bottomleft", values=seq(1,11,1), colors=col2hex(colorlist), title=colorBy,
+        layerId="colorLegend", opacity=1, labels=labs)
+	
   })
 
   # Show a popup at the given location
-  showZipcodePopup <- function(site_no, lat, lng) {
-    selectedZip <- allzips[allzips$site_no == site_no,]
+  showZipcodePopup <- function(zipcode, lat, lng) {
+    selectedZip <- allzips[allzips$zipcode == zipcode,]
     content <- as.character(tagList(
-      tags$h4("Site Number:", as.integer(selectedZip$site_no)), tags$br(),
+      tags$h4("Site Number:", as.integer(selectedZip$zipcode)),
+      tags$br(),
       sprintf("Station Name: %s", selectedZip$statname), tags$br(),
       sprintf("Longitude: %s", selectedZip$longitude), tags$br(),
       sprintf("Latitude: %s", selectedZip$latitude), tags$br(),
       sprintf("Status: Impaired or Unimpaired")
     ))
-    leafletProxy("map") %>% addPopups(lng, lat, content, layerId = site_no)
+    leafletProxy("map") %>% addPopups(lng, lat, content, layerId = zipcode)
   }
 
   # When map is clicked, show a popup with city info

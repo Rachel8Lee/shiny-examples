@@ -62,8 +62,8 @@ function(input, output, session) {
   # This observer is responsible for maintaining the circles and legend,
   # according to the variables the user has chosen to map to color and size.
   observe({
-    colorBy <- input$color
-    sizeBy <- input$size
+    colorBy <- input$metric
+    sizeBy <- input$metric
 
     if (colorBy == "superzip") {
       # Color and palette are treated specially in the "superzip" case, because

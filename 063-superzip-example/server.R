@@ -4,7 +4,7 @@ library(scales)
 library(lattice)
 library(dplyr)
 
-zipdata <- full_vol_all_April
+zipdata <- allzips
 
 function(input, output, session) {
 
@@ -88,15 +88,15 @@ function(input, output, session) {
 #      # Radius is treated specially in the "superzip" case.
 #      radius <- ifelse(zipdata$centile >= (100 - input$threshold), 30000, 3000)
 #    } else {
-      radius <-  500 + (zipdata[[sizeBy]] / max(zipdata[[sizeBy]]) * 30000)
+      radius <-  3000
 #    }
 library(gplots)
     leafletProxy("map", data = zipdata) %>%
-        clearShapes() %>%
-        addCircles(~longitude, ~latitude, radius=radius, layerId=~site_no,
-                   stroke=TRUE, fillOpacity=0.85, weight= 1, color ="#000000", fillColor=pal(classdata)) %>%
-        addLegend("bottomleft", values=seq(1,11,1), colors=col2hex(colorlist), title=colorBy,
-                  layerId="colorLegend", opacity=0.85, labels=labs)
+      clearShapes() %>%
+      addCircles(~longitude, ~latitude, radius=radius, layerId=~zipcode,
+        stroke=FALSE, fillOpacity=1, fillColor=pal(classdata)) %>%
+      addLegend("bottomleft", values=seq(1,11,1), colors=col2hex(colorlist), title=colorBy,
+        layerId="colorLegend", opacity=1, labels=labs)
 	
   })
 

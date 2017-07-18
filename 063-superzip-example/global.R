@@ -40,15 +40,3 @@ allzips$college <- allzips$college * 100
 allzips$site_no <- formatC(allzips$site_no, width=7, format="d", flag="0")
 # try as.char
 row.names(allzips) <- allzips$site_no
-
-cleantable <- allzips %>%
-  select(
-    City = city.x,
-    State = state.x,
-    Rank = rank,
-    Score = centile,
-    Superzip = superzip,
-    Population = adultpop,
-    College = college,
-    Income = income
-  )

@@ -47,9 +47,9 @@ navbarPage("Availability of high-magnitude streamflow for groundwater banking in
         width = 330, height = "auto",
 
         h2("Site Manager"),
-        selectInput("record length","Record Length", record_length), 
+        selectInput("record_length","Record Length", record_length), 
         selectInput("sites", "Sites Included", site_type),
-        selectInput("yeartype", "Year Type", year_type),
+        selectInput("year_type", "Year Type", year_type),
         selectInput("metric", "Metric", metric),
 
         plotOutput("histCentile", height = 200),

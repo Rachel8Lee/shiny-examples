@@ -8,9 +8,7 @@ zipdata<- allzips
 #zipdata <- allzips[order(-allzips$avg),]
 
 function(input, output, session) {
-
   ## Interactive Map ###########################################
-
   # Create the map
   output$map <- renderLeaflet({
     leaflet() %>%
@@ -21,7 +19,41 @@ function(input, output, session) {
       setView(lng = -120.51, lat = 38.06, zoom = 7)
   })
 
-  # A reactive expression that returns the set of zips that are
+  # decide on working data set 
+	# full record
+  if (input$record_length == "full"){
+	  # chose set by metric
+		working_set <- 
+		switch(input$metric, 
+					"avg" = full_vol,
+					"duration" = full_dur,
+					"intraannual_frequency" = full_intra,
+					"interannual_frequency" = full_vol,
+					"timing" = full_vol)	
+  }
+	# post-impairment record
+  else {
+		working_set <- 
+		switch(input$metric, 
+					"avg" = imp_vol,
+					"duration" = imp_dur,
+					"intraannual_frequency" = imp_intra,
+					"interannual_frequency" = imp_vol,
+					"timing" = imp_vol)	
+	}
+	
+	# filter set by year type
+	working_set_yt <- working_set[which(working_set$yeartype == input$yeartype),]
+	# filter by period
+	working_set_yt_period <- working_set_yt[which(working_set_yt$period == input$period),]
+	# filter by site type
+	final_working_set <- 
+	switch(input$site_type, 
+				 "impaired" = working_set_yt_period[which(working_set_yt_period$status=="impaired"),],
+				 "unimpaired" = working_set_yt_period[which(working_set_yt_period$status=="unimpaired"),],																					
+			   "both" = working_set_yet_period)
+	
+	# A reactive expression that returns the set of zips that are
   # in bounds right now
   zipsInBounds <- reactive({
     if (is.null(input$map_bounds))

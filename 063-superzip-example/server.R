@@ -74,10 +74,11 @@ function(input, output, session) {
 	  for(i in 2:length(bounds)){
 		  classdata[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- i
 	  }
-#		levs <- factor(seq(1,11,1), levels=seq(1,11,1), labels=as.character(bounds))
-      pal <- colorFactor(palette=colorlist, domain=seq(1,11,1), na.color="black")
-#    }
-    zipdata <- zipdata[order(-zipdata$avg),]
+
+    pal <- colorFactor(palette=colorlist, domain=seq(1,11,1), na.color="black")
+	   
+    temp <- zipdata[order(-zipdata$avg),]
+	   zipdata <- temp
     #if (sizeBy == "avg") {
       # Radius is treated specially in the "superzip" case.
      # radius <- ifelse(zipdata$centile >= (100 - input$threshold), 30000, 3000)

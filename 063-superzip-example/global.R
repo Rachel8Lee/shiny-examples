@@ -1,11 +1,10 @@
 library(dplyr)
 
-bigset<- readRDS("data/superzip.rds")
-allzips<-bigset[1:93,]
-
 # read in site #, name, location, status
-gauge_data <- read.csv("data/gauge_locations.csv")
+gauge_locations <- read.csv("data/gauge_locations.csv")
 gauge_status <- read.csv("data/gauge_classification.csv")
+gauge_data <- merge(gauge_locations, gauge_status, by.x = "site_no", by.y = "gauge", all.x = TRUE)
+
 allzips$site_no <- gauge_data$site_no
 allzips$statname <- gauge_data$station_nm
 allzips$latitude <- gauge_data$dec_lat_va

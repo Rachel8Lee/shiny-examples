@@ -63,7 +63,7 @@ function(input, output, session) {
    observe({
     colorBy <- input$metric
     sizeBy <- input$metric
-	#add if statement for  metric variables
+	if (sizeBy == "magnitude") {
 	colorlist <-  c("black","orangered","khaki1","olivedrab1","chartreuse3","green4","aquamarine2","deepskyblue4","blue","royalblue4","navyblue")
 	bounds <- c(0,1000,10000,50000,125000,200000,400000,800000,1500000,2500000,3500000)
 	labs <-  c("0","1 AF - 1 TAF","1000 - 10000","10000 - 50000","50000 - 125000","125000 - 200000","200000 - 400000","400000 - 800000","800000 - 1500000","1500000 - 2500000","2500000 - 3500000")
@@ -76,9 +76,11 @@ function(input, output, session) {
 	  }
 
     pal <- colorFactor(palette=colorlist, domain=seq(1,11,1), na.color="black")
-	   
+
+	  # sort in descending order so larger points rendered first
+		# for some reason site info on pop up lost
     temp <- zipdata[order(-zipdata$avg),]
-	   zipdata <- temp
+	   
     #if (sizeBy == "avg") {
       # Radius is treated specially in the "superzip" case.
      # radius <- ifelse(zipdata$centile >= (100 - input$threshold), 30000, 3000)
@@ -93,7 +95,7 @@ function(input, output, session) {
         stroke=TRUE, fillOpacity=0.85, weight= 1, color ="#000000", fillColor=pal(classdata)) %>%
       addLegend("bottomleft", values=seq(1,11,1), colors=col2hex(colorlist), title=colorBy,
         layerId="colorLegend", opacity=0.85, labels=labs)
-	
+	}
   })
 
   # Show a popup at the given location

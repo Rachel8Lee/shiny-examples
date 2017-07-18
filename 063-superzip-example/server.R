@@ -88,7 +88,7 @@ function(input, output, session) {
 #      # Radius is treated specially in the "superzip" case.
 #      radius <- ifelse(zipdata$centile >= (100 - input$threshold), 30000, 3000)
 #    } else {
-      radius <- max((500 + (zipdata[[sizeBy]] / max(zipdata[[sizeBy]]) * 30000)), 300)
+      radius <-( 100 + (zipdata[[sizeBy]] / max(zipdata[[sizeBy]]) * 30000)))
 #    }
 library(gplots)
     leafletProxy("map", data = zipdata) %>%

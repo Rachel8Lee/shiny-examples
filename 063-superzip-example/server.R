@@ -89,7 +89,7 @@ function(input, output, session) {
 #      radius <- ifelse(zipdata$centile >= (100 - input$threshold), 30000, 3000)
 #    } else {
      #radius <- 10000*zipdata[[sizeBy]]
-	  radius<- 300
+	  radius<- 3000
 #    }
 library(gplots)
     leafletProxy("map", data = zipdata) %>%

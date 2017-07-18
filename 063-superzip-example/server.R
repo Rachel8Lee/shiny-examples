@@ -4,8 +4,8 @@ library(scales)
 library(lattice)
 library(dplyr)
 library(gplots)
-
-zipdata <- allzips[order(-allzips$avg),]
+zipdata<- allzips
+#zipdata <- allzips[order(-allzips$avg),]
 
 function(input, output, session) {
 

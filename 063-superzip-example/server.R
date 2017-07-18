@@ -68,23 +68,6 @@ function(input, output, session) {
         longitude >= lngRng[1] & longitude <= lngRng[2])
   })
 
-  # Precalculate the breaks we'll need for the two histograms
-  centileBreaks <- hist(plot = FALSE, allzips$centile, breaks = 20)$breaks
-
-  output$histCentile <- renderPlot({
-    # If no zipcodes are in view, don't plot
-    if (nrow(zipsInBounds()) == 0)
-      return(NULL)
-
-    hist(zipsInBounds()$centile,
-      breaks = centileBreaks,
-      main = "Histogram Title",
-      xlab = "X Lavel",
-      xlim = range(allzips$centile),
-      col = '#00DD00',
-      border = 'white')
-  })
-
   output$scatterCollegeIncome <- renderPlot({
     # If no zipcodes are in view, don't plot
     if (nrow(zipsInBounds()) == 0)

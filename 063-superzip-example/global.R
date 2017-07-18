@@ -36,4 +36,4 @@ imp_dur <- read.csv("data/simp_data_full_vol_90_duration.csv")
 imp_intra <- read.csv("data/simp_data_imp_vol_90_intraannual_frequency.csv")
 
 allzips$site_no <- formatC(allzips$site_no, width=7, format="d", flag="0")
-row.names(allzips) <- allzips$site_no
+#row.names(allzips) <- allzips$site_no

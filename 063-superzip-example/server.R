@@ -58,12 +58,12 @@ function(input, output, session) {
   # in bounds right now
   zipsInBounds <- reactive({
     if (is.null(input$map_bounds))
-      return(zipdata[FALSE,])
+      return(working_data_set[FALSE,])
     bounds <- input$map_bounds
     latRng <- range(bounds$north, bounds$south)
     lngRng <- range(bounds$east, bounds$west)
     
-    subset(zipdata,
+    subset(working_data_set,
       latitude >= latRng[1] & latitude <= latRng[2] &
         longitude >= lngRng[1] & longitude <= lngRng[2])
   })
@@ -101,7 +101,7 @@ function(input, output, session) {
 	bounds <- c(0,1000,10000,50000,125000,200000,400000,800000,1500000,2500000,3500000)
 	labs <-  c("0","1 AF - 1 TAF","1000 - 10000","10000 - 50000","50000 - 125000","125000 - 200000","200000 - 400000","400000 - 800000","800000 - 1500000","1500000 - 2500000","2500000 - 3500000")
 
-    colorData <- zipdata[[colorBy]]
+    colorData <- working_data_set[[colorBy]]
 	  classdata <- rep(NA,length(colorData))
 	  classdata[which(colorData== bounds[[1]])] <- 1
 	  for(i in 2:length(bounds)){
@@ -118,11 +118,11 @@ function(input, output, session) {
       # Radius is treated specially in the "superzip" case.
      # radius <- ifelse(zipdata$centile >= (100 - input$threshold), 30000, 3000)
     #} else {
-      radius <- 500 + (zipdata[[sizeBy]] / max(zipdata[[sizeBy]]) * 30000)
+      radius <- 500 + (working_data_set[[sizeBy]] / max(working_data_set[[sizeBy]]) * 30000)
     #}
    
     	   
-    leafletProxy("map", data = zipdata) %>%
+    leafletProxy("map", data = working_data_set) %>%
       clearShapes() %>%
       addCircles(~longitude, ~latitude, radius=radius, layerId=~site_no,
         stroke=TRUE, fillOpacity=0.85, weight= 1, color ="#000000", fillColor=pal(classdata)) %>%
@@ -132,7 +132,7 @@ function(input, output, session) {
   })
 
   # Show a popup at the given location
-  showZipcodePopup <- function(zipcode, lat, lng) {
+  showZipcodePopup <- function(site_no, lat, lng) {
     selectedZip <- allzips[allzips$site_no == site_no,]
     content <- as.character(tagList(
       tags$h4("Site Number:", as.integer(selectedZip$site_no)),

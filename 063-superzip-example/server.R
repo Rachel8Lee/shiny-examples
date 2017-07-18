@@ -63,7 +63,7 @@ function(input, output, session) {
    observe({
     colorBy <- input$metric
     sizeBy <- input$metric
-	if (sizeBy == "magnitude") {
+	if (sizeBy == "avg") {
 	colorlist <-  c("black","orangered","khaki1","olivedrab1","chartreuse3","green4","aquamarine2","deepskyblue4","blue","royalblue4","navyblue")
 	bounds <- c(0,1000,10000,50000,125000,200000,400000,800000,1500000,2500000,3500000)
 	labs <-  c("0","1 AF - 1 TAF","1000 - 10000","10000 - 50000","50000 - 125000","125000 - 200000","200000 - 400000","400000 - 800000","800000 - 1500000","1500000 - 2500000","2500000 - 3500000")

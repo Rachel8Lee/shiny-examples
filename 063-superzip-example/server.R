@@ -68,13 +68,7 @@ function(input, output, session) {
         longitude >= lngRng[1] & longitude <= lngRng[2])
   })
 
-  output$scatterCollegeIncome <- renderPlot({
-    # If no zipcodes are in view, don't plot
-    if (nrow(zipsInBounds()) == 0)
-      return(NULL)
 
-    print(xyplot(income ~ college, data = zipsInBounds(), xlim = range(allzips$college), ylim = range(allzips$income)))
-  })
 
    observe({
     colorBy <- input$metric

@@ -13,7 +13,7 @@ allzips$longitude <- gauge_data$dec_long_v
 # FULL YEARS DATA 
 # MAGNITUDE
 full_vol <- read.csv("data/redo_simp_data_full_vol_90.csv")
-full_vol <- merge(full_vol, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
+#full_vol <- merge(full_vol, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
 
 # DURATION
 full_dur <- read.csv("data/simp_data_full_vol_90_duration.csv")

@@ -52,7 +52,7 @@ navbarPage("Availability of high-magnitude streamflow for groundwater banking in
 	selectInput("metric", "Metric", metric),
         selectInput("color", "Color", vars),
         selectInput("size", "Size", vars, selected = "adultpop"),
-        conditionalPanel("input.color == 'avg' || input.size == 'avg'",
+        conditionalPanel("input.color == 'magnitude' || input.size == 'magnitude'",
           # Only prompt for threshold when coloring or sizing by superzip
           numericInput("threshold", "SuperZIP threshold (top n percentile)", 5)
         ),

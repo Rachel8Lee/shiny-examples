@@ -5,7 +5,7 @@ library(lattice)
 library(dplyr)
 library(gplots)
 
-zipdata <- allzips
+zipdata <- allzips[order(-allzips$avg),]
 
 function(input, output, session) {
 
@@ -79,7 +79,7 @@ function(input, output, session) {
 
 	  # sort in descending order so larger points rendered first
 		# for some reason site info on pop up lost
-    temp <- zipdata[order(-zipdata$avg),]
+    #temp <- zipdata[order(-zipdata$avg),]
 	   
     #if (sizeBy == "avg") {
       # Radius is treated specially in the "superzip" case.

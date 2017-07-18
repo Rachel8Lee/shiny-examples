@@ -49,7 +49,7 @@ navbarPage("Availability of high-magnitude streamflow for groundwater banking in
 
         h2("Site Manager"),
         selectInput("sites", "Sites Included", site_type),
-		selectInput("metric", "Metric", vars),
+		selectInput("metric", "Metric", metric),
 #        selectInput("color", "Color", vars),
 #        selectInput("size", "Size", vars, selected = "adultpop"),
         conditionalPanel("input.color == 'avg' || input.size == 'avg'",

@@ -77,14 +77,15 @@ function(input, output, session) {
 #		levs <- factor(seq(1,11,1), levels=seq(1,11,1), labels=as.character(bounds))
       pal <- colorFactor(palette=colorlist, domain=seq(1,11,1), na.color="black")
 #    }
-
+    zipdata <- zipdata[with(zipdata, order(-avg))]
     #if (sizeBy == "avg") {
       # Radius is treated specially in the "superzip" case.
      # radius <- ifelse(zipdata$centile >= (100 - input$threshold), 30000, 3000)
     #} else {
       radius <- 500 + (zipdata[[sizeBy]] / max(zipdata[[sizeBy]]) * 30000)
     #}
-
+   
+    	   
     leafletProxy("map", data = zipdata) %>%
       clearShapes() %>%
       addCircles(~longitude, ~latitude, radius=radius, layerId=~zipcode,
@@ -96,7 +97,7 @@ function(input, output, session) {
 
   # Show a popup at the given location
   showZipcodePopup <- function(zipcode, lat, lng) {
-    selectedZip <- allzips[allzips$zipcode == zipcode,]
+    selectedZip <- allzips[allzips$site_no == site_no,]
     content <- as.character(tagList(
       tags$h4("Site Number:", as.integer(selectedZip$site_no)),
       tags$br(),

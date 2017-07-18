@@ -91,7 +91,7 @@ function(input, output, session) {
     	   
     leafletProxy("map", data = zipdata) %>%
       clearShapes() %>%
-      addCircles(~longitude, ~latitude, radius=radius, layerId=~zipcode,
+      addCircles(~longitude, ~latitude, radius=radius, layerId=~site_no,
         stroke=TRUE, fillOpacity=0.85, weight= 1, color ="#000000", fillColor=pal(classdata)) %>%
       addLegend("bottomleft", values=seq(1,11,1), colors=col2hex(colorlist), title=colorBy,
         layerId="colorLegend", opacity=0.85, labels=labs)
@@ -109,7 +109,7 @@ function(input, output, session) {
       sprintf("Latitude: %s", selectedZip$latitude), tags$br(),
       sprintf("Status: %s", selectedZip$status), tags$br()
     ))
-    leafletProxy("map") %>% addPopups(lng, lat, content, layerId = zipcode)
+    leafletProxy("map") %>% addPopups(lng, lat, content, layerId = site_no)
   }
 
   # When map is clicked, show a popup with city info
@@ -160,10 +160,10 @@ function(input, output, session) {
       map <- leafletProxy("map")
       map %>% clearPopups()
       dist <- 0.5
-      zip <- input$goto$zip
+      site <- input$goto$site
       lat <- input$goto$lat
       lng <- input$goto$lng
-      showZipcodePopup(zip, lat, lng)
+      showZipcodePopup(site, lat, lng)
       map %>% fitBounds(lng - dist, lat - dist, lng + dist, lat + dist)
     })
   })
@@ -177,7 +177,7 @@ function(input, output, session) {
         is.null(input$cities) | City %in% input$cities,
         is.null(input$site_nos) | Site_No %in% input$site_nos
       ) %>%
-      mutate(Action = paste('<a class="go-map" href="" data-lat="', Lat, '" data-long="', Long, '" data-zip="', Site_No, '"><i class="fa fa-crosshairs"></i></a>', sep=""))
+      mutate(Action = paste('<a class="go-map" href="" data-lat="', Lat, '" data-long="', Long, '" data-site="', Site_No, '"><i class="fa fa-crosshairs"></i></a>', sep=""))
     action <- DT::dataTableAjax(session, df)
 
     DT::datatable(df, options = list(ajax = list(url = action)), escape = FALSE)

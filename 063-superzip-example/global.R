@@ -5,15 +5,15 @@ gauge_locations <- read.csv("data/gauge_locations.csv")
 gauge_status <- read.csv("data/gauge_classification.csv")
 gauge_data <- merge(gauge_locations, gauge_status, by.x = "site_no", by.y = "gauge", all.x = TRUE)
 
-#allzips$site_no <- gauge_data$site_no
-#allzips$statname <- gauge_data$station_nm
-#allzips$latitude <- gauge_data$dec_lat_va
-#allzips$longitude <- gauge_data$dec_long_v
+allzips$site_no <- gauge_data$site_no
+allzips$statname <- gauge_data$station_nm
+allzips$latitude <- gauge_data$dec_lat_va
+allzips$longitude <- gauge_data$dec_long_v
 
 # FULL YEARS DATA 
 # MAGNITUDE
 full_vol <- read.csv("data/redo_simp_data_full_vol_90.csv")
-full_vol <- merge(full_vol, gauge_data, by.x="gauge", by.y="site_no", all.x=TRUE)
+full_vol <- merge(full_vol, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
 
 # DURATION
 full_dur <- read.csv("data/simp_data_full_vol_90_duration.csv")

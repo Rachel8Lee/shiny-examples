@@ -21,7 +21,7 @@ function(input, output, session) {
 
   # decide on working data set 
 	# full record
-  if (input$record_length == "full"){
+  working_data_set <- reactive({if (input$record_length == "full"){
 	  # chose set by metric
 		working_set <- 
 		switch(input$metric, 
@@ -52,7 +52,7 @@ function(input, output, session) {
 	switch(input$site_type, 
 				 "impaired" = working_set_yt_period[which(working_set_yt_period$status=="impaired"),],
 				 "unimpaired" = working_set_yt_period[which(working_set_yt_period$status=="unimpaired"),],																					
-			   "both" = final_working_set)
+			   "both" = final_working_set)})
 
 	# A reactive expression that returns the set of zips that are
   # in bounds right now

@@ -28,6 +28,7 @@ year_type <- c(
   "Dry" = "D"
 ) 
 
+
 navbarPage("Availability of high-magnitude streamflow for groundwater banking in the Central Valley, California", id="nav",
 
   tabPanel("Interactive map",
@@ -47,10 +48,14 @@ navbarPage("Availability of high-magnitude streamflow for groundwater banking in
         width = 330, height = "auto",
 
         h2("Site Manager"),
-        selectInput("record_length","Record Length", record_length), 
         selectInput("sites", "Sites Included", site_type),
-        selectInput("year_type", "Year Type", year_type),
-        selectInput("metric", "Metric", metric),
+		selectInput("metric", "Metric", vars),
+#        selectInput("color", "Color", vars),
+#        selectInput("size", "Size", vars, selected = "adultpop"),
+        conditionalPanel("input.color == 'avg' || input.size == 'avg'",
+          # Only prompt for threshold when coloring or sizing by superzip
+          numericInput("threshold", "SuperZIP threshold (top n percentile)", 5)
+        ),
 
         plotOutput("histCentile", height = 200),
         plotOutput("scatterCollegeIncome", height = 250),
@@ -61,5 +66,35 @@ navbarPage("Availability of high-magnitude streamflow for groundwater banking in
         'Data compiled for ', tags$em('UC Davis Depart of Land, Air and Water Resource, 2017') 
       )  
     )
-  )
+  ),
+
+  tabPanel("Data explorer",
+    fluidRow(
+      column(3,
+        selectInput("states", "States", c("All sites"="", structure(state.abb, names=state.name), "Washington, DC"="DC"), multiple=TRUE)
+      ),
+      column(3,
+        conditionalPanel("input.states",
+          selectInput("cities", "Cities", c("All cities"=""), multiple=TRUE)
+        )
+      ),
+      column(3,
+        conditionalPanel("input.states",
+          selectInput("zipcodes", "Zipcodes", c("All zipcodes"=""), multiple=TRUE)
+        )
+      )
+    ),
+    fluidRow(
+      column(1,
+        numericInput("minScore", "Min score", min=0, max=100, value=0)
+      ),
+      column(1,
+        numericInput("maxScore", "Max score", min=0, max=100, value=100)
+      )
+    ),
+    hr(),
+    DT::dataTableOutput("ziptable")
+  ),
+
+  conditionalPanel("false", icon("crosshair"))
 )

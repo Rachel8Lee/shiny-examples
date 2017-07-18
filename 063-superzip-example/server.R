@@ -94,9 +94,9 @@ library(gplots)
     leafletProxy("map", data = zipdata) %>%
       clearShapes() %>%
       addCircles(~longitude, ~latitude, radius=radius, layerId=~zipcode,
-        stroke=FALSE, fillOpacity=1, fillColor=pal(classdata)) %>%
+        stroke=TRUE, weight = 1, color ="#000000", fillOpacity=0.85, fillColor=pal(classdata)) %>%
       addLegend("bottomleft", values=seq(1,11,1), colors=col2hex(colorlist), title=colorBy,
-        layerId="colorLegend", opacity=1, labels=labs)
+        layerId="colorLegend", opacity=0.85, labels=labs)
 	
   })
 

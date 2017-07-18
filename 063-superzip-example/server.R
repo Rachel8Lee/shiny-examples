@@ -82,7 +82,7 @@ function(input, output, session) {
       # Radius is treated specially in the "superzip" case.
      # radius <- ifelse(zipdata$centile >= (100 - input$threshold), 30000, 3000)
     #} else {
-      radius <- zipdata[[sizeBy]] / max(zipdata[[sizeBy]]) * 300000
+      radius <- zipdata[[sizeBy]] / max(zipdata[[sizeBy]]) * 3000 +300
     #}
 library(gplots)
     leafletProxy("map", data = zipdata) %>%
@@ -98,7 +98,7 @@ library(gplots)
   showZipcodePopup <- function(zipcode, lat, lng) {
     selectedZip <- allzips[allzips$zipcode == zipcode,]
     content <- as.character(tagList(
-      tags$h4("Site Number:", as.integer(selectedZip$zipcode)),
+      tags$h4("Site Number:", as.integer(selectedZip$site_no)),
       tags$br(),
       sprintf("Station Name: %s", selectedZip$statname), tags$br(),
       sprintf("Longitude: %s", selectedZip$longitude), tags$br(),

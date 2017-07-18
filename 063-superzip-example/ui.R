@@ -1,33 +1,19 @@
 library(leaflet)
 
 # Choices for drop-downs
-record_length <- c(
-  "Full" = "full",
-  "Post Impairment" = "imp"
-)
-
 site_type <- c(
   "Impaired" = "impaired",
   "Unimpaired" = "unimpaired",
-  "Include both" = "full"
+  "All Sites" = "both"
 )
 
-metric <- c(
-  "Magnitude" = "magnitude",
-  "Duration" = "duration",
-  "Inter-Annual Frequency" = "interannual_frequency",
-  "Intra-Annual Frequency" = "intraannual_frequency",
-  "Timing" = "timing"
+vars <- c(
+  "Magnitude" = "avg",
+  "Duration" = "centile",
+  "Inter-Annual Frequency" = "college",
+  "Intra-Annual Frequency" = "income",
+  "Timing" = "adultpop"
 )
-
-year_type <- c(
-  "All" = "all",
-  "Above Normal" = "AN",
-  "Below Normal" = "BN",
-  "Critical" = "C",
-  "Dry" = "D"
-) 
-
 
 navbarPage("Availability of high-magnitude streamflow for groundwater banking in the Central Valley, California", id="nav",
 
@@ -49,10 +35,10 @@ navbarPage("Availability of high-magnitude streamflow for groundwater banking in
 
         h2("Site Manager"),
         selectInput("sites", "Sites Included", site_type),
-	selectInput("metric", "Metric", metric),
-        selectInput("color", "Color", metric),
-        selectInput("size", "Size", metric),
-        conditionalPanel("input.color == 'magnitude' || input.size == 'magnitude'",
+		selectInput("metric", "Metric", vars),
+#        selectInput("color", "Color", vars),
+#        selectInput("size", "Size", vars, selected = "adultpop"),
+        conditionalPanel("input.color == 'avg' || input.size == 'avg'",
           # Only prompt for threshold when coloring or sizing by superzip
           numericInput("threshold", "SuperZIP threshold (top n percentile)", 5)
         ),

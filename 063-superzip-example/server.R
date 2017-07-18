@@ -4,7 +4,7 @@ library(scales)
 library(lattice)
 library(dplyr)
 
-zipdata <- full_vol_all_April
+zipdata <- allzips
 
 function(input, output, session) {
 

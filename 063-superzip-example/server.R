@@ -88,11 +88,11 @@ function(input, output, session) {
 #      # Radius is treated specially in the "superzip" case.
 #      radius <- ifelse(zipdata$centile >= (100 - input$threshold), 30000, 3000)
 #    } else {
-      radius <- zipdata[[sizeBy]]/3500000 + 500
+      radius <- zipdata[[sizeBy]]/3500000 + 300
 #    }
 library(gplots)
     leafletProxy("map", data = zipdata) %>%
-      clearShapes() %>%
+      clearShapes() %>% 
       addCircles(~longitude, ~latitude, radius=radius, layerId=~zipcode,
         stroke=TRUE, weight = 1, color ="#000000", fillOpacity=0.85, fillColor=pal(classdata)) %>%
       addLegend("bottomleft", values=seq(1,11,1), colors=col2hex(colorlist), title=colorBy,

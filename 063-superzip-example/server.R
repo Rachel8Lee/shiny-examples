@@ -46,13 +46,14 @@ function(input, output, session) {
 	working_set_yt <- working_set[which(working_set$yeartype == input$yeartype),]
 	# filter by period
 	working_set_yt_period <- working_set_yt[which(working_set_yt$period == input$period),]
-	# filter by site type
+	# merge status, filter by site type
+	working_set_status <- merge(working_set_yt_period, gauge_data , by.x = "gauge", by.y = "site_no", all.x = TRUE)
 	final_working_set <- 
 	switch(input$site_type, 
 				 "impaired" = working_set_yt_period[which(working_set_yt_period$status=="impaired"),],
 				 "unimpaired" = working_set_yt_period[which(working_set_yt_period$status=="unimpaired"),],																					
-			   "both" = working_set_yet_period)
-	
+			   "both" = final_working_set)
+
 	# A reactive expression that returns the set of zips that are
   # in bounds right now
   zipsInBounds <- reactive({

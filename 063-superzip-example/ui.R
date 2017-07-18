@@ -15,9 +15,9 @@ site_type <- c(
 metric <- c(
   "Magnitude" = "avg",
   "Duration" = "duration",
-  "Inter-Annual Frequency" = "college",
+  "Inter-Annual Frequency" = "interannual_frequency",
   "Intra-Annual Frequency" = "intraannual_frequency",
-  "Timing" = "adultpop"
+  "Timing" = "timing"
 )
 
 year_type <- c(

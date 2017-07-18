@@ -50,8 +50,8 @@ navbarPage("Availability of high-magnitude streamflow for groundwater banking in
         h2("Site Manager"),
         selectInput("sites", "Sites Included", site_type),
 	selectInput("metric", "Metric", metric),
-        selectInput("color", "Color", vars),
-        selectInput("size", "Size", vars, selected = "adultpop"),
+        selectInput("color", "Color", metric),
+        selectInput("size", "Size", metric),
         conditionalPanel("input.color == 'magnitude' || input.size == 'magnitude'",
           # Only prompt for threshold when coloring or sizing by superzip
           numericInput("threshold", "SuperZIP threshold (top n percentile)", 5)

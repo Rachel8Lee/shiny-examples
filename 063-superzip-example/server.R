@@ -41,16 +41,7 @@ function(input, output, session) {
 
   output$histCentile <- renderPlot({
     # If no zipcodes are in view, don't plot
-    if (nrow(zipsInBounds()) == 0)
-      return(NULL)
-
-    hist(zipsInBounds()$centile,
-      breaks = centileBreaks,
-      main = "Histogram Title",
-      xlab = "X Lavel",
-      xlim = range(allzips$centile),
-      col = '#00DD00',
-      border = 'white')
+    my_barplot(imp.post, "vol MAF", monthly = TRUE, full = FALSE)
   })
 
   output$scatterCollegeIncome <- renderPlot({

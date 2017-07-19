@@ -28,7 +28,7 @@ nmpks.frame<- nmpks.frame[,2:length(nmpks.frame)]
 imp.vol.frame<- imp.vol.frame[,2:length(imp.vol.frame)]
 imp.dur.frame<- imp.dur.frame[,2:length(imp.dur.frame)]
 imp.nmpks.frame<- imp.nmpks.frame[,2:length(imp.nmpks.frame)]
-
+all_dat
 ### function to dynamically create plots for magnitude, duration, and intra-annual frequency
 my_barplot = function(imp.gauges, d, yvar, monthly = TRUE, full_record = TRUE){
 	

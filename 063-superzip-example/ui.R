@@ -53,7 +53,7 @@ navbarPage("Availability of high-magnitude streamflow for groundwater banking in
         selectInput("sitetype", "Sites Included", site_type),
 		    selectInput("metric", "Metric", vars),
 				selectInput("record", "Record Length", record_length),
-				selectInput("period", "Time Period", period)						
+				selectInput("period", "Time Period", period),						
 #        selectInput("color", "Color", vars),
 #        selectInput("size", "Size", vars, selected = "adultpop"),
         conditionalPanel("input.color == 'avg' || input.size == 'avg'",

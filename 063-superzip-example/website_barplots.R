@@ -29,15 +29,6 @@ imp.vol.frame<- imp.vol.frame[,2:length(imp.vol.frame)]
 imp.dur.frame<- imp.dur.frame[,2:length(imp.dur.frame)]
 imp.nmpks.frame<- imp.nmpks.frame[,2:length(imp.nmpks.frame)]
 
-
-
-###change this to change which stations are plotted###
-##################
-
-
-
-
-
 ### function to dynamically create plots for magnitude, duration, and intra-annual frequency
 my_barplot = function(imp.gauges, d, yvar, monthly = TRUE, full_record = TRUE){
 	
@@ -446,7 +437,15 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 			)
 }
 
-
+imp.full = alldat %>% filter(gauge %in% imp.gauges, tag == "full")
+lab.imp <- rep(NA, length(imp.gauges))
+for(i in 1:length(imp.gauges)){
+	lab.imp[[i]] <- paste("USGS ",imp.gauges[[i]],"\n",as.character(alldat$station_name[which(alldat$gauge==imp.gauges[[i]])[[1]]]),sep="")
+}
+names(lab.imp) = paste(c(imp.gauges))
+imp.full$station = imp.full$gauge
+imp.full$gauge = factor(imp.full$gauge, levels = names(lab.imp))
+levels(imp.full$gauge) = lab.imp
 
 		
 

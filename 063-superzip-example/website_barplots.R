@@ -446,7 +446,7 @@ names(lab.imp) = paste(c(imp.gauges))
 imp.full$station = imp.full$gauge
 imp.full$gauge = factor(imp.full$gauge, levels = names(lab.imp))
 levels(imp.full$gauge) = lab.imp
-}
+
 		
 
 

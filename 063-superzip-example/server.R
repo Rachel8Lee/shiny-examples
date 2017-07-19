@@ -42,7 +42,7 @@ function(input, output, session) {
 
   output$histCentile <- renderPlot({
     # If no zipcodes are in view, don't plot
-	  temp = c(11447650, 11303500)
+	  temp = c(11447650)
     my_barplot(temp,imp.full, "vol MAF", monthly = TRUE, full_record = TRUE)
   })
 

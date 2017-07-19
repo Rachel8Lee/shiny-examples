@@ -39,7 +39,7 @@ imp.nmpks.frame<- imp.nmpks.frame[,2:length(imp.nmpks.frame)]
 
 
 ### function to dynamically create plots for magnitude, duration, and intra-annual frequency
-my_barplot = function(imp.gauges, d, yvar, monthly = TRUE, full = TRUE){
+my_barplot = function(imp.gauges, d, yvar, monthly = TRUE, full_record = TRUE){
 	
 	six.gauges = imp.gauges
 # bundle data
@@ -97,12 +97,12 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		p = c("December to February", "November to April", "Hydrologic Year")
 		plabel = "3-Month Period, 6-Month Period, Hydrologic Year By Year Type"
 	}
-	if(full){
+	if(full_record){
 		rlabel = "Full Record of Available Data, Zero-Deflated"
 	} else {
 		rlabel = "Post-Impairment Record of Available Data, Zero-Deflated"
 	}
-	if(yvar=="vol MAF" & full==TRUE & monthly==FALSE){
+	if(yvar=="vol MAF" & full_record==TRUE & monthly==FALSE){
 	numgauges <- length(as.character(unique(d$gauge)))
 	gauges2 <- rep(NA, numgauges)
 	for(i in 1:length(gauges2)){
@@ -128,7 +128,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 	captext2 <- paste(captext, collapse=" ")
 	cap = paste("Average magnitude (volume) of HMF \nover the full record of data by period and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 			captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	}else if(yvar=="duration_days" & full==TRUE & monthly==FALSE){
+	}else if(yvar=="duration_days" & full_record==TRUE & monthly==FALSE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -154,7 +154,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average duration (days) of HMF \nover the full record of data by period and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	}else if(yvar=="intraannual_frequency_numpeaks" & full==TRUE & monthly==FALSE){
+	}else if(yvar=="intraannual_frequency_numpeaks" & full_record==TRUE & monthly==FALSE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -180,7 +180,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average intra-annual frequency (# of peaks) of HMF \nover the full record of data by period and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	} else 	if(yvar=="vol MAF" & full==FALSE & monthly==FALSE){
+	} else 	if(yvar=="vol MAF" & full_record==FALSE & monthly==FALSE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -206,7 +206,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average magnitude (volume) of HMF \nover the post-impairment record of data by period and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	}else if(yvar=="duration_days" & full==FALSE & monthly==FALSE){
+	}else if(yvar=="duration_days" & full_record==FALSE & monthly==FALSE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -232,7 +232,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average duration (days) of HMF \nover the post-impairment record of data by period and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	}else if(yvar=="intraannual_frequency_numpeaks" & full==FALSE & monthly==FALSE){
+	}else if(yvar=="intraannual_frequency_numpeaks" & full_record==FALSE & monthly==FALSE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -258,7 +258,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average intra-annual frequency (# of peaks) of HMF \nover the post-impairment record of data by period and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	} else if(yvar=="vol MAF" & full==TRUE & monthly==TRUE){
+	} else if(yvar=="vol MAF" & full_record==TRUE & monthly==TRUE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -284,7 +284,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average magnitude (volume) of HMF \nover the full record of data by month and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	}else if(yvar=="duration_days" & full==TRUE & monthly==TRUE){
+	}else if(yvar=="duration_days" & full_record==TRUE & monthly==TRUE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -310,7 +310,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average duration (days) of HMF \nover the full record of data by month and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	}else if(yvar=="intraannual_frequency_numpeaks" & full==TRUE & monthly==TRUE){
+	}else if(yvar=="intraannual_frequency_numpeaks" & full_record==TRUE & monthly==TRUE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -336,7 +336,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average intra-annual frequency (# of peaks) of HMF \nover the full record of data by month and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	} else 	if(yvar=="vol MAF" & full==FALSE & monthly==TRUE){
+	} else 	if(yvar=="vol MAF" & full_record==FALSE & monthly==TRUE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -362,7 +362,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average magnitude (volume) of HMF \nover the post-impairment record of data by month and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	}else if(yvar=="duration_days" & full==FALSE & monthly==TRUE){
+	}else if(yvar=="duration_days" & full_record==FALSE & monthly==TRUE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -388,7 +388,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average duration (days) of HMF \nover the post-impairment record of data by month and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	}else if(yvar=="intraannual_frequency_numpeaks" & full==FALSE & monthly==TRUE){
+	}else if(yvar=="intraannual_frequency_numpeaks" & full_record==FALSE & monthly==TRUE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){

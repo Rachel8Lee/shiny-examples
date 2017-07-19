@@ -93,7 +93,7 @@ function(input, output, session) {
      radius <- 10000*zipdata[[sizeBy]]/max(zipdata[[sizeBy]]) + 3000
 #    }
 library(gplots)
-    leafletProxy("map", data = zipdata()) %>%
+    leafletProxy("map", data = zipdata) %>%
       clearShapes() %>% 
       addCircles(~longitude, ~latitude, radius=radius, layerId=~zipcode,
         stroke=TRUE, weight = 1, color ="#000000", fillOpacity=0.85, fillColor=pal(classdata)) %>%

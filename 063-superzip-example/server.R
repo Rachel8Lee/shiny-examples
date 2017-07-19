@@ -3,6 +3,7 @@ library(RColorBrewer)
 library(scales)
 library(lattice)
 library(dplyr)
+source("website_barplots.R")
 
 zipdata <- allzips
 

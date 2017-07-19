@@ -18,7 +18,7 @@ redo_full_vol <- merge(redo_full_vol, gauge_status, by.x="gauge", by.y="gauge", 
 redo_full_vol_all <- redo_full_vol[which(redo_full_vol$yeartype == "all"),]
 redo_full_vol_all_April <-redo_full_vol_all[which(redo_full_vol_all$period == "April"),]
 allzips <- merge(allzips, redo_full_vol_all_April, by.x="zipcode", by.y="gauge", all.y=TRUE)
-allzips <- allzips[order(allzips$avg, descending = TRUE),]
+allzips <- allzips[order(allzips$avg, decreasing = TRUE),]
 #allzips$avg <- redo_full_vol_all_April$avg
 #allzips$sd <- redo_full_vol_all_April$sd
 

@@ -42,7 +42,7 @@ function(input, output, session) {
 
   output$histCentile <- renderPlot({
     # If no zipcodes are in view, don't plot
-	  temp = c(11447650)
+ 	  my_barplot(selectedZip$zipcode,imp.full, "vol MAF", monthly = TRUE, full_record = TRUE)
   })
 
   # This observer is responsible for maintaining the circles and legend,
@@ -98,7 +98,6 @@ library(gplots)
       sprintf("Status: %s", selectedZip$status), tags$br(),
       sprintf("Average: %s", selectedZip$avg), tags$br()	    
     ))
-	  my_barplot(selectedZip$zipcode,imp.full, "vol MAF", monthly = TRUE, full_record = TRUE)
     leafletProxy("map") %>% addPopups(lng, lat, content, layerId = zipcode)
   }
 

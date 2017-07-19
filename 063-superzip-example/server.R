@@ -26,12 +26,12 @@ function(input, output, session) {
   # in bounds right now
   zipsInBounds <- reactive({
     if (is.null(input$map_bounds))
-      return(zipdata[FALSE,])
+      return(zipdata()[FALSE,])
     bounds <- input$map_bounds
     latRng <- range(bounds$north, bounds$south)
     lngRng <- range(bounds$east, bounds$west)
     
-    subset(zipdata,
+    subset(zipdata(),
       latitude >= latRng[1] & latitude <= latRng[2] &
         longitude >= lngRng[1] & longitude <= lngRng[2])
   })
@@ -76,7 +76,7 @@ function(input, output, session) {
 #      colorData <- ifelse(zipdata$centile >= (100 - input$threshold), "yes", "no")
 #      pal <- colorFactor("viridis", colorData)
 #    } else {
-      colorData <- zipdata[[colorBy]]
+      colorData <- zipdata()[[colorBy]]
 	  classdata <- rep(NA,length(colorData))
 	  classdata[which(colorData== bounds[[1]])] <- 1
 	  for(i in 2:length(bounds)){
@@ -90,10 +90,10 @@ function(input, output, session) {
 #      # Radius is treated specially in the "superzip" case.
 #      radius <- ifelse(zipdata$centile >= (100 - input$threshold), 30000, 3000)
 #    } else {
-     radius <- 10000*zipdata[[sizeBy]]/max(zipdata[[sizeBy]]) + 3000
+     radius <- 10000*zipdata()[[sizeBy]]/max(zipdata()[[sizeBy]]) + 3000
 #    }
 library(gplots)
-    leafletProxy("map", data = zipdata) %>%
+    leafletProxy("map", data = zipdata()) %>%
       clearShapes() %>% 
       addCircles(~longitude, ~latitude, radius=radius, layerId=~zipcode,
         stroke=TRUE, weight = 1, color ="#000000", fillOpacity=0.85, fillColor=pal(classdata)) %>%

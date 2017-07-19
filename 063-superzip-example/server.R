@@ -4,7 +4,7 @@ library(scales)
 library(lattice)
 library(dplyr)
 
-#zipdata <- allzips
+zipdata <- allzips
 
 function(input, output, session) {
 
@@ -20,7 +20,7 @@ function(input, output, session) {
       setView(lng = -120.51, lat = 38.06, zoom = 7)
   })
  
-  zipdata <- reactive({paste(input$record, input$vars, input$yeartype, input$period, input$sitetype,sep="_")})
+  #zipdata <- reactive({paste(input$record, input$vars, input$yeartype, input$period, input$sitetype,sep="_")})
 	
   # A reactive expression that returns the set of zips that are
   # in bounds right now

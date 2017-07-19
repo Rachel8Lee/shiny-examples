@@ -21,7 +21,7 @@ function(input, output, session) {
   })
   
    zipdata <- reactive({
-    if (input$metric == "avg") zipdata <- allzips
+    if (input$metric == "avg") return (allzips)
   })
 	
   # A reactive expression that returns the set of zips that are

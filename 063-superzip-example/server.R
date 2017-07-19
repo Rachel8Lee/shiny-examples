@@ -20,9 +20,6 @@ function(input, output, session) {
       setView(lng = -120.51, lat = 38.06, zoom = 7)
   })
   
-   zipdata <- reactive({
-    if (input$metric == "avg") return (allzips)
-  })
 	
   # A reactive expression that returns the set of zips that are
   # in bounds right now

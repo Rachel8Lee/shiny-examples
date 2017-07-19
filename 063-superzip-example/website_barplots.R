@@ -446,22 +446,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 			)
 }
 
-### where plots will be saved
-#outpath = "C:/Documents/"
 
-# full record
-imp.full = alldat %>% filter(gauge %in% imp.gauges, tag == "full")
-lab.imp <- rep(NA, length(imp.gauges))
-for(i in 1:length(imp.gauges)){
-	lab.imp[[i]] <- paste("USGS ",imp.gauges[[i]],"\n",as.character(alldat$station_name[which(alldat$gauge==imp.gauges[[i]])[[1]]]),sep="")
-}
-names(lab.imp) = paste(c(imp.gauges))
-imp.full$station = imp.full$gauge
-imp.full$gauge = factor(imp.full$gauge, levels = names(lab.imp))
-levels(imp.full$gauge) = lab.imp
-
-###makes and saves full record length plots
-###can run my_batplot to comma to generate plot in R only without saving
 
 		
 

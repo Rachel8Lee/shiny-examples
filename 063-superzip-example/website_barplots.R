@@ -428,7 +428,7 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 					labels = c("Critical\t", "Dry\t", "Below Normal\t", "Above Normal\t", 
 							"Wet\t", "All\t")) + 
 			guides(fill = guide_legend(reverse = FALSE, nrow = 1)) +
-			labs(caption=cap)+
+			#labs(caption=cap)+
 			theme(
 					axis.text.x = element_text(color="black", size=10),
 					axis.text.y = element_text(color="black", size=12),

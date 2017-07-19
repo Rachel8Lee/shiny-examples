@@ -31,9 +31,9 @@ function(input, output, session) {
     latRng <- range(bounds$north, bounds$south)
     lngRng <- range(bounds$east, bounds$west)
     
-    #subset(zipdata,
-     # latitude >= latRng[1] & latitude <= latRng[2] &
-      #  longitude >= lngRng[1] & longitude <= lngRng[2])
+    subset(zipdata,
+      latitude >= latRng[1] & latitude <= latRng[2] &
+      longitude >= lngRng[1] & longitude <= lngRng[2])
   })
 
   # Precalculate the breaks we'll need for the two histograms

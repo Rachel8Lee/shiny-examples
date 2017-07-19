@@ -42,7 +42,7 @@ function(input, output, session) {
 
   output$histCentile <- renderPlot({
     # If no zipcodes are in view, don't plot
-    my_barplot(imp.post, "vol MAF", monthly = TRUE, full = FALSE)
+    my_barplot(imp.full, "vol MAF", monthly = TRUE, full = TRUE)
   })
 
   output$scatterCollegeIncome <- renderPlot({

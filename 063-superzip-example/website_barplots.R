@@ -32,12 +32,16 @@ imp.nmpks.frame<- imp.nmpks.frame[,2:length(imp.nmpks.frame)]
 
 
 ###change this to change which stations are plotted###
-imp.gauges = c(11447650, 11303500)
 ##################
 
 
 
-six.gauges = imp.gauges
+
+
+### function to dynamically create plots for magnitude, duration, and intra-annual frequency
+my_barplot = function(imp.gauges, d, yvar, monthly = TRUE, full = TRUE){
+	
+	six.gauges = imp.gauges
 # bundle data
 blanks = data.frame(gauge = six.gauges, yeartype = " ", period = NA, avg = NA, 
 		sd = NA, valtype = NA)
@@ -69,9 +73,8 @@ alldat$ymax <- alldat$avg + alldat$sd
 stationname <- read.csv(paste(inpath,"gauge_locations.csv",sep=""))
 stationname <- data.frame(site=stationname$site_no, station_name=stationname$station_nm)
 alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
-
-### function to dynamically create plots for magnitude, duration, and intra-annual frequency
-my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
+	
+	
 	if(yvar == "vol MAF"){
 		ylabel = "High Magnitude Flow Volume  (MAF)"
 		tlabel = "Average Magnitude (Volume) Above 90th Percentile\n"

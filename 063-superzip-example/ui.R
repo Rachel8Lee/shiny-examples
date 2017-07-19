@@ -1,35 +1,15 @@
 library(leaflet)
 
 # Choices for drop-downs
-record_length <- c(
-	"Full" = "full",
-	"Post-Impairment" = "post_imp"
-)	
+record_length <- c("Full" = "full", "Post-Impairment" = "post_imp")	
 
-site_type <- c(
-  "Impaired" = "impaired",
-  "Unimpaired" = "unimpaired",
-  "All Sites" = "both"
-)
+site_type <- c("Impaired" = "impaired", "Unimpaired" = "unimpaired", "All Sites" = "both")
 
-vars <- c(
-  "Magnitude" = "avg",
-  "Duration" = "centile",
-  "Inter-Annual Frequency" = "college",
-  "Intra-Annual Frequency" = "income",
-  "Timing" = "adultpop"
-)
+vars <- c("Magnitude" = "avg", "Duration" = "centile", "Inter-Annual Frequency" = "college", "Intra-Annual Frequency" = "income", "Timing" = "adultpop")
  
-period <- c(
-	"January"= "jan", "February" = "feb", 
-	"March" = "mar", "April" = "apr",
-	"November" = "nov", "December" = "dec",
-	"November to April" = "novtapr", 
-	"December to February" = "dectfeb",
-	"Hydrologic Year" = "hy"
-)
+period <- c("January"= "jan", "February" = "feb", "March" = "mar", "April" = "apr", "November" = "nov", "December" = "dec", "November to April" = "novtapr", "December to February" = "dectfeb", "Hydrologic Year" = "hy")
 
-
+year_type <- c("Above Normal" = "AN", "Below Normal" = "BN", "Critical" = "C", "Dry" = "dry", "All" = "all")
 navbarPage("Availability of high-magnitude streamflow for groundwater banking in the Central Valley, California", id="nav",
 
   tabPanel("Interactive map",
@@ -49,10 +29,10 @@ navbarPage("Availability of high-magnitude streamflow for groundwater banking in
         width = 330, height = "auto",
 
         h2("Site Manager"),
-				selectInput("yeartype", "Year Type", year_type),
-        selectInput("sitetype", "Sites Included", site_type),
-		    selectInput("metric", "Metric", vars),
-				selectInput("record", "Record Length", record_length),
+		    selectInput("record", "Record Length", record_length),
+				selectInput("metric", "Metric", vars),
+				selectInput("yeartype", "Year Type", year_type),						
+		    selectInput("sitetype", "Sites Included", site_type),
 				selectInput("period", "Time Period", period),						
 #        selectInput("color", "Color", vars),
 #        selectInput("size", "Size", vars, selected = "adultpop"),

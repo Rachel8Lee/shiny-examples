@@ -26,7 +26,7 @@ function(input, output, session) {
   # in bounds right now
   zipsInBounds <- reactive({
     if (is.null(input$map_bounds))
-      return(zipdata()[FALSE,])
+      return(zipdata[FALSE,])
     bounds <- input$map_bounds
     latRng <- range(bounds$north, bounds$south)
     lngRng <- range(bounds$east, bounds$west)

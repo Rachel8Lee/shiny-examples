@@ -17,7 +17,7 @@ allzips$longitude <- gauge_data$dec_long_v
 # FULL VOL
 full_avg <- read.csv("data/redo_simp_data_full_vol_90.csv")
 full_avg <- merge(full_avg, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
-full_avg_all <- full_avg[which(full_vol$yeartype == "all"),]
+full_avg_all <- full_avg[which(full_avg$yeartype == "all"),]
 full_avg_all_April <-full_avg_all[which(full_avg_all$period == "April"),]
 allzips <- merge(allzips, full_avg_all_April, by.x="zipcode", by.y="gauge", all.y=TRUE)
 allzips <- allzips[order(allzips$avg, decreasing = TRUE),]

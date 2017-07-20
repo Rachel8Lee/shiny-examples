@@ -25,7 +25,7 @@ function(input, output, session) {
 	
   # A reactive expression that returns the set of zips that are
   # in bounds right now
-  zipsInBounds <- reactive({
+  siteInBounds <- reactive({
     if (is.null(input$map_bounds))
       return(sitedata[FALSE,])
     bounds <- input$map_bounds

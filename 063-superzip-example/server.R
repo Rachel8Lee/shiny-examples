@@ -88,7 +88,7 @@ library(gplots)
   })
 
   # Show a popup at the given location
-  showZipcodePopup <- function(zipcode, lat, lng) {
+  showSitePopup <- function(zipcode, lat, lng) {
     selectedZip <- allzips[allzips$zipcode == zipcode,]
     content <- as.character(tagList(
       tags$h4("Site Number:", as.integer(selectedZip$zipcode)),
@@ -110,7 +110,7 @@ library(gplots)
       return()
 
     isolate({
-      showZipcodePopup(event$id, event$lat, event$lng)
+      showSitePopup(event$id, event$lat, event$lng)
     })
   })
 
@@ -153,7 +153,7 @@ library(gplots)
       zip <- input$goto$zip
       lat <- input$goto$lat
       lng <- input$goto$lng
-      showZipcodePopup(zip, lat, lng)
+      showSitePopup(zip, lat, lng)
       map %>% fitBounds(lng - dist, lat - dist, lng + dist, lat + dist)
     })
   })

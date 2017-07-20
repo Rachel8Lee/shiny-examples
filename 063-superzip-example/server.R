@@ -37,7 +37,7 @@ function(input, output, session) {
   })
 
   # Precalculate the breaks we'll need for the two histograms
-  centileBreaks <- hist(plot = FALSE, allzips$centile, breaks = 20)$breaks
+  centileBreaks <- hist(plot = FALSE, allsites$centile, breaks = 20)$breaks
 
   output$histCentile <- renderPlot({
  	  my_barplot(imp.full, "vol MAF", monthly = TRUE, full = TRUE)

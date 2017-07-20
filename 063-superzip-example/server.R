@@ -73,8 +73,8 @@ function(input, output, session) {
   })
 
   # Show a popup at the given location
-  showSitePopup <- function(siteID, lat, lng) {
-    selectedSite <- allsites[allsites$site_no == siteID,]
+  showSitePopup <- function(site_no, lat, lng) {
+    selectedSite <- allsites[allsites$site_no == site_no,]
     content <- as.character(tagList(
       tags$h4("Site Number:", as.integer(selectedSite$site_no)),
       tags$br(),
@@ -84,7 +84,7 @@ function(input, output, session) {
       sprintf("Status: %s", selectedSite$status), tags$br(),
       sprintf("Average: %s", selectedSite$avg), tags$br()	    
     ))
-    leafletProxy("map") %>% addPopups(lng, lat, content, layerId = siteID)
+    leafletProxy("map") %>% addPopups(lng, lat, content, layerId = site_no)
   }
 
   # When map is clicked, show a popup with city info

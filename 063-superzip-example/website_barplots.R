@@ -10,7 +10,7 @@ library(ggplot2) #must be most recent version of ggplot2, otherwise captions don
 library(grid)
 
 ## where to look for files
-inpath <- c("C:/Documents/")
+inpath <- c("data/")
 ###
 
 
@@ -459,25 +459,6 @@ levels(imp.full$gauge) = lab.imp
 
 ###makes and saves full record length plots
 ###can run my_batplot to comma to generate plot in R only without saving
-ggsave(file.path(outpath, "imp_monthly_vol_full_AF.png"), 
-		my_barplot(imp.full, "vol MAF", monthly = TRUE, full = TRUE), 
-		width = 10, height = 6, units = "in")
-ggsave(file.path(outpath, "imp_bigperiod_vol_full_AF.png"), 
-		my_barplot(imp.full, "vol MAF", monthly = FALSE, full = TRUE), 
-		width = 13.125, height = 9, units = "in")
-ggsave(file.path(outpath, "imp_monthly_dur_full.png"), 
-		my_barplot(imp.full, "duration_days", monthly = TRUE, full = TRUE), 
-		width = 13.125, height = 9, units = "in")
-ggsave(file.path(outpath, "imp_bigperiod_dur_full.png"), 
-		my_barplot(imp.full, "duration_days", monthly = FALSE, full = TRUE), 
-		width = 13.125, height = 9, units = "in")
-ggsave(file.path(outpath, "imp_monthly_nmpks_full.png"), 
-		my_barplot(imp.full, "intraannual_frequency_numpeaks", monthly = TRUE, full = TRUE), 
-		width = 13.125, height = 9, units = "in")
-ggsave(file.path(outpath, "imp_bigperiod_nmpks_full.png"), 
-		my_barplot(imp.full, "intraannual_frequency_numpeaks", monthly = FALSE, full = TRUE), 
-		width = 13.125, height = 9, units = "in")
-
 
 # post-impairment
 imp.post = alldat %>% filter(gauge %in% imp.gauges, tag == "post-impairment")
@@ -489,25 +470,3 @@ names(lab.imp) = paste(c(imp.gauges))
 imp.post$station = imp.post$gauge
 imp.post$gauge = factor(imp.post$gauge, levels = names(lab.imp))
 levels(imp.post$gauge) = lab.imp
-
-###makes and saves post-impairment record length plots
-###can run my_batplot to comma to generate plot in R only without saving
-ggsave(file.path(outpath, "imp_monthly_vol_post_AF.png"), 
-		my_barplot(imp.post, "vol MAF", monthly = TRUE, full = FALSE), 
-		width = 10, height = 6, units = "in")
-ggsave(file.path(outpath, "imp_monthly_dur_post.png"), 
-		my_barplot(imp.post, "duration_days", monthly = TRUE, full = FALSE), 
-		width = 13.125, height = 9, units = "in")
-ggsave(file.path(outpath, "imp_monthly_nmpks_post.png"), 
-		my_barplot(imp.post, "intraannual_frequency_numpeaks", monthly = TRUE, full = FALSE), 
-		width = 13.125, height = 9, units = "in")
-ggsave(file.path(outpath, "imp_bigperiod_dur_post.png"), 
-		my_barplot(imp.post, "duration_days", monthly = FALSE, full = FALSE), 
-		width = 13.125, height = 9, units = "in")
-ggsave(file.path(outpath, "imp_bigperiod_vol_post_AF.png"), 
-		my_barplot(imp.post, "vol MAF", monthly = FALSE, full = FALSE), 
-		width = 13.125, height = 9, units = "in")
-ggsave(file.path(outpath, "imp_bigperiod_nmpks_post.png"), 
-		my_barplot(imp.post, "intraannual_frequency_numpeaks", monthly = FALSE, full = FALSE), 
-		width = 13.125, height = 9, units = "in")
-

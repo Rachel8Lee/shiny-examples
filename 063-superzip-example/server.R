@@ -5,7 +5,7 @@ library(lattice)
 library(dplyr)
 source("website_barplots.R")
 
-sitedata <- allzips
+sitedata <- allsites
 
 function(input, output, session) {
 

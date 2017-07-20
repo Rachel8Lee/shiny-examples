@@ -43,7 +43,7 @@ function(input, output, session) {
   output$histCentile <- renderPlot({
     # If no zipcodes are in view, don't plot
 	  #temp <-c(11447650)
- 	  my_barplot(imp.full, "vol MAF", monthly = TRUE, full_record = TRUE)
+ 	  my_barplot(imp.full, "vol MAF", monthly = TRUE, full = TRUE)
   })
 
   # This observer is responsible for maintaining the circles and legend,

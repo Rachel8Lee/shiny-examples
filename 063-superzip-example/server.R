@@ -5,7 +5,7 @@ library(lattice)
 library(dplyr)
 source("website_barplots.R")
 
-zipdata <- allzips
+sitedata <- allzips
 
 function(input, output, session) {
 
@@ -21,18 +21,18 @@ function(input, output, session) {
       setView(lng = -120.51, lat = 38.06, zoom = 7)
   })
  
-  #zipdata <- reactive({paste(input$record, input$vars, input$yeartype, input$period, input$sitetype,sep="_")})
+  #sitedata <- reactive({paste(input$record, input$vars, input$yeartype, input$period, input$sitetype,sep="_")})
 	
   # A reactive expression that returns the set of zips that are
   # in bounds right now
   zipsInBounds <- reactive({
     if (is.null(input$map_bounds))
-      return(zipdata[FALSE,])
+      return(sitedata[FALSE,])
     bounds <- input$map_bounds
     latRng <- range(bounds$north, bounds$south)
     lngRng <- range(bounds$east, bounds$west)
     
-    subset(zipdata,
+    subset(sitedata,
       latitude >= latRng[1] & latitude <= latRng[2] &
       longitude >= lngRng[1] & longitude <= lngRng[2])
   })
@@ -58,10 +58,10 @@ function(input, output, session) {
 #    if (colorBy == "avg") {
 #      # Color and palette are treated specially in the "superzip" case, because
 #      # the values are categorical instead of continuous.
-#      colorData <- ifelse(zipdata$centile >= (100 - input$threshold), "yes", "no")
+#      colorData <- ifelse(sitedata$centile >= (100 - input$threshold), "yes", "no")
 #      pal <- colorFactor("viridis", colorData)
 #    } else {
-      colorData <- zipdata[[colorBy]]
+      colorData <- sitedata[[colorBy]]
 	  classdata <- rep(NA,length(colorData))
 	  classdata[which(colorData== bounds[[1]])] <- 1
 	  for(i in 2:length(bounds)){
@@ -73,12 +73,12 @@ function(input, output, session) {
 
 #    if (sizeBy == "avg") {
 #      # Radius is treated specially in the "superzip" case.
-#      radius <- ifelse(zipdata$centile >= (100 - input$threshold), 30000, 3000)
+#      radius <- ifelse(sitedata$centile >= (100 - input$threshold), 30000, 3000)
 #    } else {
-     radius <- 10000*zipdata[[sizeBy]]/max(zipdata[[sizeBy]]) + 3000
+     radius <- 10000*sitedata[[sizeBy]]/max(sitedata[[sizeBy]]) + 3000
 #    }
 library(gplots)
-    leafletProxy("map", data = zipdata) %>%
+    leafletProxy("map", data = sitedata) %>%
       clearShapes() %>% 
       addCircles(~longitude, ~latitude, radius=radius, layerId=~zipcode,
         stroke=TRUE, weight = 1, color ="#000000", fillOpacity=0.85, fillColor=pal(classdata)) %>%

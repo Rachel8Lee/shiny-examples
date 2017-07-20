@@ -6,7 +6,7 @@ allsites<-bigset[1:93,]
 # read in site #, name, location
 gauge_data <- read.csv("data/gauge_locations.csv")
 gauge_status <- read.csv("data/gauge_classification.csv")
-allsites$zipcode <- gauge_data$site_no
+allsites$site_no <- gauge_data$site_no
 allsites$statname <- gauge_data$station_nm
 allsites$latitude <- gauge_data$dec_lat_va
 allsites$longitude <- gauge_data$dec_long_v

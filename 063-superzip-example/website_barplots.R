@@ -10,7 +10,7 @@ library(ggplot2) #must be most recent version of ggplot2, otherwise captions don
 library(grid)
 
 ## where to look for files
-inpath <- c("data/")
+inpath <- c("C:/Documents/")
 ###
 
 
@@ -29,10 +29,15 @@ imp.vol.frame<- imp.vol.frame[,2:length(imp.vol.frame)]
 imp.dur.frame<- imp.dur.frame[,2:length(imp.dur.frame)]
 imp.nmpks.frame<- imp.nmpks.frame[,2:length(imp.nmpks.frame)]
 
-### function to dynamically create plots for magnitude, duration, and intra-annual frequency
-my_barplot = function(gaugeID, d, yvar, monthly = TRUE, full_record = TRUE){
-	
-six.gauges = gaugesID
+
+
+###change this to change which stations are plotted###
+imp.gauges = c(11447650, 11303500)
+##################
+
+
+
+six.gauges = imp.gauges
 # bundle data
 blanks = data.frame(gauge = six.gauges, yeartype = " ", period = NA, avg = NA, 
 		sd = NA, valtype = NA)
@@ -64,8 +69,9 @@ alldat$ymax <- alldat$avg + alldat$sd
 stationname <- read.csv(paste(inpath,"gauge_locations.csv",sep=""))
 stationname <- data.frame(site=stationname$site_no, station_name=stationname$station_nm)
 alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
-	
-	
+
+### function to dynamically create plots for magnitude, duration, and intra-annual frequency
+my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 	if(yvar == "vol MAF"){
 		ylabel = "High Magnitude Flow Volume  (MAF)"
 		tlabel = "Average Magnitude (Volume) Above 90th Percentile\n"
@@ -88,12 +94,12 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		p = c("December to February", "November to April", "Hydrologic Year")
 		plabel = "3-Month Period, 6-Month Period, Hydrologic Year By Year Type"
 	}
-	if(full_record){
+	if(full){
 		rlabel = "Full Record of Available Data, Zero-Deflated"
 	} else {
 		rlabel = "Post-Impairment Record of Available Data, Zero-Deflated"
 	}
-	if(yvar=="vol MAF" & full_record==TRUE & monthly==FALSE){
+	if(yvar=="vol MAF" & full==TRUE & monthly==FALSE){
 	numgauges <- length(as.character(unique(d$gauge)))
 	gauges2 <- rep(NA, numgauges)
 	for(i in 1:length(gauges2)){
@@ -119,7 +125,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 	captext2 <- paste(captext, collapse=" ")
 	cap = paste("Average magnitude (volume) of HMF \nover the full record of data by period and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 			captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	}else if(yvar=="duration_days" & full_record==TRUE & monthly==FALSE){
+	}else if(yvar=="duration_days" & full==TRUE & monthly==FALSE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -145,7 +151,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average duration (days) of HMF \nover the full record of data by period and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	}else if(yvar=="intraannual_frequency_numpeaks" & full_record==TRUE & monthly==FALSE){
+	}else if(yvar=="intraannual_frequency_numpeaks" & full==TRUE & monthly==FALSE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -171,7 +177,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average intra-annual frequency (# of peaks) of HMF \nover the full record of data by period and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	} else 	if(yvar=="vol MAF" & full_record==FALSE & monthly==FALSE){
+	} else 	if(yvar=="vol MAF" & full==FALSE & monthly==FALSE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -197,7 +203,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average magnitude (volume) of HMF \nover the post-impairment record of data by period and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	}else if(yvar=="duration_days" & full_record==FALSE & monthly==FALSE){
+	}else if(yvar=="duration_days" & full==FALSE & monthly==FALSE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -223,7 +229,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average duration (days) of HMF \nover the post-impairment record of data by period and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	}else if(yvar=="intraannual_frequency_numpeaks" & full_record==FALSE & monthly==FALSE){
+	}else if(yvar=="intraannual_frequency_numpeaks" & full==FALSE & monthly==FALSE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -249,7 +255,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average intra-annual frequency (# of peaks) of HMF \nover the post-impairment record of data by period and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	} else if(yvar=="vol MAF" & full_record==TRUE & monthly==TRUE){
+	} else if(yvar=="vol MAF" & full==TRUE & monthly==TRUE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -275,7 +281,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average magnitude (volume) of HMF \nover the full record of data by month and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	}else if(yvar=="duration_days" & full_record==TRUE & monthly==TRUE){
+	}else if(yvar=="duration_days" & full==TRUE & monthly==TRUE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -301,7 +307,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average duration (days) of HMF \nover the full record of data by month and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	}else if(yvar=="intraannual_frequency_numpeaks" & full_record==TRUE & monthly==TRUE){
+	}else if(yvar=="intraannual_frequency_numpeaks" & full==TRUE & monthly==TRUE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -327,7 +333,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average intra-annual frequency (# of peaks) of HMF \nover the full record of data by month and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	} else 	if(yvar=="vol MAF" & full_record==FALSE & monthly==TRUE){
+	} else 	if(yvar=="vol MAF" & full==FALSE & monthly==TRUE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -353,7 +359,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average magnitude (volume) of HMF \nover the post-impairment record of data by month and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	}else if(yvar=="duration_days" & full_record==FALSE & monthly==TRUE){
+	}else if(yvar=="duration_days" & full==FALSE & monthly==TRUE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -379,7 +385,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 		captext2 <- paste(captext, collapse=" ")
 		cap = paste("Average duration (days) of HMF \nover the post-impairment record of data by month and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
-	}else if(yvar=="intraannual_frequency_numpeaks" & full_record==FALSE & monthly==TRUE){
+	}else if(yvar=="intraannual_frequency_numpeaks" & full==FALSE & monthly==TRUE){
 		numgauges <- length(as.character(unique(d$gauge)))
 		gauges2 <- rep(NA, numgauges)
 		for(i in 1:length(gauges2)){
@@ -422,7 +428,7 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 					labels = c("Critical\t", "Dry\t", "Below Normal\t", "Above Normal\t", 
 							"Wet\t", "All\t")) + 
 			guides(fill = guide_legend(reverse = FALSE, nrow = 1)) +
-			#labs(caption=cap)+
+			labs(caption=cap)+
 			theme(
 					axis.text.x = element_text(color="black", size=10),
 					axis.text.y = element_text(color="black", size=12),
@@ -437,6 +443,10 @@ alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 			)
 }
 
+### where plots will be saved
+outpath = "C:/Documents/"
+
+# full record
 imp.full = alldat %>% filter(gauge %in% imp.gauges, tag == "full")
 lab.imp <- rep(NA, length(imp.gauges))
 for(i in 1:length(imp.gauges)){
@@ -447,6 +457,57 @@ imp.full$station = imp.full$gauge
 imp.full$gauge = factor(imp.full$gauge, levels = names(lab.imp))
 levels(imp.full$gauge) = lab.imp
 
-		
+###makes and saves full record length plots
+###can run my_batplot to comma to generate plot in R only without saving
+ggsave(file.path(outpath, "imp_monthly_vol_full_AF.png"), 
+		my_barplot(imp.full, "vol MAF", monthly = TRUE, full = TRUE), 
+		width = 10, height = 6, units = "in")
+ggsave(file.path(outpath, "imp_bigperiod_vol_full_AF.png"), 
+		my_barplot(imp.full, "vol MAF", monthly = FALSE, full = TRUE), 
+		width = 13.125, height = 9, units = "in")
+ggsave(file.path(outpath, "imp_monthly_dur_full.png"), 
+		my_barplot(imp.full, "duration_days", monthly = TRUE, full = TRUE), 
+		width = 13.125, height = 9, units = "in")
+ggsave(file.path(outpath, "imp_bigperiod_dur_full.png"), 
+		my_barplot(imp.full, "duration_days", monthly = FALSE, full = TRUE), 
+		width = 13.125, height = 9, units = "in")
+ggsave(file.path(outpath, "imp_monthly_nmpks_full.png"), 
+		my_barplot(imp.full, "intraannual_frequency_numpeaks", monthly = TRUE, full = TRUE), 
+		width = 13.125, height = 9, units = "in")
+ggsave(file.path(outpath, "imp_bigperiod_nmpks_full.png"), 
+		my_barplot(imp.full, "intraannual_frequency_numpeaks", monthly = FALSE, full = TRUE), 
+		width = 13.125, height = 9, units = "in")
 
+
+# post-impairment
+imp.post = alldat %>% filter(gauge %in% imp.gauges, tag == "post-impairment")
+lab.imp <- rep(NA, length(imp.gauges))
+for(i in 1:length(imp.gauges)){
+	lab.imp[[i]] <- paste("USGS ",imp.gauges[[i]],"\n",as.character(alldat$station_name[which(alldat$gauge==imp.gauges[[i]])[[1]]]),sep="")
+}
+names(lab.imp) = paste(c(imp.gauges))
+imp.post$station = imp.post$gauge
+imp.post$gauge = factor(imp.post$gauge, levels = names(lab.imp))
+levels(imp.post$gauge) = lab.imp
+
+###makes and saves post-impairment record length plots
+###can run my_batplot to comma to generate plot in R only without saving
+ggsave(file.path(outpath, "imp_monthly_vol_post_AF.png"), 
+		my_barplot(imp.post, "vol MAF", monthly = TRUE, full = FALSE), 
+		width = 10, height = 6, units = "in")
+ggsave(file.path(outpath, "imp_monthly_dur_post.png"), 
+		my_barplot(imp.post, "duration_days", monthly = TRUE, full = FALSE), 
+		width = 13.125, height = 9, units = "in")
+ggsave(file.path(outpath, "imp_monthly_nmpks_post.png"), 
+		my_barplot(imp.post, "intraannual_frequency_numpeaks", monthly = TRUE, full = FALSE), 
+		width = 13.125, height = 9, units = "in")
+ggsave(file.path(outpath, "imp_bigperiod_dur_post.png"), 
+		my_barplot(imp.post, "duration_days", monthly = FALSE, full = FALSE), 
+		width = 13.125, height = 9, units = "in")
+ggsave(file.path(outpath, "imp_bigperiod_vol_post_AF.png"), 
+		my_barplot(imp.post, "vol MAF", monthly = FALSE, full = FALSE), 
+		width = 13.125, height = 9, units = "in")
+ggsave(file.path(outpath, "imp_bigperiod_nmpks_post.png"), 
+		my_barplot(imp.post, "intraannual_frequency_numpeaks", monthly = FALSE, full = FALSE), 
+		width = 13.125, height = 9, units = "in")
 

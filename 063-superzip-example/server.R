@@ -3,15 +3,14 @@ library(RColorBrewer)
 library(scales)
 library(lattice)
 library(dplyr)
+library(gplots)
 source("website_barplots.R")
 
 sitedata <- allsites
 
 function(input, output, session) {
-
-  ## Interactive Map ###########################################
-
-  # Create the map
+## Interactive Map ###########################################
+# Create the map
   output$map <- renderLeaflet({
     leaflet() %>%
       addTiles(
@@ -41,8 +40,6 @@ function(input, output, session) {
   centileBreaks <- hist(plot = FALSE, allzips$centile, breaks = 20)$breaks
 
   output$histCentile <- renderPlot({
-    # If no zipcodes are in view, don't plot
-	  #temp <-c(11447650)
  	  my_barplot(imp.full, "vol MAF", monthly = TRUE, full = TRUE)
   })
 
@@ -55,29 +52,17 @@ function(input, output, session) {
 	colorlist <-  c("black","orangered","khaki1","olivedrab1","chartreuse3","green4","aquamarine2","deepskyblue4","blue","royalblue4","navyblue")
 	bounds <- c(0,1000,10000,50000,125000,200000,400000,800000,1500000,2500000,3500000)
 	labs <-  c("0","1 AF - 1 TAF","1000 - 10000","10000 - 50000","50000 - 125000","125000 - 200000","200000 - 400000","400000 - 800000","800000 - 1500000","1500000 - 2500000","2500000 - 3500000")
-#    if (colorBy == "avg") {
-#      # Color and palette are treated specially in the "superzip" case, because
-#      # the values are categorical instead of continuous.
-#      colorData <- ifelse(sitedata$centile >= (100 - input$threshold), "yes", "no")
-#      pal <- colorFactor("viridis", colorData)
-#    } else {
-      colorData <- sitedata[[colorBy]]
+
+    colorData <- sitedata[[colorBy]]
 	  classdata <- rep(NA,length(colorData))
 	  classdata[which(colorData== bounds[[1]])] <- 1
 	  for(i in 2:length(bounds)){
 		  classdata[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- i
 	  }
-#		levs <- factor(seq(1,11,1), levels=seq(1,11,1), labels=as.character(bounds))
-      pal <- colorFactor(palette=colorlist, domain=seq(1,11,1), na.color="black")
-#    }
 
-#    if (sizeBy == "avg") {
-#      # Radius is treated specially in the "superzip" case.
-#      radius <- ifelse(sitedata$centile >= (100 - input$threshold), 30000, 3000)
-#    } else {
+     pal <- colorFactor(palette=colorlist, domain=seq(1,11,1), na.color="black")
      radius <- 10000*sitedata[[sizeBy]]/max(sitedata[[sizeBy]]) + 3000
-#    }
-library(gplots)
+
     leafletProxy("map", data = sitedata) %>%
       clearShapes() %>% 
       addCircles(~longitude, ~latitude, radius=radius, layerId=~zipcode,
@@ -88,18 +73,18 @@ library(gplots)
   })
 
   # Show a popup at the given location
-  showSitePopup <- function(zipcode, lat, lng) {
-    selectedZip <- allzips[allzips$zipcode == zipcode,]
+  showSitePopup <- function(siteID, lat, lng) {
+    selectedSite <- allsites[allsites$site_no == siteID,]
     content <- as.character(tagList(
-      tags$h4("Site Number:", as.integer(selectedZip$zipcode)),
+      tags$h4("Site Number:", as.integer(selectedSite$site_no)),
       tags$br(),
-      sprintf("Station Name: %s", selectedZip$statname), tags$br(),
-      sprintf("Longitude: %s", selectedZip$longitude), tags$br(),
-      sprintf("Latitude: %s", selectedZip$latitude), tags$br(),
-      sprintf("Status: %s", selectedZip$status), tags$br(),
-      sprintf("Average: %s", selectedZip$avg), tags$br()	    
+      sprintf("Station Name: %s", selectedSite$statname), tags$br(),
+      sprintf("Longitude: %s", selectedSite$longitude), tags$br(),
+      sprintf("Latitude: %s", selectedSite$latitude), tags$br(),
+      sprintf("Status: %s", selectedSite$status), tags$br(),
+      sprintf("Average: %s", selectedSite$avg), tags$br()	    
     ))
-    leafletProxy("map") %>% addPopups(lng, lat, content, layerId = zipcode)
+    leafletProxy("map") %>% addPopups(lng, lat, content, layerId = siteID)
   }
 
   # When map is clicked, show a popup with city info
@@ -108,7 +93,6 @@ library(gplots)
     event <- input$map_shape_click
     if (is.null(event))
       return()
-
     isolate({
       showSitePopup(event$id, event$lat, event$lng)
     })

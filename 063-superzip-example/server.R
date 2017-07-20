@@ -36,8 +36,6 @@ function(input, output, session) {
       longitude >= lngRng[1] & longitude <= lngRng[2])
   })
 
-  # Precalculate the breaks we'll need for the two histograms
-  centileBreaks <- hist(plot = FALSE, allsites$centile, breaks = 20)$breaks
 
   output$histCentile <- renderPlot({
  	  my_barplot(imp.full, "vol MAF", monthly = TRUE, full = TRUE)

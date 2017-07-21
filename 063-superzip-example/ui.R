@@ -63,7 +63,7 @@ bodies <- dashboardBody(
 													selectInput("metric", "Metric", vars),
 													selectInput("record","Record Length", record_length),
 													selectInput("period","Time Period", period),
-													selectInput("site","Site Selection", site_type)
+													selectInput("site","Site Selection", site_type),
 													selectInput("yeartype", "Year Type", year_type)
 												)
 										

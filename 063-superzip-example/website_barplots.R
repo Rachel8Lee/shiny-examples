@@ -32,7 +32,7 @@ imp.nmpks.frame<- imp.nmpks.frame[,2:length(imp.nmpks.frame)]
 
 
 ###change this to change which stations are plotted###
-imp.gauges = c(11447650)
+imp.gauges = c(11447650, 11224500)
 ##################
 
 

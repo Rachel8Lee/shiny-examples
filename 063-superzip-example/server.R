@@ -37,7 +37,7 @@ function(input, output, session) {
   })
 
 
-  output$histCentile <- renderPlot({
+  output$testPlot <- renderPlot({
  	  my_barplot(imp.full, "vol MAF", monthly = TRUE, full = TRUE)
   })
 

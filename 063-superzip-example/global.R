@@ -13,7 +13,7 @@ allsites <- data.frame(site_no = gauge_data$site_no, station_nm = gauge_data$sta
 full_avg <- read.csv("data/redo_simp_data_full_vol_90.csv")
 full_avg_all <- full_avg[which(full_avg$yeartype == "all"),]
 full_avg_all_April <-full_avg_all[which(full_avg_all$period == "April"),]
-allsites <- merge(allsites, full_avg_all_April, by.x="zipcode", by.y="gauge", all.y=TRUE)
+allsites <- merge(allsites, full_avg_all_April, by.x="site_no", by.y="gauge", all.y=TRUE)
 allsites <- allsites[order(allsites$avg, decreasing = TRUE),]
 
 

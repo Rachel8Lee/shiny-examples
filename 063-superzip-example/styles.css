@@ -13,12 +13,46 @@ div.outer {
 }
 
 /* Customize fonts */
-body, label, input, button, select { 
-  font-family: 'Helvetica Neue', Helvetica;
+body, label, input, button, select, .main-header .logo { 
+  font-family: 'Arial';
   font-weight: 200;
 }
 h1, h2, h3, h4 { font-weight: 400; }
 
+/* active sidebar item color */     
+	.skin-black .main-sidebar .sidebar .sidebar-menu .active a{
+  	background-color: #00c0ef;
+}
+/* other links in the sidebarmenu when hovered */
+	.skin-black .main-sidebar .sidebar .sidebar-menu a:hover{
+  	background-color: #3bff00;
+}
+/* toggle button when hovered  */                    
+ 	.skin-black .main-header .navbar .sidebar-toggle:hover{
+  	background-color: #3bff00;
+}
+/* active sidebar item color */     
+.main-header .navbar-custom-menu .main-header .navbar-right {
+    float: left;
+}
+.myClass { 
+	line-height: 50px;
+	text-align: center;
+	font-family: "Arial";
+	padding: 0 15px;
+	color: black;
+	font-size: 2vw;
+		}
+@media (min-width: 1200px) {
+  .myClass {
+    line-height: 50px;
+    text-align: center;
+    font-family: "Arial";
+    padding: 0 15px;
+    color: black;
+    font-size: x-large
+  }
+}
 #controls {
   /* Appearance */
   background-color: white;

@@ -51,7 +51,7 @@ bodies <- dashboardBody(
 							
 							)
 						),
-					column(width=6,
+					column(width=12,
 							fluidRow(tags$head(tags$style(HTML('
 																	.form-group, .selectize-control {
 																	margin-bottom: 5px;
@@ -61,9 +61,9 @@ bodies <- dashboardBody(
 											box(id="selectbox",width=NULL, #collapsible=TRUE,
 													selectInput("record","Record Length", record_length),
 													selectInput("metric", "Metric", vars)
-												)
+												),
 										
-									), 
+									#), 
 										column(width=6,
 											box(id="selectbox2",width=NULL, #collapsible=TRUE,
 													selectInput("period","Time Period", period),

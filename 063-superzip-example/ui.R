@@ -51,7 +51,7 @@ bodies <- dashboardBody(
 							
 							)
 						),
-					column(width=12,
+					column(width=6,
 							fluidRow(tags$head(tags$style(HTML('
 																	.form-group, .selectize-control {
 																	margin-bottom: 5px;

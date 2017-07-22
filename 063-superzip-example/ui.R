@@ -71,13 +71,7 @@ bodies <- dashboardBody(
 												)
 										
 									), style="font-size:small;")),	 
-								 ###
-								 
-									 column(width=12,
-													box(id="selectbox3",width=NULL,
-															selectInput("period","Time Period", period),
-														 ),
-							###
+
 							fluidRow(column(width=12,
 											box(width=NULL,
 													tags$style(type = "text/css", "#testplot {height: calc(100vh - 410px) !important;}"),

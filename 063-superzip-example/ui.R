@@ -57,17 +57,20 @@ bodies <- dashboardBody(
 																	margin-bottom: 5px;
 																	}'))), 
 									div(
-									column(width=12,
+									column(width=6,
 											box(id="selectbox",width=NULL, #collapsible=TRUE,
-#													selectInput("sites", "Site Type", site_type),
-													selectInput("metric", "Metric", vars),
 													selectInput("record","Record Length", record_length),
+													selectInput("metric", "Metric", vars)
+												)
+										
+									), 
+										column(width=6,
+											box(id="selectbox2",width=NULL, #collapsible=TRUE,
 													selectInput("period","Time Period", period),
-													selectInput("site","Site Selection", site_type),
 													selectInput("yeartype", "Year Type", year_type)
 												)
 										
-									), style="font-size:small;")),
+									),style="font-size:small;")),
 							fluidRow(column(width=12,
 											box(width=NULL,
 													tags$style(type = "text/css", "#testplot {height: calc(100vh - 410px) !important;}"),

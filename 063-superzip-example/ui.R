@@ -72,12 +72,11 @@ bodies <- dashboardBody(
 										
 									), style="font-size:small;")),	 
 								 ###
-								 div(
+								 
 									 column(width=12,
 													box(id="selectbox3",width=NULL,
 															selectInput("period","Time Period", period),
-														 )
-								 ),style="font-size:small;")),
+														 ),
 							###
 							fluidRow(column(width=12,
 											box(width=NULL,

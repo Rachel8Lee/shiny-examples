@@ -57,14 +57,6 @@ bodies <- dashboardBody(
 																	.form-group, .selectize-control {
 																	margin-bottom: 5px;
 																	}'))), 
-								 ###
-								 div(width=12,
-										 column(width=12,
-														box(id="selectbox1", width=NULL,
-																selectInput("site","Site", record_length)
-																)
-														)
-										 ),
 																
 									div(
 									column(width=6,
@@ -81,6 +73,14 @@ bodies <- dashboardBody(
 												)
 										
 									), style="font-size:small;")),	 
+								 	
+								 div(width=12,
+									 column(width=12,
+										 box(id="selectbox1", width=NULL,
+												selectInput("site","Site", record_length)
+												)
+										)
+									),
 
 							fluidRow(column(width=12,
 											box(width=NULL,

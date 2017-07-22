@@ -51,7 +51,14 @@ bodies <- dashboardBody(
 							
 							)
 						),
-					column(width=6,
+									fluidRow(
+					column(width=12,
+							box(id="selectbox",width=NULL, #collapsible=TRUE,
+													selectInput("record","Record Length", record_length)
+							
+							)
+						),
+					column(width=12,
 							fluidRow(tags$head(tags$style(HTML('
 																	.form-group, .selectize-control {
 																	margin-bottom: 5px;

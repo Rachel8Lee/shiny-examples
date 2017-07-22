@@ -71,6 +71,17 @@ bodies <- dashboardBody(
 												)
 										
 									),style="font-size:small;")),
+								 
+						
+								
+										column(width=12,
+											box(id="selectbox3",width=NULL, #collapsible=TRUE,
+													selectInput("yeartype", "Year Type", year_type)
+												)
+										
+									),style="font-size:small;")),	 
+								 
+								 
 							fluidRow(column(width=12,
 											box(width=NULL,
 													tags$style(type = "text/css", "#testplot {height: calc(100vh - 410px) !important;}"),

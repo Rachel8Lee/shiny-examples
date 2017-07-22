@@ -51,11 +51,21 @@ bodies <- dashboardBody(
 							
 							)
 						),
+					
 					column(width=12,
 							fluidRow(tags$head(tags$style(HTML('
 																	.form-group, .selectize-control {
 																	margin-bottom: 5px;
 																	}'))), 
+								 ###
+								 div(width=12,
+										 column(width=12,
+														box(id="selectbox1", width=NULL,
+																selectInput("site","Site", record_length)
+																)
+														)
+										 ),
+																
 									div(
 									column(width=6,
 											box(id="selectbox",width=NULL, #collapsible=TRUE,

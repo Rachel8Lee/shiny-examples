@@ -70,17 +70,14 @@ bodies <- dashboardBody(
 													selectInput("yeartype", "Year Type", year_type)
 												)
 										
-									),style="font-size:small;")),
+									)
+							
 								 
-						
-								
-										column(width=12,
-											box(id="selectbox3",width=NULL, #collapsible=TRUE,
-													selectInput("yeartype", "Year Type", year_type)
-												)
-										
-									),style="font-size:small;")),	 
-								 
+						  fluidRow(column(width=12,
+											box(id="selectbox2",width=NULL, #collapsible=TRUE,
+													selectInput("period","Time Period", period)
+											)
+										),style="font-size:small;")),	 
 								 
 							fluidRow(column(width=12,
 											box(width=NULL,

@@ -61,9 +61,9 @@ bodies <- dashboardBody(
 											box(id="selectbox",width=NULL, #collapsible=TRUE,
 													selectInput("record","Record Length", record_length),
 													selectInput("metric", "Metric", vars)
-												),
+												)
 										
-									#), 
+									), 
 										column(width=6,
 											box(id="selectbox2",width=NULL, #collapsible=TRUE,
 													selectInput("period","Time Period", period),
@@ -71,7 +71,14 @@ bodies <- dashboardBody(
 												)
 										
 									), style="font-size:small;")),	 
-								 
+								 ###
+								 div(
+									 column(width=12,
+													box(id="selectbox3",width=NULL,
+															selectInput("period","Time Period", period),
+														 )
+								 ),style="font-size:small;")),
+							###
 							fluidRow(column(width=12,
 											box(width=NULL,
 													tags$style(type = "text/css", "#testplot {height: calc(100vh - 410px) !important;}"),

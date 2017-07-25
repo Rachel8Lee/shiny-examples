@@ -38,7 +38,7 @@ bodies <- dashboardBody(
 			tabItem(tabName="interactivemap",
 					
 				fluidRow(
-					column(width=12,
+					column(width=6,
 							box(width=NULL, height=NULL,
 							tags$head(
 # Include our custom CSS
@@ -52,21 +52,21 @@ bodies <- dashboardBody(
 							)
 						),
 					
-					column(width=12,
-							fluidRow(tags$head(tags$style(HTML('
+					#column(width=12,
+						#	fluidRow(tags$head(tags$style(HTML('
 																	.form-group, .selectize-control {
 																	margin-bottom: 5px;
 																	}'))), 
 																
-									div(
-									column(width=6,
+						#			div(
+									column(width=3,
 											box(id="selectbox",width=NULL, #collapsible=TRUE,
 													selectInput("record","Record Length", record_length),
 													selectInput("metric", "Metric", metric)
 												)
 										
 									), 
-										column(width=6,
+										column(width=3,
 											box(id="selectbox2",width=NULL, #collapsible=TRUE,
 													selectInput("period","Time Period", period),
 													selectInput("yeartype", "Year Type", year_type)
@@ -74,8 +74,8 @@ bodies <- dashboardBody(
 										
 									), style="font-size:small;")),	 
 								 	
-								 div(width=12,
-									 column(width=12,
+								 div(width=6,
+									 column(width=6,
 										 box(id="selectbox3", width=NULL,
 												selectInput("site","Site", sites)
 												)

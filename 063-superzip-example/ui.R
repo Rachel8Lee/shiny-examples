@@ -53,10 +53,10 @@ bodies <- dashboardBody(
 						),
 					
 					#column(width=12,
-						#	fluidRow(tags$head(tags$style(HTML('
-																	.form-group, .selectize-control {
-																	margin-bottom: 5px;
-																	}'))), 
+						#fluidRow(tags$head(tags$style(HTML('
+						#											.form-group, .selectize-control {
+						#											margin-bottom: 5px;
+						#											}'))), 
 																
 						#			div(
 									column(width=3,

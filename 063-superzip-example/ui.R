@@ -36,15 +36,7 @@ bodies <- dashboardBody(
                    ')),
   tabItems(
     tabItem(tabName="interactivemap",
-            #					fluidRow(column(width=12,
-            #							infoBox(div("Availability of high-magnitude streamflow for groundwater banking in the Central Valley, CA",
-            #											style = "white-space: normal; word-wrap: break-word"), 
-            #									value = NULL,
-            #									subtitle="Interactive Map",
-            #									icon = shiny::icon("globe"), color = "aqua", width = NULL,
-            #									href = NULL, fill = FALSE) 
-            #							)),
-            #					
+				
             fluidRow(
               column(width=6,
                      box(width=NULL, height=NULL,
@@ -65,14 +57,17 @@ bodies <- dashboardBody(
                                                         margin-bottom: 5px;
                                                         }'))), 
 									div(
-									  column(width=12,
-									         box(id="selectbox",width=NULL, #collapsible=TRUE,
-									             #													selectInput("sites", "Site Type", site_type),
-									             selectInput("metric", "Metric", vars),
+									  column(width=6,
+									         box(id="selectbox",width=NULL, 
 									             selectInput("record","Record Length", record_length),
-									             selectInput("period","Time Period", period),
-									             selectInput("site","Site Selection", sites)
-									             #													selectInput("yeartype", "Year Type", yeartype)
+                               selectInput("metric", "Metric", metric)
+									         )
+									         
+									  ), 
+                    column(width=6,
+									         box(id="selectbox2",width=NULL,  
+                               selectInput("period","Time Period", period),
+                               selectInput("yeartype", "Year Type", year_type)
 									         )
 									         
 									  ), style="font-size:small;")),

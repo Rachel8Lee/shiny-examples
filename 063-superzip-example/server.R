@@ -120,11 +120,7 @@ function(input, output, session) {
 
 
   ## Data Explorer ###########################################
-
-   output$testplot <- renderPlot({
- 	  my_barplot(imp.full, "vol MAF", monthly = TRUE, full = TRUE)
-  })
   
-
+  output$downloadData <- downloadHandler(filename = "temp.csv", content = allsites)
   
 }

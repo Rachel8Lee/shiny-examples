@@ -93,62 +93,7 @@ bodies <- dashboardBody(
 						)
 				),
 
-			tabItem(tabName= "dataexplorer",
-				fluidRow(
-					column(width=12,
-							box(width=NULL, height=NULL,
-							tags$head(
-# Include our custom CSS
-									includeCSS("styles.css"),
-									includeScript("gomap.js")
-							),
-							tags$style(type = "text/css", "#map {height: calc(100vh - 100px) !important;}"),
-							
-							leafletOutput("map")
-							
-							)
-						),
-					
-					column(width=12,
-							fluidRow(tags$head(tags$style(HTML('
-																	.form-group, .selectize-control {
-																	margin-bottom: 5px;
-																	}'))), 
-																
-									div(
-									column(width=6,
-											box(id="selectbox",width=NULL, #collapsible=TRUE,
-													selectInput("record","Record Length", record_length),
-													selectInput("metric", "Metric", metric)
-												)
-										
-									), 
-										column(width=6,
-											box(id="selectbox2",width=NULL, #collapsible=TRUE,
-													selectInput("period","Time Period", period),
-													selectInput("yeartype", "Year Type", year_type)
-												)
-										
-									), style="font-size:small;")),	 
-								 	
-								 div(width=12,
-									 column(width=12,
-										 box(id="selectbox1", width=NULL,
-												selectInput("site","Site", sites)
-												)
-										)
-									),
-
-							fluidRow(column(width=12,
-											box(width=NULL,
-													tags$style(type = "text/css", "#testplot {height: calc(100vh - 410px) !important;}"),
-													plotOutput("testplot")
-											)
-										)
-									)
-							)
-						)
-				),
+			tabItem(tabName= "dataexplorer"),
 
 dashboardPage(
 		title="Flow Availability",

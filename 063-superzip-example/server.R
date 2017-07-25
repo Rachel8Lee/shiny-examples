@@ -56,10 +56,12 @@ function(input, output, session) {
 	  classdata[which(colorData== bounds[[1]])] <- 1
 	  for(i in 2:length(bounds)){
 		  classdata[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- i
+radius <- 10000*sitedata[[sizeBy]]/max(sitedata[[sizeBy]]) + 3000
 	  }
 
      pal <- colorFactor(palette=colorlist, domain=seq(1,11,1), na.color="black")
-     radius <- 10000*sitedata[[sizeBy]]/max(sitedata[[sizeBy]]) + 3000
+	  
+     #radius <- 10000*sitedata[[sizeBy]]/max(sitedata[[sizeBy]]) + 3000
 
     leafletProxy("map", data = sitedata) %>%
       clearShapes() %>% 

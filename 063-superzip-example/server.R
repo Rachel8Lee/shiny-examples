@@ -71,7 +71,7 @@ function(input, output, session) {
 	}
 
 		
-    colorData <- sitedata[[avg]]
+    colorData <- sitedata$avg
 	  classdata <- rep(NA,length(colorData))
 	  classdata[which(colorData== bounds[[1]])] <- 1
 	  for(i in 2:length(bounds)){
@@ -80,7 +80,7 @@ function(input, output, session) {
 
      pal <- colorFactor(palette=colorlist, domain=seq(1,11,1), na.color="black")
 	  
-     radius <- 10000*sitedata[[avg]]/max(sitedata[[avg]]) + 3000
+     radius <- 10000*sitedata$avg/max(sitedata$avg) + 3000
 
     leafletProxy("map", data = sitedata) %>%
       clearShapes() %>% 

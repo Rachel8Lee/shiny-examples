@@ -90,7 +90,7 @@ bodies <- dashboardBody(
 										)
 									)
 							)
-						)
+						#)
 				),
 
 			tabItem(tabName= "dataexplorer",

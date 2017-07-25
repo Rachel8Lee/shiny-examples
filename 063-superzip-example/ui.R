@@ -95,20 +95,31 @@ bodies <- dashboardBody(
 
 			tabItem(tabName= "dataexplorer",					
 					fluidRow(
-							column(12,
-									selectInput("states", "States", c("All sites"="", structure(state.abb, names=state.name), "Washington, DC"="DC"), multiple=TRUE)
-							)
-							)
-					),
-					fluidRow(
-							column(width = NULL, plotOutput("testplot"))
-					),
-					hr(),
-					DT::dataTableOutput("ziptable")
+							column(12,,
+											box(id="selectbox",width=NULL, #collapsible=TRUE,
+													selectInput("record","Record Length", record_length),
+													selectInput("metric", "Metric", metric),
+													selectInput("period","Time Period", period),
+													selectInput("yeartype", "Year Type", year_type),
+													selectInput("site1","Site", sites),
+													selectInput("site2","Site", sites),
+													selectInput("site3","Site", sites)
+												)
+	        						)
+					         ),
+							
+												fluidRow(column(width=12,
+											box(width=NULL,
+													tags$style(type = "text/css", "#testplot {height: calc(100vh - 410px) !important;}"),
+													plotOutput("testplot")
+											)
+										)
+									),
+					hr()
 			)
 		)
-
 )
+
 dashboardPage(
 		title="Flow Availability",
 		header=header,

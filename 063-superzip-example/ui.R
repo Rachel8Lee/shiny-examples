@@ -17,12 +17,10 @@ period <- c("January"= "jan", "February" = "feb", "March" = "mar", "April" = "ap
 year_type <- c("Above Normal" = "AN", "Below Normal" = "BN", "Critical" = "C", "Dry" = "dry", "All" = "all")
 
 #header
-header <- dashboardHeader(titleWidth=150,
-		title = "Menu"
-)
+header <- dashboardHeader(titleWidth=150, title = "Menu")
 
 sidebar <- dashboardSidebar(width=150,
-														sidebarMenu(
+				sidebarMenu(
 					menuItem("Interactive Map", tabName="interactivemap", icon=icon("globe")),
 					menuItem("Data Explorer", tabName = "dataexplorer", icon=icon("info-circle"))
 				)

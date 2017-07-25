@@ -48,14 +48,30 @@ function(input, output, session) {
   # This observer is responsible for maintaining the circles and legend,
   # according to the variables the user has chosen to map to color and size.
   observe({
-    if(input$metric == "magnitude") colorBy <- "avg"
-    if(input$metric == "magnitude") sizeBy <- "avg"
+   
 	##add if statement for  metric variables
+  if (input$metric == "magnitude") {
 	colorlist <-  c("black","orangered","khaki1","olivedrab1","chartreuse3","green4","aquamarine2","deepskyblue4","blue","royalblue4","navyblue")
 	bounds <- c(0,1000,10000,50000,125000,200000,400000,800000,1500000,2500000,3500000)
 	labs <-  c("0","1 AF - 1 TAF","1TAF - 10TAF","10TAF- 50TAF","50TAF - 125TAF","125TAF - 200TAF","200TAF - 400TAF","400TAF - 800TAF","800TAF - 1.5MAF","1.5MAF - 2.5MAF","2.5MAF - 3.5MAF")
+	legendTitle <- "Magnitude (HMF Volume)"}
+  
+  else if 
+  (input$metric == "duration") {
+	colorlist <- c("black", "darkmagenta", "magenta", "blueviolet", "royalblue", "turquoise")
+	bounds <- c(0,1,10,20,40,60,80)
+	labs <-	c("0","1 - 10","10 - 20","20 - 40","40 - 60", "60 - 80")
+	legendTitle <- "Duration (HMF Days)"
+ }
+	else{	
+  colorlist <- c("black","yellow","darkorange","deeppink","dark violet","navy")
+	bounds <- c(0,1,4,8,12,16,20)
+	labs <- c("0", "1 - 4","4 - 8", "8 - 12", "12 - 16","16 - 20")
+  legendTitle <- "No. 1-Day Peaks"
+	}
 
-    colorData <- sitedata[[colorBy]]
+		
+    colorData <- sitedata[[avg]]
 	  classdata <- rep(NA,length(colorData))
 	  classdata[which(colorData== bounds[[1]])] <- 1
 	  for(i in 2:length(bounds)){
@@ -64,13 +80,13 @@ function(input, output, session) {
 
      pal <- colorFactor(palette=colorlist, domain=seq(1,11,1), na.color="black")
 	  
-     radius <- 10000*sitedata[[sizeBy]]/max(sitedata[[sizeBy]]) + 3000
+     radius <- 10000*sitedata[[avg]]/max(sitedata[[avg]]) + 3000
 
     leafletProxy("map", data = sitedata) %>%
       clearShapes() %>% 
       addCircles(~longitude, ~latitude, radius=radius, layerId=~site_no,
         stroke=TRUE, weight = 1, color ="#000000", fillOpacity=0.85, fillColor=pal(classdata)) %>%
-      addLegend("bottomleft", values=seq(1,11,1), colors=col2hex(colorlist), title=colorBy,
+      addLegend("bottomleft", values=seq(1,11,1), colors=col2hex(colorlist), title=legendTitle,
         layerId="colorLegend", opacity=0.85, labels=labs)
 	
   })

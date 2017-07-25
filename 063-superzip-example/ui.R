@@ -93,7 +93,7 @@ bodies <- dashboardBody(
 						)
 				),
 
-			tabItem(tabName= "dataexplorer"					
+			tabItem(tabName= "dataexplorer",					
 				fluidRow(
 					column(width=6,
 							box(width=NULL, height=NULL,

@@ -28,7 +28,7 @@ sidebar <- dashboardSidebar(width=150,
 				)
 )
 
-bodies <- <- dashboardBody( 
+bodies <- dashboardBody( 
   tags$script(HTML('
                    $(document).ready(function() {
                    $("header").find("nav").append(\'<div class="myClass"> Availability of High-magnitude Streamflow for Groundwater Banking </div>\');

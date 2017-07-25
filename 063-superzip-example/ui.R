@@ -77,7 +77,7 @@ bodies <- dashboardBody(
 								 div(width=12,
 									 column(width=12,
 										 box(id="selectbox1", width=NULL,
-												selectInput("site","Site", record_length)
+												selectInput("site","Site", sites)
 												)
 										)
 									),

@@ -132,7 +132,7 @@ bodies <- dashboardBody(
 									)
 							)
 						)
-				)#))
+				)))
 
 dashboardPage(
 		title="Flow Availability",

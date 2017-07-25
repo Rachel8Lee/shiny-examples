@@ -113,16 +113,16 @@ function(input, output, session) {
   })
 
   observe({
-    zipcodes <- if (is.null(input$states)) character(0) else {
+    sitenos <- if (is.null(input$states)) character(0) else {
       cleantable %>%
         filter(State %in% input$states,
           is.null(input$cities) | City %in% input$cities) %>%
-        `$`('Zipcode') %>%
+        `$`('SiteNo') %>%
         unique() %>%
         sort()
     }
-    stillSelected <- isolate(input$zipcodes[input$zipcodes %in% zipcodes])
-    updateSelectInput(session, "zipcodes", choices = zipcodes,
+    stillSelected <- isolate(input$sitenos[input$sitenos %in% sitenos])
+    updateSelectInput(session, "sitenos", choices = sitenos,
       selected = stillSelected)
   })
 
@@ -148,9 +148,9 @@ function(input, output, session) {
         Score <= input$maxScore,
         is.null(input$states) | State %in% input$states,
         is.null(input$cities) | City %in% input$cities,
-        is.null(input$zipcodes) | Zipcode %in% input$zipcodes
+        is.null(input$sitenos) | SiteNo %in% input$sitenos
       ) %>%
-      mutate(Action = paste('<a class="go-map" href="" data-lat="', Lat, '" data-long="', Long, '" data-zip="', Zipcode, '"><i class="fa fa-crosshairs"></i></a>', sep=""))
+      mutate(Action = paste('<a class="go-map" href="" data-lat="', Lat, '" data-long="', Long, '" data-zip="', SiteNo, '"><i class="fa fa-crosshairs"></i></a>', sep=""))
     action <- DT::dataTableAjax(session, df)
 
     DT::datatable(df, options = list(ajax = list(url = action)), escape = FALSE)

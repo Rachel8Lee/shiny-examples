@@ -103,7 +103,8 @@ bodies <- dashboardBody(
             ),
 						fluidRow(column(title="Download Data Set",width=12,
                             box(id="selectbox4",width=NULL, 
-																selectInput("yeartype", "Year Type", year_type)
+																selectInput("yeartype", "Year Type", year_type),
+																downloadButton('downloadData', 'Download')
                             )
             ))
     )))

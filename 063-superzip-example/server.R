@@ -70,15 +70,16 @@ function(input, output, session) {
   legendTitle <- "No. 1-Day Peaks"
 	}
 
-		
+    dom <- seq(1,length(bounds),1)  
+	  
     colorData <- sitedata$avg
 	  classdata <- rep(NA,length(colorData))
 	  classdata[which(colorData== bounds[[1]])] <- 1
 	  for(i in 2:length(bounds)){
 		  classdata[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- i
 	  }
-
-     pal <- colorFactor(palette=colorlist, domain=seq(1,11,1), na.color="black")
+     
+     pal <- colorFactor(palette=colorlist, domain=dom, na.color="black")
 	  
      radius <- 10000*sitedata$avg/max(sitedata$avg) + 3000
 
@@ -86,7 +87,7 @@ function(input, output, session) {
       clearShapes() %>% 
       addCircles(~longitude, ~latitude, radius=radius, layerId=~site_no,
         stroke=TRUE, weight = 1, color ="#000000", fillOpacity=0.85, fillColor=pal(classdata)) %>%
-      addLegend("bottomleft", values=seq(1,11,1), colors=col2hex(colorlist), title=legendTitle,
+      addLegend("bottomleft", values=dom, colors=col2hex(colorlist), title=legendTitle,
         layerId="colorLegend", opacity=0.85, labels=labs)
 	
   })

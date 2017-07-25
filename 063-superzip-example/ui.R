@@ -96,7 +96,7 @@ bodies <- dashboardBody(
 			tabItem(tabName= "dataexplorer")
 			)
 		)
-)
+
 
 dashboardPage(
 		title="Flow Availability",

@@ -94,28 +94,13 @@ bodies <- dashboardBody(
 				),
 
 			tabItem(tabName= "dataexplorer",					
-					fluidRow(
-							column(12,,
-											box(id="selectbox",width=NULL, #collapsible=TRUE,
-													selectInput("record","Record Length", record_length),
-													selectInput("metric", "Metric", metric),
-													selectInput("period","Time Period", period),
-													selectInput("yeartype", "Year Type", year_type),
-													selectInput("site1","Site", sites),
-													selectInput("site2","Site", sites),
-													selectInput("site3","Site", sites)
-												)
-	        						)
-					         ),
-							
-												fluidRow(column(width=12,
+												fluidRow(column(width=NULL,
 											box(width=NULL,
 													tags$style(type = "text/css", "#testplot {height: calc(100vh - 410px) !important;}"),
 													plotOutput("testplot")
 											)
 										)
 									),
-					hr()
 			)
 		)
 )

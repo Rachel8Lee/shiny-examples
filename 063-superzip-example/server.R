@@ -40,6 +40,10 @@ function(input, output, session) {
   output$testplot <- renderPlot({
  	  my_barplot(imp.full, "vol MAF", monthly = TRUE, full = TRUE)
   })
+	
+	output$testplot2 <- renderPlot({
+ 	  my_barplot(imp.full, "vol MAF", monthly = TRUE, full = TRUE)
+  })
 
   # This observer is responsible for maintaining the circles and legend,
   # according to the variables the user has chosen to map to color and size.

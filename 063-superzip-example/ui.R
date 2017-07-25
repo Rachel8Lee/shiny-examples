@@ -7,8 +7,8 @@ record_length <- c("Full" = "full", "Post-Impairment" = "post_imp")
 site_type <- c("Impaired" = "impaired", "Unimpaired" = "unimpaired", 
 							 "All Sites" = "both")
 
-metric <- c("Magnitude" = "magnitude", "Duration" = "centile", "Inter-Annual Frequency" = "college", 
-					"Intra-Annual Frequency" = "income", "Timing" = "adultpop")
+metric <- c("Magnitude" = "magnitude", "Duration" = "duration", "Inter-Annual Frequency" = "interaanual frequency", 
+					"Intra-Annual Frequency" = "intraannual frequency", "Timing" = "timing")
  
 period <- c("January"= "jan", "February" = "feb", "March" = "mar", "April" = "apr", 
 						"November" = "nov", "December" = "dec", "November to April" = "novtapr", 

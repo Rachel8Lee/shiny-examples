@@ -105,7 +105,7 @@ bodies <- dashboardBody(
                             box(id="selectbox4",width=NULL, 
 																selectInput("yeartype", "Year Type", year_type)
                             )
-            ),
+            )
     )))
 
 

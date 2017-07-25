@@ -105,7 +105,13 @@ bodies <- dashboardBody(
 													selectInput("site3","Site", sites)
 												)
 										)
-									)
+									),
+							fluidRow(column(width=12,
+											box(id="plotboxexplorer", width=NULL,
+													tags$style(type = "text/css", "#testplot {height: calc(100vh - 410px) !important;}"),
+													plotOutput("testplot")
+											)
+										)
 			)
 		))
 

@@ -7,7 +7,7 @@ record_length <- c("Full" = "full", "Post-Impairment" = "post_imp")
 site_type <- c("Impaired" = "impaired", "Unimpaired" = "unimpaired", 
 							 "All Sites" = "both")
 
-vars <- c("Magnitude" = "avg", "Duration" = "centile", "Inter-Annual Frequency" = "college", 
+metric <- c("Magnitude" = "magnitude", "Duration" = "centile", "Inter-Annual Frequency" = "college", 
 					"Intra-Annual Frequency" = "income", "Timing" = "adultpop")
  
 period <- c("January"= "jan", "February" = "feb", "March" = "mar", "April" = "apr", 
@@ -62,7 +62,7 @@ bodies <- dashboardBody(
 									column(width=6,
 											box(id="selectbox",width=NULL, #collapsible=TRUE,
 													selectInput("record","Record Length", record_length),
-													selectInput("metric", "Metric", vars)
+													selectInput("metric", "Metric", metric)
 												)
 										
 									), 

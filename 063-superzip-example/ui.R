@@ -94,13 +94,15 @@ bodies <- dashboardBody(
 				),
 
 			tabItem(tabName= "dataexplorer",
-			fluidRow(column(width=12,
+			fluidRow(column(width=6,
 											box(id="selectbox",width=NULL, #collapsible=TRUE,
 													selectInput("record","Record Length", record_length),
 													selectInput("metric", "Metric", metric),
 													selectInput("period","Time Period", period),
 													selectInput("yeartype", "Year Type", year_type),
-													selectInput("site1","Site", sites)
+													selectInput("site1","Site", sites),
+													selectInput("site2","Site", sites),
+													selectInput("site3","Site", sites)
 												)
 										)
 									)

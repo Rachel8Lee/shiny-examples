@@ -93,14 +93,7 @@ bodies <- dashboardBody(
 						)
 				),
 
-			tabItem(tabName= "dataexplorer",					
-												fluidRow(column(width=12,
-											box(width=NULL,
-													tags$style(type = "text/css", "#testplot {height: calc(100vh - 410px) !important;}"),
-													plotOutput("testplot")
-											)
-										)
-									),
+			tabItem(tabName= "dataexplorer")
 			)
 		)
 )

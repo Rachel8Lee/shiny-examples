@@ -130,7 +130,7 @@ bodies <- dashboardBody(
 													plotOutput("testplot")
 											)
 										)
-									))))
+									)))),
 
 dashboardPage(
 		title="Flow Availability",

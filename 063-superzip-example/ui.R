@@ -93,7 +93,8 @@ bodies <- dashboardBody(
 						)
 				),
 
-			tabItem(tabName= "dataexplorer", fluidRow(
+			tabItem(tabName= "dataexplorer"					
+				fluidRow(
 					column(width=6,
 							box(width=NULL, height=NULL,
 							tags$head(
@@ -115,12 +116,10 @@ bodies <- dashboardBody(
 									div(
 									column(width=12,
 											box(id="selectbox",width=NULL, #collapsible=TRUE,
-#													selectInput("sites", "Site Type", site_type),
 													selectInput("metric", "Metric", vars),
 													selectInput("record","Record Length", record_length),
 													selectInput("period","Time Period", period),
 													selectInput("site","Site Selection", sites)
-#													selectInput("yeartype", "Year Type", yeartype)
 												)
 										
 									), style="font-size:small;")),
@@ -130,7 +129,10 @@ bodies <- dashboardBody(
 													plotOutput("testplot")
 											)
 										)
-									)))),
+									)
+							)
+						)
+				),
 
 dashboardPage(
 		title="Flow Availability",

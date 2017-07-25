@@ -45,7 +45,7 @@ function(input, output, session) {
   # according to the variables the user has chosen to map to color and size.
   observe({
     colorBy <- input$metric
-    sizeBy <- input$metric
+    if(input$metric == "magnitude") sizeBy <- "avg"
 	##add if statement for  metric variables
 	colorlist <-  c("black","orangered","khaki1","olivedrab1","chartreuse3","green4","aquamarine2","deepskyblue4","blue","royalblue4","navyblue")
 	bounds <- c(0,1000,10000,50000,125000,200000,400000,800000,1500000,2500000,3500000)
@@ -56,12 +56,11 @@ function(input, output, session) {
 	  classdata[which(colorData== bounds[[1]])] <- 1
 	  for(i in 2:length(bounds)){
 		  classdata[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- i
-radius <- 10000*sitedata[[sizeBy]]/max(sitedata[[sizeBy]]) + 3000
 	  }
 
      pal <- colorFactor(palette=colorlist, domain=seq(1,11,1), na.color="black")
 	  
-     #radius <- 10000*sitedata[[sizeBy]]/max(sitedata[[sizeBy]]) + 3000
+     radius <- 10000*sitedata[[sizeBy]]/max(sitedata[[sizeBy]]) + 3000
 
     leafletProxy("map", data = sitedata) %>%
       clearShapes() %>% 

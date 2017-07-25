@@ -64,28 +64,18 @@ bodies <- dashboardBody(
                                                         .form-group, .selectize-control {
                                                         margin-bottom: 5px;
                                                         }'))), 
-									column(width=3,
-                     box(id="selectbox",width=NULL, #collapsible=TRUE,
-                         selectInput("record","Record Length", record_length),
-                         selectInput("metric", "Metric", metric)
-                     )
-                     
-              ), 
-              column(width=3,
-                     box(id="selectbox2",width=NULL, #collapsible=TRUE,
-                         selectInput("period","Time Period", period),
-                         selectInput("yeartype", "Year Type", year_type)
-                     )
-                     
-              ), style="font-size:small;")),	 
-    
-    div(width=6,
-        column(width=6,
-               box(id="selectbox3", width=NULL,
-                   selectInput("site","Site", sites)
-               )
-        )
-    ),
+									
+    tabItem(tabName= "dataexplorer",
+            fluidRow(column(width=4,
+                            box(id="selectbox",width=NULL, #collapsible=TRUE,
+                                selectInput("record","Record Length", record_length),
+                                selectInput("metric", "Metric", metric),
+                                selectInput("period","Time Period", period),
+                                selectInput("site1","Site", sites),
+                                selectInput("site2","Site", sites),
+                                selectInput("site3","Site", sites)
+                            )
+            ),
 									fluidRow(column(width=12,
 									                box(width=NULL,
 									                    tags$style(type = "text/css", "#testplot {height: calc(100vh - 410px) !important;}"),

@@ -76,14 +76,14 @@ bodies <- dashboardBody(
 								 	
 								 div(width=12,
 									 column(width=12,
-										 box(id="selectbox1", width=NULL,
+										 box(id="selectbox3", width=NULL,
 												selectInput("site","Site", sites)
 												)
 										)
 									),
 
 							fluidRow(column(width=12,
-											box(width=NULL,
+											box(id="plotboxinteractive", width=NULL,
 													tags$style(type = "text/css", "#testplot {height: calc(100vh - 410px) !important;}"),
 													plotOutput("testplot")
 											)
@@ -95,8 +95,8 @@ bodies <- dashboardBody(
 
 			tabItem(tabName= "dataexplorer",
 			fluidRow(column(width=12,
-											box(width=NULL,
-													#tags$style(type = "text/css", "#testplot {height: calc(100vh - 410px) !important;}"),
+											box(id="plotboxexplorer",width=NULL,
+													tags$style(type = "text/css", "#testplot {height: calc(100vh - 410px) !important;}"),
 													plotOutput("testplot")
 											)
 										)

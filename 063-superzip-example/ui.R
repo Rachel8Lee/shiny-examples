@@ -111,7 +111,7 @@ bodies <- dashboardBody(
 				column(width=8,
 				       box(id="plotboxexplorer", width=NULL,
 					         tags$style(type = "text/css", "#testplot {height: calc(100vh - 410px) !important;}"),
-						                  plotOutput("testplot")
+						                  plotOutput("testplot2")
 						      	         )
 					         )
 			        )

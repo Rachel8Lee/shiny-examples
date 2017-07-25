@@ -80,7 +80,7 @@ function(input, output, session) {
       sprintf("Longitude: %s", selectedSite$longitude), tags$br(),
       sprintf("Latitude: %s", selectedSite$latitude), tags$br(),
       sprintf("Status: %s", selectedSite$status), tags$br(),
-      sprintf("Average: %s", selectedSite$avg), tags$br()	    
+      sprintf("Average: %s", selectedSite$metric), tags$br()	    
     ))
     leafletProxy("map") %>% addPopups(lng, lat, content, layerId = site_no)
   }

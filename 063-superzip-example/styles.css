@@ -75,10 +75,11 @@ h1, h2, h3, h4 { font-weight: 400; }
 
 #controls:legendcircle {
   border-radius: 50%;
-height: 10px;
+  height: 10px;
   width: 10px;
-  margin-top: 8px;
+  margin-top: 1px;
 }
+
 /* Position and style citation */
 #cite {
   position: absolute;

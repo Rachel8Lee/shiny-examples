@@ -59,7 +59,7 @@ bodies <- dashboardBody(
 									div(
 									column(width=6,
 											box(id="selectbox",width=NULL, 
-													selectInput("metric", "Metric", vars),
+													selectInput("metric", "Metric", metric),
 													selectInput("record","Record Length", record_length)
 												)
 										
@@ -67,7 +67,7 @@ bodies <- dashboardBody(
 									column(width=6,
 											box(id="selectbox",width=NULL, #collapsible=TRUE,
 													selectInput("period","Time Period", period),
-													selectInput("yeartype", "Year Type", yeartype)
+													selectInput("yeartype", "Year Type", year_type)
 											)
 									
 									), style="font-size:small;")),

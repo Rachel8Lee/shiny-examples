@@ -6,13 +6,13 @@ library(dplyr)
 library(gplots)
 source("website_barplots.R")
 
-#sitedata <- allsites
+sitedata <- allsites
 
 function(input, output, session) {
 ## Interactive Map ###########################################
 # Create the map
 	
-  sitedata <- reactive({return(paste(input$record, input$metric, input$yeartype, input$period, input$sitetype,sep="_"))})
+  #sitedata <- reactive({return(paste(input$record, input$metric, input$yeartype, input$period, input$sitetype,sep="_"))})
 
 	
   output$map <- renderLeaflet({
@@ -28,12 +28,12 @@ function(input, output, session) {
   # in bounds right now
   siteInBounds <- reactive({
     if (is.null(input$map_bounds))
-      return(sitedata()[FALSE,])
+      return(sitedata[FALSE,])
     bounds <- input$map_bounds
     latRng <- range(bounds$north, bounds$south)
     lngRng <- range(bounds$east, bounds$west)
     
-    subset(sitedata(),
+    subset(sitedata,
       latitude >= latRng[1] & latitude <= latRng[2] &
       longitude >= lngRng[1] & longitude <= lngRng[2])
   })
@@ -74,7 +74,7 @@ function(input, output, session) {
 
     dom <- seq(1,length(bounds),1)  
 	  
-    colorData <- sitedata()$avg
+    colorData <- sitedata$avg
 	  classdata <- rep(NA,length(colorData))
 	  classdata[which(colorData== bounds[[1]])] <- 1
 	  for(i in 2:length(bounds)){

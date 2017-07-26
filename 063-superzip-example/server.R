@@ -78,7 +78,10 @@ function(input, output, session) {
 
     dom <- seq(1,length(bounds),1)  
 	  
-    colorData <- sitedata$avg
+	  unimp_sites <- sitedata[which(sitedata$status=="unimpaired"),] 
+	  imp_sites <- sitedata[which(sitedata$status=="impaired"),] 
+	  
+    colorData <- unimp_sites$avg
 	  classdata <- rep(NA,length(colorData))
 	  classdata[which(colorData== bounds[[1]])] <- 1
 	  for(i in 2:length(bounds)){
@@ -94,8 +97,6 @@ function(input, output, session) {
   colorAdditions <- paste0(colorlist, "; width:", sizes, "px; height:", sizes, "px")
   labelAdditions <- paste0("<div style='display: inline-block;height: ", sizes, "px;margin-top: 4px;line-height: ", sizes, "px;'>", labs, "</div>")
 	  
-  unimp_sites <- sitedata[which(sitedata$status=="unimpaired"),] 
-	 imp_sites <- sitedata[which(sitedata$status=="impaired"),] 
 	  
     leafletProxy("map", data = unimp_sites) %>%
       clearShapes() %>% 

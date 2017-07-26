@@ -81,7 +81,7 @@ function(input, output, session) {
 	  unimp_sites <- sitedata[which(sitedata$status=="unimpaired"),] 
 	  imp_sites <- sitedata[which(sitedata$status=="impaired"),] 
 	  
-    colorData <- unimp_sites$avg
+    colorData <- sitedata$avg
 	  classdata <- rep(NA,length(colorData))
 	  classdata[which(colorData== bounds[[1]])] <- 1
 	  for(i in 2:length(bounds)){
@@ -98,7 +98,7 @@ function(input, output, session) {
   labelAdditions <- paste0("<div style='display: inline-block;height: ", sizes, "px;margin-top: 4px;line-height: ", sizes, "px;'>", labs, "</div>")
 	  
 	  
-    leafletProxy("map", data = unimp_sites) %>%
+    leafletProxy("map", data = sitedata) %>%
       clearShapes() %>% 
       addCircles(~longitude, ~latitude, radius=radius, layerId=~site_no,
         stroke=TRUE, weight = 1, color ="#000000", fillOpacity=0.85, fillColor=pal(classdata)) %>%

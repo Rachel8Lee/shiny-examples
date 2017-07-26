@@ -57,7 +57,7 @@ function(input, output, session) {
 	bounds <- c(0,1000,10000,50000,125000,200000,400000,800000,1500000,2500000,3500000)
 	labs <-  c("0","1 AF - 1 TAF","1TAF - 10TAF","10TAF- 50TAF","50TAF - 125TAF","125TAF - 200TAF","200TAF - 400TAF","400TAF - 800TAF","800TAF - 1.5MAF","1.5MAF - 2.5MAF","2.5MAF - 3.5MAF")
 	legendTitle <- "Magnitude (HMF Volume)"
-        sizes <- c(1,3,6,9,12,15,18,21,24,27,30,33)
+  sizes <- c(1,3,6,9,12,15,18,21,24,27,30)
   }
   
   else if 
@@ -66,12 +66,14 @@ function(input, output, session) {
 	bounds <- c(0,1,10,20,40,60,80)
 	labs <-	c("0","1 - 10","10 - 20","20 - 40","40 - 60", "60 - 80")
 	legendTitle <- "Duration (HMF Days)"
+  sizes <- c(1,3,6,9,12,15)
  }
 	else{	
   colorlist <- c("black","yellow","darkorange","deeppink","dark violet","navy")
 	bounds <- c(0,1,4,8,12,16,20)
 	labs <- c("0", "1 - 4","4 - 8", "8 - 12", "12 - 16","16 - 20")
   legendTitle <- "No. 1-Day Peaks"
+	sizes <- c(1,3,6,9,12,15)
 	}
 
     dom <- seq(1,length(bounds),1)  

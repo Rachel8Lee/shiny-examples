@@ -94,7 +94,10 @@ function(input, output, session) {
   colorAdditions <- paste0(colorlist, "; width:", sizes, "px; height:", sizes, "px")
   labelAdditions <- paste0("<div style='display: inline-block;height: ", sizes, "px;margin-top: 4px;line-height: ", sizes, "px;'>", labs, "</div>")
 	  
-    leafletProxy("map", data = sitedata) %>%
+  unimp_sites <- sitedata[which(sitedata$status=="unimpaired"),] 
+	 imp_sites <- sitedata[which(sitedata$status=="impaired"),] 
+	  
+    leafletProxy("map", data = unimp_sites) %>%
       clearShapes() %>% 
       addCircles(~longitude, ~latitude, radius=radius, layerId=~site_no,
         stroke=TRUE, weight = 1, color ="#000000", fillOpacity=0.85, fillColor=pal(classdata)) %>%

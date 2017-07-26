@@ -12,8 +12,8 @@ function(input, output, session) {
 ## Interactive Map ###########################################
 # Create the map
 	
-  sitedatatemp <- reactive({return(paste(input$record, input$metric, input$yeartype, input$period, input$sitetype,sep="_"))})
-	sitedata <- sitedatatemp()
+  sitedata <- reactive({return(paste(input$record, input$metric, input$yeartype, input$period, input$sitetype,sep="_"))})
+
 	
   output$map <- renderLeaflet({
     leaflet() %>%
@@ -28,12 +28,12 @@ function(input, output, session) {
   # in bounds right now
   siteInBounds <- reactive({
     if (is.null(input$map_bounds))
-      return(sitedata[FALSE,])
+      return(sitedata()[FALSE,])
     bounds <- input$map_bounds
     latRng <- range(bounds$north, bounds$south)
     lngRng <- range(bounds$east, bounds$west)
     
-    subset(sitedata,
+    subset(sitedata(),
       latitude >= latRng[1] & latitude <= latRng[2] &
       longitude >= lngRng[1] & longitude <= lngRng[2])
   })

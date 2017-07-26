@@ -12,7 +12,8 @@ function(input, output, session) {
 ## Interactive Map ###########################################
 # Create the map
 	
-  sitedata <- reactive({return(paste(input$record, input$metric, input$yeartype, input$period, input$sitetype,sep="_"))})
+  sitedatatemp <- reactive({return(paste(input$record, input$metric, input$yeartype, input$period, input$sitetype,sep="_"))})
+	sitedata <- sitedatatemp()
 	
   output$map <- renderLeaflet({
     leaflet() %>%
@@ -23,8 +24,6 @@ function(input, output, session) {
       setView(lng = -120.51, lat = 38.06, zoom = 6)
   })
  
-  #sitedata <- reactive({paste(input$record, input$vars, input$yeartype, input$period, input$sitetype,sep="_")})
-	
   # A reactive expression that returns the set of zips that are
   # in bounds right now
   siteInBounds <- reactive({
@@ -75,7 +74,7 @@ function(input, output, session) {
 
     dom <- seq(1,length(bounds),1)  
 	  
-    colorData <- sitedata$avg
+    colorData <- sitedata()$avg
 	  classdata <- rep(NA,length(colorData))
 	  classdata[which(colorData== bounds[[1]])] <- 1
 	  for(i in 2:length(bounds)){

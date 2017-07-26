@@ -1,5 +1,3 @@
-<script src="leaflet-svg-shape-markers/dist/leaflet-svg-shape-markers.min.js"></script>
-
 // When locator icon in datatable is clicked, go to that spot on the map
 $(document).on("click", ".go-map", function(e) {
   e.preventDefault();

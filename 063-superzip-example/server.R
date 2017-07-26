@@ -99,7 +99,7 @@ function(input, output, session) {
       addCircles(~longitude, ~latitude, radius=radius, layerId=~site_no,
         stroke=TRUE, weight = 1, color ="#000000", fillOpacity=0.85, fillColor=pal(classdata)) %>%
       addLegend("bottomleft", values=dom, colors=colorAdditions, title=legendTitle,
-        layerId="colorLegend", opacity=0.85, labels=labelAdditions)
+        layerId="colorLegend", classname="legend circle", opacity=0.85, labels=labelAdditions)
 	
   })
 

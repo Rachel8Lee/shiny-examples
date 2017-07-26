@@ -10,14 +10,15 @@ allsites <- data.frame(site_no = gauge_data$site_no, station_nm = gauge_data$sta
 # zipdata <- reactive({paste(input$record, input$vars, input$yeartype, input$period, input$sitetype,sep="_")})
 # subset data 
 # FULL VOL
-full_avg <- read.csv("data/redo_simp_data_full_vol_90.csv")
-full_avg_all <- full_avg[which(full_avg$yeartype == "all"),]
-full_avg_all_April <-full_avg_all[which(full_avg_all$period == "April"),]
-allsites <- merge(allsites, full_avg_all_April, by.x="site_no", by.y="gauge", all.y=TRUE)
-allsites <- allsites[order(allsites$avg, decreasing = TRUE),]
-
+full_magnitude <- read.csv("data/redo_simp_data_full_vol_90.csv")
+full_magnitude_all <- full_magnitude[which(full_magnitude$yeartype == "all"),]
+full_magnitude_all_apr <-full_magnitude_all[which(full_magnitude_all$period == "April"),]
 
 # POST-IMP VOL
-postimp_vol <- read.csv("data/redo_simp_data_imp_vol_90.csv")
+post_imp_magnitude <- read.csv("data/redo_simp_data_imp_vol_90.csv")
+post_imp_magnitude_all <- post_imp_magnitude[which(post_imp_magnitude$yeartype == "all"),]
+post_imp_magnitude_all_apr <-full_magnitude_all[which(full_magnitude_all$period == "April"),]
 
+allsites <- merge(allsites, full_magnitude_all_apr, by.x="site_no", by.y="gauge", all.y=TRUE)
+allsites <- allsites[order(allsites$avg, decreasing = TRUE),]
 row.names(allsites) <- allsites$site_no

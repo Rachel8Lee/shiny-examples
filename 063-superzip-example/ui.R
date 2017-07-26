@@ -59,8 +59,8 @@ bodies <- dashboardBody(
 									div(
 									column(width=6,
 											box(id="selectbox",width=NULL, 
-													selectInput("metric", "Metric", metric),
-													selectInput("record","Record Length", record_length)
+													selectInput("record","Record Length", record_length),
+													selectInput("metric", "Metric", metric)
 												)
 										
 									),

@@ -75,6 +75,8 @@ h1, h2, h3, h4 { font-weight: 400; }
 
 #controls:legendcircle {
   border-radius: 50%;
+height: 10px;
+  width: 10px;
   margin-top: 8px;
 }
 /* Position and style citation */

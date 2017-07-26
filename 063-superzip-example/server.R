@@ -57,7 +57,7 @@ function(input, output, session) {
 	bounds <- c(0,1000,10000,50000,125000,200000,400000,800000,1500000,2500000,3500000)
 	labs <-  c("0","1 AF - 1 TAF","1TAF - 10TAF","10TAF- 50TAF","50TAF - 125TAF","125TAF - 200TAF","200TAF - 400TAF","400TAF - 800TAF","800TAF - 1.5MAF","1.5MAF - 2.5MAF","2.5MAF - 3.5MAF")
 	legendTitle <- "Magnitude (HMF Volume)"
-  sizes <- rep(3000,times=10)
+        sizes <- rep(3,times=10)
   }
   
   else if 

@@ -58,12 +58,12 @@ function(input, output, session) {
 	labs <-  c("0","1 AF - 1 TAF","1TAF - 10TAF","10TAF- 50TAF","50TAF - 125TAF","125TAF - 200TAF","200TAF - 400TAF","400TAF - 800TAF","800TAF - 1.5MAF","1.5MAF - 2.5MAF","2.5MAF - 3.5MAF")
 	legendTitle <- "Magnitude (HMF Volume)"
 	zoomsize <- input$map_zoom
-	if (zoomsize == 6) {
+	#if (zoomsize == 6) {
   	sizes <- c(1,3,6,9,12,15,18,21,24,27,30)}
-	else if (zoomsize == 7){
-	sizes <- c(1,4,7,10,13,16,19,22,25,28,31)}
-	else {
-  	sizes <- c(2,5,8,11,14,17,20,23,26,29,32)}
+	#else if (zoomsize == 7){
+	#sizes <- c(1,4,7,10,13,16,19,22,25,28,31)}
+	#else {
+  	#sizes <- c(2,5,8,11,14,17,20,23,26,29,32)}
   }
   
   else if 
@@ -82,6 +82,7 @@ function(input, output, session) {
 	sizes <- c(1,3,6,9,12,15)
 	}
 
+    sizes <- sizes + (input$map_zoom - 6)
     dom <- seq(1,length(bounds),1)  
 	  
 	  unimp_sites <- sitedata[which(sitedata$status=="unimpaired"),] 
@@ -103,7 +104,7 @@ function(input, output, session) {
   colorAdditions <- paste0(colorlist, "; width:", sizes, "px; height:", sizes, "px")
   labelAdditions <- paste0("<div style='display: inline-block;height: ", sizes, "px;margin-top: 4px;line-height: ", sizes, "px;'>", labs, "</div>")
 	  
-	  
+    	  
     leafletProxy("map", data = sitedata) %>%
       clearShapes() %>% 
       addCircles(~longitude, ~latitude, radius=radius, layerId=~site_no,

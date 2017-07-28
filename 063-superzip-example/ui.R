@@ -2,7 +2,7 @@ library(leaflet)
 library(shinydashboard)
 
 # Choices for drop-downs
-record_length <- c("Full" = "full", "Post-Impairment" = "post_imp")	
+record_length <- c("Full" = "full", "Post-Impairment" = "post-impairment")	
 
 site_type <- c("Impaired" = "impaired", "Unimpaired" = "unimpaired", 
 							 "All Sites" = "both")
@@ -10,11 +10,11 @@ site_type <- c("Impaired" = "impaired", "Unimpaired" = "unimpaired",
 metric <- c("Magnitude" = "magnitude", "Duration" = "duration", "Inter-Annual Frequency" = "interaanual frequency", 
 					"Intra-Annual Frequency" = "intraannual frequency", "Timing" = "timing")
  
-period <- c("January"= "jan", "February" = "feb", "March" = "mar", "April" = "apr", 
-						"November" = "nov", "December" = "dec", "November to April" = "novtapr", 
-						"December to February" = "dectfeb", "Hydrologic Year" = "hy")
+period <- c("January"= "January", "February" = "February", "March" = "March", "April" = "April", 
+						"November" = "November", "December" = "December", "November to April" = "November to April", 
+						"December to February" = "December to February", "Hydrologic Year" = "Hydrologic Year")
 
-year_type <- c("Above Normal" = "AN", "Below Normal" = "BN", "Critical" = "C", "Dry" = "dry", "All" = "all")
+year_type <- c("All" = "all", "Above Normal" = "AN", "Below Normal" = "BN", "Critical" = "C", "Dry" = "D", "Wet" = "W")
 
 sites <- paste("USGS ", allsites$site_no, ", ", allsites$station_nm, sep="")
 

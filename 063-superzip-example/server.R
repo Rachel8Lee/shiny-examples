@@ -6,7 +6,7 @@ library(dplyr)
 library(gplots)
 source("website_barplots.R")
 
-sitedata <- allsites
+#sitedata <- allsites
 
 function(input, output, session) {
 ## Interactive Map ###########################################

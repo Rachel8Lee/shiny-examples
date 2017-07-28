@@ -75,7 +75,6 @@ function(input, output, session) {
 
 	  # size for legend icons
     sizes <- sizes + (input$map_zoom - 6)
-    metresPerPixel = 40075016.686 * Math.abs(Math.cos(map.getCenter().lat * 180/Math.PI)) / Math.pow(2, map.getZoom()+8)
     
     dom <- seq(1,length(bounds),1)  
 	  

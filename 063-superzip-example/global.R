@@ -22,7 +22,7 @@ imp_dur <- read.csv("data/simp_data_imp_vol_90_duration.csv")
 imp_dur_all <- imp_dur[which(imp_dur$yeartype == "all"),]
 imp_dur_all_apr <- imp_dur_all[which(imp_dur_all$period == "April"),]
 
-allsites <- merge(allsites, imp_dur_all_apr, by.x="site_no", by.y="gauge", all.y=TRUE)
+allsites <- merge(allsites, imp_magnitude_all_apr, by.x="site_no", by.y="gauge", all.y=TRUE)
 allsites <- allsites[order(allsites$avg, decreasing = TRUE),]
 row.names(allsites) <- allsites$site_no
 

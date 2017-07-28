@@ -6,7 +6,7 @@ library(dplyr)
 library(gplots)
 source("website_barplots.R")
 
-#sitedata <- allsites
+sitedata <- allsites
 
 function(input, output, session) {
 ## Interactive Map ###########################################
@@ -23,21 +23,21 @@ function(input, output, session) {
       ) %>%
       setView(lng = -120.51, lat = 38.06, zoom = 6)
   })
-  sitedata <- reactive({(paste(input$record, input$metric, input$yeartype, input$period, input$sitetype,sep="_"))})
+  #sitedata <- reactive({(paste(input$record, input$metric, input$yeartype, input$period, input$sitetype,sep="_"))})
  
   # A reactive expression that returns the set of zips that are
   # in bounds right now
-  siteInBounds <- reactive({
-    if (is.null(input$map_bounds))
-      return(sitedata[FALSE,])
-    bounds <- input$map_bounds
-    latRng <- range(bounds$north, bounds$south)
-    lngRng <- range(bounds$east, bounds$west)
+  #siteInBounds <- reactive({
+   # if (is.null(input$map_bounds))
+    #  return(sitedata[FALSE,])
+    #bounds <- input$map_bounds
+    #latRng <- range(bounds$north, bounds$south)
+    #lngRng <- range(bounds$east, bounds$west)
     
-    subset(sitedata,
-      latitude >= latRng[1] & latitude <= latRng[2] &
-      longitude >= lngRng[1] & longitude <= lngRng[2])
-  })
+    ##subset(sitedata,
+      #latitude >= latRng[1] & latitude <= latRng[2] &
+      #longitude >= lngRng[1] & longitude <= lngRng[2])
+  #})
 
 
   output$testplot <- renderPlot({

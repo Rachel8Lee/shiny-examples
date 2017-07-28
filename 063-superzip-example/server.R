@@ -7,7 +7,7 @@ library(gplots)
 source("barplots2.R")
 #source("convert.js")
 
-#sitedata <- allsites
+sitedata <- allsites
 
 function(input, output, session) {
 ## Interactive Map ###########################################
@@ -88,7 +88,7 @@ function(input, output, session) {
 	  #sitedata()[which(sitedata()$status=="unimpaired"),] 
 	  #imp_sites <- 
 	  
-    colorData <- sitedata()$avg
+    colorData <- sitedata$avg
 	  classdata <- rep(NA,length(colorData))
 	  classdata[which(colorData== bounds[[1]])] <- 1
 	  for(i in 2:length(bounds)){
@@ -97,7 +97,7 @@ function(input, output, session) {
      
      pal <- colorFactor(palette=colorlist, domain=dom, na.color="black")
 	  
-     radius <- 10000*sitedata()$avg/max(sitedata()$avg) + 3000
+     radius <- 10000*sitedata$avg/max(sitedata$avg) + 3000
 
 	  colorlist <- col2hex(colorlist)
   
@@ -105,7 +105,7 @@ function(input, output, session) {
   labelAdditions <- paste0("<div style='display: inline-block;height: ", sizes, "px;margin-top: 4px;line-height: ", sizes, "px;'>", labs, "</div>")
 	  
     	  
-    leafletProxy("map", data = sitedata()) %>%
+    leafletProxy("map", data = sitedata) %>%
       clearShapes() %>% 
       addCircles(~longitude, ~latitude, radius=radius, layerId=~site_no,
         stroke=TRUE, weight = 1, color ="#000000", fillOpacity=0.85, fillColor=pal(classdata)) %>%

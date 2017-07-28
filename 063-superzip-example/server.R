@@ -44,7 +44,7 @@ function(input, output, session) {
 
 
   output$testplot <- renderPlot({
-	  gauge<-strsplit(input$site1, " ")[[1]][2]
+	  gauge<-strsplit(input$site, " ")[[1]][2]
 	  gauge <- strsplit(gauge, ",")[[1]][1]
 	  d <- gauge_select_plot(gauge, full = TRUE)
  	  my_barplot(d, "vol MAF", monthly = TRUE, full = TRUE)

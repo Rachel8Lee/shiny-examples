@@ -49,8 +49,10 @@ function(input, output, session) {
   })
 	
 	output$testplot2 <- renderPlot({
-	  g<- c(11276500,11302000)
-	  d2<- gauge_select_plot(g, full = TRUE)
+		first_site <- strsplit(input$site1, " ")[[1]][2]
+		sec_site <- strsplit(input$site2, " ")[[1]][2]
+		third_site <- strsplit(input$site3, " ")[[1]][2]
+	  d2<- gauge_select_plot(c(first_site, sec_site, third_site), full = TRUE)
  	  my_barplot(d2, "vol MAF", monthly = TRUE, full = TRUE)
  })
   

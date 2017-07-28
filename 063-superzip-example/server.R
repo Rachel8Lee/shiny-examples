@@ -21,7 +21,7 @@ function(input, output, session) {
       setView(lng = -120.51, lat = 38.06, zoom = 6)
   })
 	
-  sitedata <- reactive({(paste(input$record, input$metric, input$yeartype, input$period, input$sitetype,sep="_"))})
+  sitedata <- reactive({(paste(input$record, input$metric, input$yeartype, input$period,sep="_"))})
  
   # A reactive expression that returns the set of zips that are
   # in bounds right now
@@ -76,8 +76,9 @@ function(input, output, session) {
     sizes <- sizes + (input$map_zoom - 6)
     dom <- seq(1,length(bounds),1)  
 	  
-	  unimp_sites <- sitedata()[which(sitedata()$status=="unimpaired"),] 
-	  imp_sites <- sitedata()[which(sitedata()$status=="impaired"),] 
+	  unimp_sites <- subset(sitedata(), sitedata()[,5]=="unimpaired")
+	#sitedata()[which(sitedata()$status=="unimpaired"),] 
+	  #imp_sites <- 
 	  
     colorData <- sitedata()$avg
 	  classdata <- rep(NA,length(colorData))

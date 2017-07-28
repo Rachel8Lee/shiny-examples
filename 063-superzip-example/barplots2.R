@@ -2,13 +2,52 @@
 # 
 # Author: tiffnk
 ###############################################################################
+gauge_data <- read.csv("data/gauge_locations.csv")
+gauge_data <- gauge_data[,2:length(gauge_data)]
+gauge_status <- read.csv("data/gauge_classification.csv")
+gauge_status<- gauge_status[,2:length(gauge_status)]
 
+# subset data 
+# FULL VOL
+redo_full_vol <- read.csv("data/redo_simp_data_full_vol_90.csv")
+redo_full_vol <- redo_full_vol[,2:length(redo_full_vol)]
+redo_full_vol <- merge(redo_full_vol, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
+redo_full_dur <- read.csv("data/simp_data_full_vol_90_duration.csv")
+redo_full_dur <- redo_full_dur[,2:length(redo_full_dur)]
+redo_full_dur <- merge(redo_full_dur, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
+redo_full_nmpks <- read.csv("data/simp_data_full_vol_90_intraannual_frequency.csv")
+redo_full_nmpks <- redo_full_nmpks[,2:length(redo_full_nmpks)]
+redo_full_nmpks <- merge(redo_full_nmpks, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
+
+redo_imp_vol <- read.csv("data/redo_simp_data_imp_vol_90.csv")
+redo_imp_vol <- redo_imp_vol[,2:length(redo_imp_vol)]
+redo_imp_vol <- merge(redo_imp_vol, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
+redo_imp_dur <- read.csv("data/simp_data_imp_vol_90_duration.csv")
+redo_imp_dur <- redo_imp_dur[,2:length(redo_imp_dur)]
+redo_imp_dur <- merge(redo_imp_dur, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
+redo_imp_nmpks <- read.csv("data/simp_data_imp_vol_90_intraannual_frequency.csv")
+redo_imp_nmpks <- redo_imp_nmpks[,2:length(redo_imp_nmpks)]
+redo_imp_nmpks <- merge(redo_imp_nmpks, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
+
+
+vol.frame <- redo_full_vol
+vol.frame[is.na(vol.frame)] <- 0 
+dur.frame<- redo_full_dur
+dur.frame[is.na(dur.frame)] <- 0 
+nmpks.frame<- redo_full_nmpks
+nmpks.frame[is.na(nmpks.frame)] <- 0 
+imp.vol.frame<- redo_full_vol
+imp.vol.frame[is.na(imp.vol.frame)] <- 0 
+imp.dur.frame<- redo_imp_dur
+imp.dur.frame[is.na(imp.dur.frame)] <- 0 
+imp.nmpks.frame<- redo_imp_nmpks
+imp.nmpks.frame[is.na(imp.nmpks.frame)] <- 0 
 
 gauge_select_plot <- function(gauges, full=TRUE){
 	six.gauges = gauges
 # bundle data
 	blanks = data.frame(gauge = six.gauges, yeartype = " ", period = NA, avg = NA, 
-			sd = NA, valtype = NA)
+			sd = NA, valtype = NA, basin=NA, status=NA)
 	full = do.call(rbind.data.frame, list(dur.frame, vol.frame,
 					nmpks.frame)) %>% rbind.data.frame(blanks)
 	full["tag"] = "full" 
@@ -34,7 +73,7 @@ gauge_select_plot <- function(gauges, full=TRUE){
 	alldat$ymin <- alldat$avg - alldat$sd
 	alldat$ymax <- alldat$avg + alldat$sd
 	##add station name
-	stationname <- read.csv(paste(inpath,"gauge_locations.csv",sep=""))
+	stationname <- gauge_data
 	stationname <- data.frame(site=stationname$site_no, station_name=stationname$station_nm)
 	alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 	
@@ -43,6 +82,8 @@ gauge_select_plot <- function(gauges, full=TRUE){
 		lab.full <- rep(NA, length(six.gauges))
 		for(i in 1:length(six.gauges)){
 			lab.full[[i]] <- paste("USGS ",six.gauges[[i]],"\n",as.character(alldat$station_name[which(alldat$gauge==six.gauges[[i]])[[1]]]),sep="")
+#			lab.full[[i]] <- paste("USGS ",six.gauges[[i]],sep="")
+			
 		}
 		names(lab.full) = paste(c(six.gauges))
 		imp.full$station = imp.full$gauge
@@ -54,7 +95,9 @@ gauge_select_plot <- function(gauges, full=TRUE){
 		lab.imp <- rep(NA, length(six.gauges))
 		for(i in 1:length(six.gauges)){
 			lab.imp[[i]] <- paste("USGS ",six.gauges[[i]],"\n",as.character(alldat$station_name[which(alldat$gauge==six.gauges[[i]])[[1]]]),sep="")
-		}
+#			lab.imp[[i]] <- paste("USGS ",six.gauges[[i]],sep="")
+		
+	}
 		names(lab.imp) = paste(c(six.gauges))
 		imp.post$station = imp.post$gauge
 		imp.post$gauge = factor(imp.post$gauge, levels = names(lab.imp))
@@ -112,13 +155,12 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 		for(i in 1:length(gauges2)){
 			if(i == length(gauges2)){
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],".",sep="")
-				
 			}else {
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],",\n",sep="")
 			}
 		}
 		captext2 <- paste(captext, collapse=" ")
-		cap = paste("Average magnitude (volume) of HMF \nover the full record of data by period and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
+		cap = paste("Average magnitude (volume) of HMF over the full record of data by period and year typefor ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
 	}else if(yvar=="duration_days" & full==TRUE & monthly==FALSE){
 		numgauges <- length(as.character(unique(d$gauge)))
@@ -138,13 +180,12 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 		for(i in 1:length(gauges2)){
 			if(i == length(gauges2)){
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],".",sep="")
-				
 			}else {
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],",\n",sep="")
 			}
 		}
 		captext2 <- paste(captext, collapse=" ")
-		cap = paste("Average duration (days) of HMF \nover the full record of data by period and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
+		cap = paste("Average duration (days) of HMF over the full record of data by period and year type for ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
 	}else if(yvar=="intraannual_frequency_numpeaks" & full==TRUE & monthly==FALSE){
 		numgauges <- length(as.character(unique(d$gauge)))
@@ -164,13 +205,12 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 		for(i in 1:length(gauges2)){
 			if(i == length(gauges2)){
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],".",sep="")
-				
 			}else {
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],",\n",sep="")
 			}
 		}
 		captext2 <- paste(captext, collapse=" ")
-		cap = paste("Average intra-annual frequency (# of peaks) of HMF \nover the full record of data by period and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
+		cap = paste("Average intra-annual frequency (# of peaks) of HMF over the full record of data by period and year type for ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
 	} else 	if(yvar=="vol MAF" & full==FALSE & monthly==FALSE){
 		numgauges <- length(as.character(unique(d$gauge)))
@@ -190,13 +230,12 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 		for(i in 1:length(gauges2)){
 			if(i == length(gauges2)){
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],".",sep="")
-				
 			}else {
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],",\n",sep="")
 			}
 		}
 		captext2 <- paste(captext, collapse=" ")
-		cap = paste("Average magnitude (volume) of HMF \nover the post-impairment record of data by period and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
+		cap = paste("Average magnitude (volume) of HMF over the post-impairment record of data by period and year type for ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
 	}else if(yvar=="duration_days" & full==FALSE & monthly==FALSE){
 		numgauges <- length(as.character(unique(d$gauge)))
@@ -216,13 +255,12 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 		for(i in 1:length(gauges2)){
 			if(i == length(gauges2)){
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],".",sep="")
-				
 			}else {
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],",\n",sep="")
 			}
 		}
 		captext2 <- paste(captext, collapse=" ")
-		cap = paste("Average duration (days) of HMF \nover the post-impairment record of data by period and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
+		cap = paste("Average duration (days) of HMF over the post-impairment record of data by period and year type for ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
 	}else if(yvar=="intraannual_frequency_numpeaks" & full==FALSE & monthly==FALSE){
 		numgauges <- length(as.character(unique(d$gauge)))
@@ -242,13 +280,12 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 		for(i in 1:length(gauges2)){
 			if(i == length(gauges2)){
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],".",sep="")
-				
 			}else {
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],",\n",sep="")
 			}
 		}
 		captext2 <- paste(captext, collapse=" ")
-		cap = paste("Average intra-annual frequency (# of peaks) of HMF \nover the post-impairment record of data by period and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
+		cap = paste("Average intra-annual frequency (# of peaks) of HMF over the post-impairment record of data by period and year type for ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
 	} else if(yvar=="vol MAF" & full==TRUE & monthly==TRUE){
 		numgauges <- length(as.character(unique(d$gauge)))
@@ -268,13 +305,12 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 		for(i in 1:length(gauges2)){
 			if(i == length(gauges2)){
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],".",sep="")
-				
 			}else {
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],",\n",sep="")
 			}
 		}
 		captext2 <- paste(captext, collapse=" ")
-		cap = paste("Average magnitude (volume) of HMF \nover the full record of data by month and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
+		cap = paste("Average magnitude (volume) of HMF over the full record of data by month and year type for ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
 	}else if(yvar=="duration_days" & full==TRUE & monthly==TRUE){
 		numgauges <- length(as.character(unique(d$gauge)))
@@ -294,13 +330,12 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 		for(i in 1:length(gauges2)){
 			if(i == length(gauges2)){
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],".",sep="")
-				
 			}else {
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],",\n",sep="")
 			}
 		}
 		captext2 <- paste(captext, collapse=" ")
-		cap = paste("Average duration (days) of HMF \nover the full record of data by month and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
+		cap = paste("Average duration (days) of HMF over the full record of data by month and year type for ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
 	}else if(yvar=="intraannual_frequency_numpeaks" & full==TRUE & monthly==TRUE){
 		numgauges <- length(as.character(unique(d$gauge)))
@@ -320,13 +355,12 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 		for(i in 1:length(gauges2)){
 			if(i == length(gauges2)){
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],".",sep="")
-				
 			}else {
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],",\n",sep="")
 			}
 		}
 		captext2 <- paste(captext, collapse=" ")
-		cap = paste("Average intra-annual frequency (# of peaks) of HMF \nover the full record of data by month and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
+		cap = paste("Average intra-annual frequency (# of peaks) of HMF over the full record of data by month and year type for ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
 	} else 	if(yvar=="vol MAF" & full==FALSE & monthly==TRUE){
 		numgauges <- length(as.character(unique(d$gauge)))
@@ -346,13 +380,12 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 		for(i in 1:length(gauges2)){
 			if(i == length(gauges2)){
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],".",sep="")
-				
 			}else {
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],",\n",sep="")
 			}
 		}
 		captext2 <- paste(captext, collapse=" ")
-		cap = paste("Average magnitude (volume) of HMF \nover the post-impairment record of data by month and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
+		cap = paste("Average magnitude (volume) of HMF over the post-impairment record of data by month and year type for ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
 	}else if(yvar=="duration_days" & full==FALSE & monthly==TRUE){
 		numgauges <- length(as.character(unique(d$gauge)))
@@ -372,13 +405,12 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 		for(i in 1:length(gauges2)){
 			if(i == length(gauges2)){
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],".",sep="")
-				
 			}else {
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],",\n",sep="")
 			}
 		}
 		captext2 <- paste(captext, collapse=" ")
-		cap = paste("Average duration (days) of HMF \nover the post-impairment record of data by month and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
+		cap = paste("Average duration (days) of HMF over the post-impairment record of data by month and year type for ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
 	}else if(yvar=="intraannual_frequency_numpeaks" & full==FALSE & monthly==TRUE){
 		numgauges <- length(as.character(unique(d$gauge)))
@@ -398,13 +430,12 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 		for(i in 1:length(gauges2)){
 			if(i == length(gauges2)){
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],".",sep="")
-				
 			}else {
 				captext[[i]] <- paste("USGS ",as.character(unique(d$station))[[i]], " on the ", gauges2[[i]],",\n",sep="")
 			}
 		}
 		captext2 <- paste(captext, collapse=" ")
-		cap = paste("Average intra-annual frequency (# of peaks) of HMF \nover the post-impairment record of data by month and year type\nfor ", numgauges, " site(s) in the Central Valley:\n",
+		cap = paste("Average intra-annual frequency (# of peaks) of HMF over the post-impairment record of data by month and year type for ", numgauges, " site(s) in the Central Valley:\n",
 				captext2,"\n Source: Kocis & Dahlke 2017", sep="")
 	}
 	plottitle = eval(parse(text = paste0('ggtitle(expression(atop("', tlabel, 
@@ -425,15 +456,16 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 			guides(fill = guide_legend(reverse = FALSE, nrow = 1)) +
 			labs(caption=cap)+
 			theme(
-					axis.text.x = element_text(color="black", size=10),
-					axis.text.y = element_text(color="black", size=12),
-					axis.title.x = element_text(color="black", size=14),
-					axis.title.y = element_text(color="black", size=14),
-#		title = element_text(color="black", size=rel(2)),
+					axis.text.x = element_text(color="black", size=rel(.6)),
+					axis.text.y = element_text(color="black", size=rel(.6)),
+					axis.title.x = element_text(color="black", size=rel(.8)),
+					axis.title.y = element_text(color="black", size=rel(.8)),
+#		title = element_text(color="black", size=rel(1)),
 					legend.position = "bottom",
-					legend.title = element_text(color="black", size=14),
-					legend.text = element_text(color="black", size=12),
-					strip.text = element_text(color="black", size=10),
-					legend.key = element_rect(colour = 'black')
+					legend.title = element_text(color="black", size=rel(.6)),
+					legend.text = element_text(color="black", size=rel(.6)),
+					strip.text = element_text(color="black", size=rel(.6)),
+					legend.key = element_rect(colour = 'black'),
+					plot.caption = element_text(size=rel(.5))
 			)
 }

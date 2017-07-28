@@ -22,9 +22,11 @@ function(input, output, session) {
       setView(lng = -120.51, lat = 38.06, zoom = 6)
   })
 	
-  sitedata <- reactive({
-	  paste(input$record, input$metric, input$yeartype, input$period,sep="_")
-  })
+  #sitedata <- reactive({
+	  #subset(allsites, allsites$record == input$record, allsites$yeartype == input$yeartype, allsites$period, 
+		#allsites$metric == input$metric)
+	  #paste(input$record, input$metric, input$yeartype, input$period,sep="_")
+  #})
  
   # A reactive expression that returns the set of zips that are
   # in bounds right now

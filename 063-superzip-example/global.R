@@ -18,7 +18,7 @@ imp_magnitude <- read.csv("data/redo_simp_data_imp_vol_90.csv")
 imp_magnitude_all <- imp_magnitude[which(imp_magnitude$yeartype == "all"),]
 imp_magnitude_all_apr <- imp_magnitude_all[which(imp_magnitude_all$period == "April"),]
 
-allsites <- merge(allsites, full_magnitude_all_apr, by.x="site_no", by.y="gauge", all.y=TRUE)
+allsites <- merge(allsites, imp_magnitude_all_apr, by.x="site_no", by.y="gauge", all.y=TRUE)
 allsites <- allsites[order(allsites$avg, decreasing = TRUE),]
 row.names(allsites) <- allsites$site_no
 

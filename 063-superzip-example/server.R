@@ -6,7 +6,7 @@ library(dplyr)
 library(gplots)
 source("website_barplots.R")
 
-#sitedata <- allsites
+sitedata <- allsites
 
 function(input, output, session) {
 ## Interactive Map ###########################################
@@ -21,7 +21,7 @@ function(input, output, session) {
       setView(lng = -120.51, lat = 38.06, zoom = 6)
   })
 	
-  sitedata <- reactive({(paste(input$record, input$metric, input$yeartype, input$period,sep="_"))})
+  #sitedata <- reactive({(paste(input$record, input$metric, input$yeartype, input$period,sep="_"))})
  
   # A reactive expression that returns the set of zips that are
   # in bounds right now
@@ -73,14 +73,17 @@ function(input, output, session) {
   legendTitle <- "No. 1-Day Peaks"
 	sizes <- c(1,3,6,9,12,15) }
 
+	  # size for legend icons
     sizes <- sizes + (input$map_zoom - 6)
+    metresPerPixel = 40075016.686 * Math.abs(Math.cos(map.getCenter().lat * 180/Math.PI)) / Math.pow(2, map.getZoom()+8)
+    
     dom <- seq(1,length(bounds),1)  
 	  
-	  unimp_sites <- subset(sitedata(), sitedata()[,5]=="unimpaired")
-	#sitedata()[which(sitedata()$status=="unimpaired"),] 
+	  #unimp_sites <- subset(sitedata(), sitedata()[,5]=="unimpaired")
+	  #sitedata()[which(sitedata()$status=="unimpaired"),] 
 	  #imp_sites <- 
 	  
-    colorData <- sitedata()$avg
+    colorData <- sitedata$avg
 	  classdata <- rep(NA,length(colorData))
 	  classdata[which(colorData== bounds[[1]])] <- 1
 	  for(i in 2:length(bounds)){
@@ -89,7 +92,7 @@ function(input, output, session) {
      
      pal <- colorFactor(palette=colorlist, domain=dom, na.color="black")
 	  
-     radius <- 10000*sitedata()$avg/max(sitedata()$avg) + 3000
+     radius <- 10000*sitedata$avg/max(sitedata$avg) + 3000
 
 	  colorlist <- col2hex(colorlist)
   
@@ -97,7 +100,7 @@ function(input, output, session) {
   labelAdditions <- paste0("<div style='display: inline-block;height: ", sizes, "px;margin-top: 4px;line-height: ", sizes, "px;'>", labs, "</div>")
 	  
     	  
-    leafletProxy("map", data = sitedata()) %>%
+    leafletProxy("map", data = sitedata) %>%
       clearShapes() %>% 
       addCircles(~longitude, ~latitude, radius=radius, layerId=~site_no,
         stroke=TRUE, weight = 1, color ="#000000", fillOpacity=0.85, fillColor=pal(classdata)) %>%

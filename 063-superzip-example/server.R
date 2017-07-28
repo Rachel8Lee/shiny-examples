@@ -5,7 +5,7 @@ library(lattice)
 library(dplyr)
 library(gplots)
 source("website_barplots.R")
-source("convert.js")
+#source("convert.js")
 
 sitedata <- allsites
 

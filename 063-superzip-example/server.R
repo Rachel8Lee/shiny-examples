@@ -12,7 +12,7 @@ function(input, output, session) {
 ## Interactive Map ###########################################
 # Create the map
 	
-  #sitedata <- reactive({return(paste(input$record, input$metric, input$yeartype, input$period, input$sitetype,sep="_"))})
+  sitedata <- reactiveValues({(paste(input$record, input$metric, input$yeartype, input$period, input$sitetype,sep="_"))})
 
 	
   output$map <- renderLeaflet({

@@ -44,7 +44,8 @@ function(input, output, session) {
 
 
   output$testplot <- renderPlot({
- 	  my_barplot(imp.full, "vol MAF", monthly = TRUE, full = TRUE)
+	  d<- gauge_select_plot(11276500, full = TRUE)
+ 	  my_barplot(d, "vol MAF", monthly = TRUE, full = TRUE)
   })
 	
 	output$testplot2 <- renderPlot({

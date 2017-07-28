@@ -123,7 +123,7 @@ function(input, output, session) {
      
      pal <- colorFactor(palette=colorlist, domain=dom, na.color="black")
 	  
-     radius <- 10000*sitedata$avg/max(sitedata$avg) + 3000
+     #radius <- 10000*sitedata$avg/max(sitedata$avg) + 3000
 
 	  colorlist <- col2hex(colorlist)
   
@@ -133,7 +133,7 @@ function(input, output, session) {
     	  
     leafletProxy("map", data = sitedata) %>%
       clearShapes() %>% 
-      addCircles(~longitude, ~latitude, radius=radius, layerId=~site_no,
+      addCircles(~longitude, ~latitude, radius=3000, layerId=~site_no,
         stroke=TRUE, weight = 1, color ="#000000", fillOpacity=0.85, fillColor=pal(classdata)) %>%
       addLegend("bottomleft", values=dom, colors=colorAdditions, title=legendTitle,
         layerId="colorLegend", opacity=0.85, labels=labelAdditions)

@@ -38,7 +38,7 @@ gauge_select_plot <- function(gauges, full=TRUE){
 	stationname <- data.frame(site=stationname$site_no, station_name=stationname$station_nm)
 	alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 	
-	if(full=TRUE){
+	if(full==TRUE){
 		imp.full = alldat %>% filter(gauge %in% six.gauges, tag == "full")
 		lab.full <- rep(NA, length(six.gauges))
 		for(i in 1:length(six.gauges)){

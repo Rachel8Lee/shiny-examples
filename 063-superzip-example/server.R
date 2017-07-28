@@ -49,7 +49,10 @@ function(input, output, session) {
   })
 	
 	output$testplot2 <- renderPlot({
- 	  my_barplot(imp.full, "vol MAF", monthly = TRUE, full = TRUE)
+	  g<- c(11276500,11302000)
+	  d2<- gauge_select_plot(g, full = TRUE)
+ 	  my_barplot(d2, "vol MAF", monthly = TRUE, full = TRUE)
+ })
   
 
   # This observer is responsible for maintaining the circles and legend,

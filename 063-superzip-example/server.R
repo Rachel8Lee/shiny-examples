@@ -23,11 +23,11 @@ function(input, output, session) {
       ) %>%
       setView(lng = -120.51, lat = 38.06, zoom = 6)
   })
+  sitedata <- reactive({(paste(input$record, input$metric, input$yeartype, input$period, input$sitetype,sep="_"))})
  
   # A reactive expression that returns the set of zips that are
   # in bounds right now
   siteInBounds <- reactive({
-    sitedata <- reactiveValues({(paste(input$record, input$metric, input$yeartype, input$period, input$sitetype,sep="_"))})
     if (is.null(input$map_bounds))
       return(sitedata[FALSE,])
     bounds <- input$map_bounds

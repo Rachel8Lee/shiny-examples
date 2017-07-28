@@ -49,7 +49,7 @@ function(input, output, session) {
 	  if (input$record == "full") {
 	    d <- gauge_select_plot(gauge, full = TRUE) 
             if (input$period == "January" |  input$period == "February" | 
-		input$period == "March" | input$period == "April" | input$period == "November" | input$period == December) {
+		input$period == "March" | input$period == "April" | input$period == "November" | input$period == "December") {
 		    my_barplot(d, "vol MAF", monthly = TRUE, full = TRUE) }
             else {
 		    my_barplot(d, "vol MAF", monthly = FALSE, full = TRUE) }
@@ -57,7 +57,7 @@ function(input, output, session) {
 	  else {
 	    d <- gauge_select_plot(gauge, full = TRUE) 
             if (input$period == "January" |  input$period == "February" | 
-		input$period == "March" | input$period == "April" | input$period == "November" | input$period == December) {
+		input$period == "March" | input$period == "April" | input$period == "November" | input$period == "December") {
 		    my_barplot(d, "vol MAF", monthly = TRUE, full = FALSE) }
             else {
 		    my_barplot(d, "vol MAF", monthly = FALSE, full = FALSE) }

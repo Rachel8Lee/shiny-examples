@@ -47,6 +47,7 @@ function(input, output, session) {
 	  gauge<-strsplit(input$site, " ")[[1]][2]
 	  gauge <- strsplit(gauge, ",")[[1]][1]
 	  if (input$record == "full") {
+            input$record
 	    d <- gauge_select_plot(gauge, full = TRUE) 
             if (input$period == "January" |  input$period == "February" | 
 		input$period == "March" | input$period == "April" | input$period == "November" | input$period == "December") {

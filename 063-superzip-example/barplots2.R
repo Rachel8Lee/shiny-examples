@@ -43,7 +43,7 @@ imp.dur.frame[is.na(imp.dur.frame)] <- 0
 imp.nmpks.frame<- redo_imp_nmpks
 imp.nmpks.frame[is.na(imp.nmpks.frame)] <- 0 
 
-gauge_select_plot <- function(gauges, full=TRUE){
+gauge_select_plot <- function(gauges, full_rec=TRUE){
 	six.gauges = gauges
 # bundle data
 	blanks = data.frame(gauge = six.gauges, yeartype = " ", period = NA, avg = NA, 
@@ -77,7 +77,7 @@ gauge_select_plot <- function(gauges, full=TRUE){
 	stationname <- data.frame(site=stationname$site_no, station_name=stationname$station_nm)
 	alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 	
-	if(full==TRUE){
+	if(full_rec==TRUE){
 		imp.full = alldat %>% filter(gauge %in% six.gauges, tag == "full")
 		lab.full <- rep(NA, length(six.gauges))
 		for(i in 1:length(six.gauges)){

@@ -12,7 +12,7 @@ function(input, output, session) {
 ## Interactive Map ###########################################
 # Create the map
 	
-  sitedata <- reactiveValues({(paste(input$record, input$metric, input$yeartype, input$period, input$sitetype,sep="_"))})
+  #sitedata <- reactiveValues({(paste(input$record, input$metric, input$yeartype, input$period, input$sitetype,sep="_"))})
 
 	
   output$map <- renderLeaflet({
@@ -27,6 +27,7 @@ function(input, output, session) {
   # A reactive expression that returns the set of zips that are
   # in bounds right now
   siteInBounds <- reactive({
+    sitedata <- reactiveValues({(paste(input$record, input$metric, input$yeartype, input$period, input$sitetype,sep="_"))})
     if (is.null(input$map_bounds))
       return(sitedata[FALSE,])
     bounds <- input$map_bounds

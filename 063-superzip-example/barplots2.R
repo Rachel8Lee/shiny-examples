@@ -36,7 +36,7 @@ dur.frame<- redo_full_dur
 dur.frame[is.na(dur.frame)] <- 0 
 nmpks.frame<- redo_full_nmpks
 nmpks.frame[is.na(nmpks.frame)] <- 0 
-imp.vol.frame<- redo_full_vol
+imp.vol.frame<- redo_imp_vol
 imp.vol.frame[is.na(imp.vol.frame)] <- 0 
 imp.dur.frame<- redo_imp_dur
 imp.dur.frame[is.na(imp.dur.frame)] <- 0 

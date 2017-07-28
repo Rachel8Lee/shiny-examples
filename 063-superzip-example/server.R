@@ -7,7 +7,7 @@ library(gplots)
 source("website_barplots.R")
 #source("convert.js")
 
-sitedata <- allsites
+#sitedata <- allsites
 
 function(input, output, session) {
 ## Interactive Map ###########################################
@@ -22,7 +22,9 @@ function(input, output, session) {
       setView(lng = -120.51, lat = 38.06, zoom = 6)
   })
 	
-  #sitedata <- reactive({(paste(input$record, input$metric, input$yeartype, input$period,sep="_"))})
+  sitedata <- reactive({
+	  paste(input$record, input$metric, input$yeartype, input$period,sep="_")
+  })
  
   # A reactive expression that returns the set of zips that are
   # in bounds right now
@@ -45,7 +47,7 @@ function(input, output, session) {
 	
 	output$testplot2 <- renderPlot({
  	  my_barplot(imp.full, "vol MAF", monthly = TRUE, full = TRUE)
-  })
+  
 
   # This observer is responsible for maintaining the circles and legend,
   # according to the variables the user has chosen to map to color and size.
@@ -83,7 +85,7 @@ function(input, output, session) {
 	  #sitedata()[which(sitedata()$status=="unimpaired"),] 
 	  #imp_sites <- 
 	  
-    colorData <- sitedata$avg
+    colorData <- sitedata()$avg
 	  classdata <- rep(NA,length(colorData))
 	  classdata[which(colorData== bounds[[1]])] <- 1
 	  for(i in 2:length(bounds)){
@@ -92,7 +94,7 @@ function(input, output, session) {
      
      pal <- colorFactor(palette=colorlist, domain=dom, na.color="black")
 	  
-     radius <- 10000*sitedata$avg/max(sitedata$avg) + 3000
+     radius <- 10000*sitedata()$avg/max(sitedata()$avg) + 3000
 
 	  colorlist <- col2hex(colorlist)
   
@@ -100,7 +102,7 @@ function(input, output, session) {
   labelAdditions <- paste0("<div style='display: inline-block;height: ", sizes, "px;margin-top: 4px;line-height: ", sizes, "px;'>", labs, "</div>")
 	  
     	  
-    leafletProxy("map", data = sitedata) %>%
+    leafletProxy("map", data = sitedata()) %>%
       clearShapes() %>% 
       addCircles(~longitude, ~latitude, radius=radius, layerId=~site_no,
         stroke=TRUE, weight = 1, color ="#000000", fillOpacity=0.85, fillColor=pal(classdata)) %>%

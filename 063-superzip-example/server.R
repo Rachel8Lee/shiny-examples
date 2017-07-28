@@ -46,8 +46,23 @@ function(input, output, session) {
   output$testplot <- renderPlot({
 	  gauge<-strsplit(input$site, " ")[[1]][2]
 	  gauge <- strsplit(gauge, ",")[[1]][1]
-	  d <- gauge_select_plot(gauge, full = TRUE)
- 	  my_barplot(d, "vol MAF", monthly = TRUE, full = TRUE)
+	  if (input$record == "full") {
+	    d <- gauge_select_plot(gauge, full = TRUE) 
+            if (input$period == "January" |  input$period == "February" | 
+		input$period == "March" | input$period == "April" | input$period == "November" | input$period == December) {
+		    my_barplot(d, "vol MAF", monthly = TRUE, full = TRUE) }
+            else {
+		    my_barplot(d, "vol MAF", monthly = FALSE, full = TRUE) }
+	  } 
+	  else {
+	    d <- gauge_select_plot(gauge, full = TRUE) 
+            if (input$period == "January" |  input$period == "February" | 
+		input$period == "March" | input$period == "April" | input$period == "November" | input$period == December) {
+		    my_barplot(d, "vol MAF", monthly = TRUE, full = FALSE) }
+            else {
+		    my_barplot(d, "vol MAF", monthly = FALSE, full = FALSE) }
+	  }
+		  
   })
 	
 	output$testplot2 <- renderPlot({

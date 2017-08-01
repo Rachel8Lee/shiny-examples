@@ -169,6 +169,6 @@ function(input, output, session) {
 
   ## Data Explorer ###########################################
   
-  output$downloadData <- downloadHandler(filename = "temp.csv", content = allsites)
+  output$downloadData <- downloadHandler(filename = "temp.csv", content = function(file) {write.csv(sitedata, file)})
   
 }

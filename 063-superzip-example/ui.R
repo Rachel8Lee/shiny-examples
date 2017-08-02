@@ -4,8 +4,7 @@ library(shinydashboard)
 # Choices for drop-downs
 record_length <- c("Full" = "full", "Post-Impairment" = "post-impairment")	
 
-site_type <- c("Impaired" = "impaired", "Unimpaired" = "unimpaired", 
-							 "All Sites" = "both")
+site_type <- c("Impaired" = "impaired", "Unimpaired" = "unimpaired")
 
 metric <- c("Magnitude" = "magnitude", "Duration" = "duration", "Inter-Annual Frequency" = "interaanual frequency", 
 					"Intra-Annual Frequency" = "intraannual frequency", "Timing" = "timing")
@@ -57,19 +56,25 @@ bodies <- dashboardBody(
                                                         margin-bottom: 5px;
                                                         }'))), 
 									div(
-									column(width=6,
+									column(width=4,
 											box(id="selectbox",width=NULL, 
 													selectInput("record","Record Length", record_length),
 													selectInput("metric", "Metric", metric)
 												)
 										
 									),
-									column(width=6,
+									column(width=4,
 											box(id="selectbox",width=NULL, #collapsible=TRUE,
 													selectInput("period","Time Period", period),
 													selectInput("yeartype", "Year Type", year_type)
 											)
 									
+									),
+									column(width=4,
+											box(id="selectbox",width=NULL, 
+													 checkboxGroupInput("site_type", "Site Type", choiceNames = site_type),
+												)
+										
 									), style="font-size:small;")),
 							fluidRow(column(width=12),
 									box(id="selectbox2",width=NULL, #collapsible=TRUE,

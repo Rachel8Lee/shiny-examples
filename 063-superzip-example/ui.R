@@ -72,8 +72,8 @@ bodies <- dashboardBody(
 									),
 									column(width=4,
 											box(id="selectbox",width=NULL, 
-													 "sitetype", "Select Site Type:", choiceNames = list(icon("impaired"), icon("unimpaired")),
-    												choiceValues = list("impaired", "unimpaired"),
+													 "sitetype", "Select Site Type:", choiceNames = c("Impaired", "Unimpaired"),
+    												choiceValues = c("impaired", "unimpaired"),
 												)
 										
 									), style="font-size:small;")),

@@ -5,7 +5,6 @@ library(lattice)
 library(dplyr)
 library(gplots)
 source("barplots2.R")
-#source("convert.js")
 
 sitedata <- allsites
 
@@ -30,40 +29,40 @@ function(input, output, session) {
  
   # A reactive expression that returns the set of zips that are
   # in bounds right now
-  #siteInBounds <- reactive({
+  # siteInBounds <- reactive({
    # if (is.null(input$map_bounds))
-    #  return(sitedata[FALSE,])
-    #bounds <- input$map_bounds
-    #latRng <- range(bounds$north, bounds$south)
-    #lngRng <- range(bounds$east, bounds$west)
+    # return(sitedata[FALSE,])
+    # bounds <- input$map_bounds
+    # latRng <- range(bounds$north, bounds$south)
+    # lngRng <- range(bounds$east, bounds$west)
     
-    ##subset(sitedata,
-      #latitude >= latRng[1] & latitude <= latRng[2] &
-      #longitude >= lngRng[1] & longitude <= lngRng[2])
-  #})
-
+    # subset(sitedata,
+    # latitude >= latRng[1] & latitude <= latRng[2] &
+    # longitude >= lngRng[1] & longitude <= lngRng[2])
+  # })
 
   output$testplot <- renderPlot({
-	  gauge<-strsplit(input$site, " ")[[1]][2]
+    # isolate site ID
+	  gauge <- strsplit(input$site, " ")[[1]][2]
 	  gauge <- strsplit(gauge, ",")[[1]][1]
+    # full, nested monthly
 	  if (input$record == "full") {
-            input$record
 	    d <- gauge_select_plot(gauge, full = TRUE) 
-            if (input$period == "January" |  input$period == "February" | 
-		input$period == "March" | input$period == "April" | input$period == "November" | input$period == "December") {
-		    my_barplot(d, "vol MAF", monthly = TRUE, full = TRUE) }
-            else {
+      if (input$period == "January" |  input$period == "February" | 
+		      input$period == "March" | input$period == "April" | input$period == "November" | input$period == "December") {
+		      my_barplot(d, "vol MAF", monthly = TRUE, full = TRUE) }
+      else {
 		    my_barplot(d, "vol MAF", monthly = FALSE, full = TRUE) }
 	  } 
+    # post-impairment
 	  else {
 	    d <- gauge_select_plot(gauge, full = FALSE) 
-            if (input$period == "January" |  input$period == "February" | 
-		input$period == "March" | input$period == "April" | input$period == "November" | input$period == "December") {
-		    my_barplot(d, "vol MAF", monthly = TRUE, full = FALSE) }
-            else {
+      if (input$period == "January" |  input$period == "February" | 
+		      input$period == "March" | input$period == "April" | input$period == "November" | input$period == "December") {
+		      my_barplot(d, "vol MAF", monthly = TRUE, full = FALSE) }
+      else {
 		    my_barplot(d, "vol MAF", monthly = FALSE, full = FALSE) }
 	  }
-		  
   })
 	
 	output$testplot2 <- renderPlot({
@@ -73,7 +72,8 @@ function(input, output, session) {
 		sec_site <- strsplit(sec_site, ",")[[1]][1]
 		third_site <- strsplit(input$site3, " ")[[1]][2]
 		third_site <- strsplit(third_site, ",")[[1]][1]
-	  d2<- gauge_select_plot(c(first_site, sec_site, third_site), full = TRUE)
+    
+	  d2 <- gauge_select_plot(c(first_site, sec_site, third_site), full = TRUE)
  	  my_barplot(d2, "vol MAF", monthly = TRUE, full = TRUE)
  })
   
@@ -83,43 +83,38 @@ function(input, output, session) {
   observe({
    
 	##add if statement for  metric variables
-  if (input$metric == "magnitude") {
-	colorlist <-  c("black","orangered","khaki1","olivedrab1","chartreuse3","green4","aquamarine2","deepskyblue4","blue","royalblue4","navyblue")
-	bounds <- c(0,1000,10000,50000,125000,200000,400000,800000,1500000,2500000,3500000)
-	labs <-  c("0","1 AF - 1 TAF","1TAF - 10TAF","10TAF- 50TAF","50TAF - 125TAF","125TAF - 200TAF","200TAF - 400TAF","400TAF - 800TAF","800TAF - 1.5MAF","1.5MAF - 2.5MAF","2.5MAF - 3.5MAF")
-	legendTitle <- "Magnitude (HMF Volume)"
-	zoomsize <- input$map_zoom
-  sizes <- c(1,3,6,9,12,15,18,21,24,27,30) 
-	radius <- 10000*sitedata$avg/max(sitedata$avg) + 3000
-	}
+    if (input$metric == "magnitude") {
+	    colorlist <-  c("black","orangered","khaki1","olivedrab1","chartreuse3","green4","aquamarine2","deepskyblue4","blue","royalblue4","navyblue")
+	    bounds <- c(0,1000,10000,50000,125000,200000,400000,800000,1500000,2500000,3500000)
+	    labs <-  c("0","1 AF - 1 TAF","1TAF - 10TAF","10TAF- 50TAF","50TAF - 125TAF","125TAF - 200TAF","200TAF - 400TAF","400TAF - 800TAF","800TAF - 1.5MAF","1.5MAF - 2.5MAF","2.5MAF - 3.5MAF")
+	    legendTitle <- "Magnitude (HMF Volume)"
+	    zoomsize <- input$map_zoom
+      sizes <- c(1,3,6,9,12,15,18,21,24,27,30) 
+	    rad <- 10000*sitedata$avg/max(sitedata$avg) + 3000
+	  }
   
-  else if (input$metric == "duration") {
-	colorlist <- c("black", "darkmagenta", "magenta", "blueviolet", "royalblue", "turquoise")
-	bounds <- c(0,1,10,20,40,60,80)
-	labs <-	c("0","1 - 10","10 - 20","20 - 40","40 - 60", "60 - 80")
-	legendTitle <- "Duration (HMF Days)"
-  sizes <- c(1,3,6,9,12,15) 
-	radius <- 100*sitedata$avg/max(sitedata$avg) + 3000
-	}
+    else if (input$metric == "duration") {
+	    colorlist <- c("black", "darkmagenta", "magenta", "blueviolet", "royalblue", "turquoise")
+	    bounds <- c(0,1,10,20,40,60,80)
+	    labs <-	c("0","1 - 10","10 - 20","20 - 40","40 - 60", "60 - 80")
+	    legendTitle <- "Duration (HMF Days)"
+      sizes <- c(1,3,6,9,12,15) 
+	    rad <- 100*sitedata$avg/max(sitedata$avg) + 3000
+	  }
 		
-	else{	
-  colorlist <- c("black","yellow","darkorange","deeppink","dark violet","navy")
-	bounds <- c(0,1,4,8,12,16,20)
-	labs <- c("0", "1 - 4","4 - 8", "8 - 12", "12 - 16","16 - 20")
-  legendTitle <- "No. 1-Day Peaks"
-	sizes <- c(1,3,6,9,12,15) 
-	radius <- 3000
-	}
+	  else { 	
+      colorlist <- c("black","yellow","darkorange","deeppink","dark violet","navy")
+	    bounds <- c(0,1,4,8,12,16,20)
+	    labs <- c("0", "1 - 4","4 - 8", "8 - 12", "12 - 16","16 - 20")
+      legendTitle <- "No. 1-Day Peaks"
+	    sizes <- c(1,3,6,9,12,15) 
+	    rad <- 3000
+	  }  
 
 	  # size for legend icons
     sizes <- sizes + (input$map_zoom - 6)
-    
     dom <- seq(1,length(bounds),1)  
-	  
-	  #unimp_sites <- subset(sitedata(), sitedata()[,5]=="unimpaired")
-	  #sitedata()[which(sitedata()$status=="unimpaired"),] 
-	  #imp_sites <- 
-	  
+	 
     colorData <- sitedata$avg
 	  classdata <- rep(NA,length(colorData))
 	  classdata[which(colorData== bounds[[1]])] <- 1
@@ -127,23 +122,18 @@ function(input, output, session) {
 		  classdata[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- i
 	  }
      
-     pal <- colorFactor(palette=colorlist, domain=dom, na.color="black")
-	  
-     #radius <- 10000*sitedata$avg/max(sitedata$avg) + 3000
-
+    pal <- colorFactor(palette=colorlist, domain=dom, na.color="black")
 	  colorlist <- col2hex(colorlist)
-  
-  colorAdditions <- paste0(colorlist, "; width:", sizes, "px; height:", sizes, "px")
-  labelAdditions <- paste0("<div style='display: inline-block;height: ", sizes, "px;margin-top: 4px;line-height: ", sizes, "px;'>", labs, "</div>")
-	  
+    # modify legend size 
+    colorAdditions <- paste0(colorlist, "; width:", sizes, "px; height:", sizes, "px")
+    labelAdditions <- paste0("<div style='display: inline-block;height: ", sizes, "px;margin-top: 4px;line-height: ", sizes, "px;'>", labs, "</div>")
     	  
     leafletProxy("map", data = sitedata) %>%
       clearShapes() %>% 
-      addCircles(~longitude, ~latitude, radius=radius, layerId=~site_no,
-        stroke=TRUE, weight = 1, color ="#000000", fillOpacity=0.85, fillColor=pal(classdata)) %>%
-      addLegend("bottomleft", values=dom, colors=colorAdditions, title=legendTitle,
-        layerId="colorLegend", opacity=0.85, labels=labelAdditions)
-	
+      addCircles(~longitude, ~latitude, radius=rad, layerId=~site_no, stroke=TRUE, 
+                 weight = 1, color ="#000000", fillOpacity=0.85, fillColor=pal(classdata)) %>%
+      addLegend("bottomleft", values=dom, colors=colorAdditions, title=legendTitle, layerId="colorLegend", 
+                opacity=0.85, labels=labelAdditions)
   })
 
   # Show a popup at the given location
@@ -175,6 +165,5 @@ function(input, output, session) {
 
   ## Data Explorer ###########################################
   
-  output$downloadData <- downloadHandler(filename = "temp.csv", content = function(file) {write.csv(sitedata, file)})
-  
+  output$downloadData <- downloadHandler(filename = "temp.csv", content = function(file) {write.csv(sitedata, file)})  
 }

@@ -73,7 +73,7 @@ bodies <- dashboardBody(
 									column(width=4,
 											box(id="selectbox",width=NULL, 
 													 checkboxGroupInput("sitetype", "Select Site Type:", c("Impaired" = "impaired", "Unimpaired" = "unimpaired"),
-																						 selected = c("Impaired", "Unimpaired"))
+																						 selected = c("impaired", "unimpaired"))
 												)
 										
 									), style="font-size:small;")),

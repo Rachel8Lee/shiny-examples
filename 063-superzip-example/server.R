@@ -95,7 +95,7 @@ function(input, output, session) {
 	  }
   
     else if (input$metric == "duration") {
-	    colorlist <- c("black", "maroon", "magenta", "blueviolet", "royalblue", "turquoise")
+	    colorlist <- c("black", "maroon", "magenta", "indigo", "royalblue", "turquoise")
 	    bounds <- c(0,1,10,20,40,60,80)
 	    labs <-	c("0","1 - 10","10 - 20","20 - 40","40 - 60", "60 - 80")
 	    legendTitle <- "Duration (HMF Days)"

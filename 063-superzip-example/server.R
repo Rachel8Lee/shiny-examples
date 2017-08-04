@@ -90,7 +90,9 @@ function(input, output, session) {
 	    legendTitle <- "Magnitude (HMF Volume)"
 	    zoomsize <- input$map_zoom
       sizes <- c(1,3,6,9,12,15,18,21,24,27,30) 
-	    rad <- 10000*sitedata$avg/max(sitedata$avg) + 3000
+	    largest_avg <- sitedata$avg[1]
+	    scalar <- 10000/largest_avg
+	    rad <- scalar*sitedata$avg + 3000
 	  }
   
     else if (input$metric == "duration") {

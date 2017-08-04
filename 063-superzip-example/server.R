@@ -81,7 +81,14 @@ function(input, output, session) {
   # This observer is responsible for maintaining the circles and legend,
   # according to the variables the user has chosen to map to color and size.
   observe({
-   
+		# 
+    if (length(input$sitetype) == 2) {
+		  sitedata <- sitedata
+		}
+		else {
+		  sitedata <- sitedata[which(sitedata$status == input$sitetype)]
+		}
+		
 	##add if statement for  metric variables
     if (input$metric == "magnitude") {
 	    colorlist <-  c("black","orangered","khaki1","olivedrab1","chartreuse3","green4","aquamarine2","deepskyblue4","blue","royalblue4","navyblue")

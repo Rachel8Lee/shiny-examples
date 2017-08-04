@@ -100,7 +100,7 @@ function(input, output, session) {
 	    labs <-	c("0","1 - 10","10 - 20","20 - 40","40 - 60", "60 - 80")
 	    legendTitle <- "Duration (HMF Days)"
       sizes <- c(1,3,6,9,12,15) 
-			scalar <- 1000/sitedata$avg[1]
+			scalar <- 10000/sitedata$avg[1]
 	    rad <- scalar*sitedata$avg + 3000
 	  }
 		

@@ -2,17 +2,14 @@ library(dplyr)
 
 # read in site #, name, location
 gauge_location <- read.csv("data/gauge_locations.csv")
+gauge_location <- gauge_location[,2:length(gauge_location)]
 gauge_status <- read.csv("data/gauge_classification.csv")
+gauge_status<- gauge_status[,2:length(gauge_status)]
 gauge_data <- merge(gauge_location, gauge_status, by.x = "site_no", by.y = "gauge", all.x = TRUE)
 
 allsites <- data.frame(site_no = gauge_data$site_no, station_nm = gauge_data$station_nm, latitude = gauge_data$dec_lat_va, longitude = gauge_data$dec_long_v, status = gauge_data$status)
 
 # for barplots
-gauge_data <- read.csv("data/gauge_locations.csv")
-gauge_data <- gauge_data[,2:length(gauge_data)]
-gauge_status <- read.csv("data/gauge_classification.csv")
-gauge_status<- gauge_status[,2:length(gauge_status)]
-
 # subset data 
 # FULL VOL
 redo_full_vol <- read.csv("data/redo_simp_data_full_vol_90.csv")
@@ -53,7 +50,11 @@ full <- rbind.data.frame(dur.frame, vol.frame, nmpks.frame)
 full["tag"] <- "full" 
 post <- rbind.data.frame(imp.dur.frame, imp.vol.frame, imp.nmpks.frame)
 post["tag"] <- "post-impairment"
-allsites <- rbind.data.frame(full, post)
+alldat <- rbind.data.frame(full, post)
+allsites <- merge(alldat, gauge_location, by.x = "gauge", by.y = "site_no", all.x = TRUE)
+colnames(allsites)[1] <- "site_no"
+colnames(allsites)[12] <- "latitude"
+colnames(allsites)[13] <- "longitude"
 
 # subset data 
 # FULL VOL

@@ -83,7 +83,7 @@ function(input, output, session) {
   observe({
 		# checkbox for site types
     if (length(input$sitetype) == 1) {
-		  sitedata <- sitedata[which(sitedata$status == "impaired")]
+		  sitedata <- sitedata[which(sitedata[5] == "impaired")]
 		}
 		
 	##add if statement for  metric variables

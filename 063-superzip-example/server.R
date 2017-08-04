@@ -90,8 +90,7 @@ function(input, output, session) {
 	    legendTitle <- "Magnitude (HMF Volume)"
 	    zoomsize <- input$map_zoom
       sizes <- c(1,3,6,9,12,15,18,21,24,27,30) 
-	    largest_avg <- sitedata$avg[1]
-	    scalar <- 10000/largest_avg
+	    scalar <- 10000/sitedata$avg[1]
 	    rad <- scalar*sitedata$avg + 3000
 	  }
   
@@ -101,7 +100,8 @@ function(input, output, session) {
 	    labs <-	c("0","1 - 10","10 - 20","20 - 40","40 - 60", "60 - 80")
 	    legendTitle <- "Duration (HMF Days)"
       sizes <- c(1,3,6,9,12,15) 
-	    rad <- 100*sitedata$avg/max(sitedata$avg) + 3000
+			scalar <- 1000/sitedata$avg[1]
+	    rad <- scalar*sitedata$avg + 3000
 	  }
 		
 	  else { 	

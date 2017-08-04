@@ -104,13 +104,24 @@ function(input, output, session) {
 	    rad <- scalar*sitedata$avg + 3000
 	  }
 		
+		else if (input$metric == "intraannual frequency") {
+	    colorlist <- c("black","yellow","darkorange","deeppink","darkviolet","navy")
+	    bounds <- c(0,4,8,12,16,20)
+	    labs <- c("0", "1 - 4","4 - 8", "8 - 12", "12 - 16","16 - 20")
+      legendTitle <- "No. 1-Day Peaks"
+	    sizes <- c(15,18,21,24,27,30) 
+	    scalar <- 10000/sitedata$avg[1]
+	    rad <- scalar*sitedata$avg + 3000
+	  }
+		
+		# havent decided on inter freq and timing yet
 	  else { 	
       colorlist <- c("black","yellow","darkorange","deeppink","darkviolet","navy")
 	    bounds <- c(0,4,8,12,16,20)
 	    labs <- c("0", "1 - 4","4 - 8", "8 - 12", "12 - 16","16 - 20")
       legendTitle <- "No. 1-Day Peaks"
 	    sizes <- c(15,18,21,24,27,30) 
-	    rad <- 3000
+	    rad <- 4000
 	  }  
 
 	  # size for legend icons

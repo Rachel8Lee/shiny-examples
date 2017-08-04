@@ -40,7 +40,15 @@ function(input, output, session) {
     # latitude >= latRng[1] & latitude <= latRng[2] &
     # longitude >= lngRng[1] & longitude <= lngRng[2])
   # })
-
+  sitedata <- reactive({
+		if (input$metric == "magnitude") {
+	    subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype & allsites$period == input$period & allsites$valtype == "vol AF") }
+		else if (input$metric == "duration") {
+	    subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype & allsites$period == input$period & allsites$valtype == "duration_days") }
+	  else {
+	    subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype & allsites$period == input$period & allsites$valtype == "intraannual_frequency_numpeaks") }
+	})
+	
   output$testplot <- renderPlot({
     # isolate site ID
 	  gauge <- strsplit(input$site, " ")[[1]][2]

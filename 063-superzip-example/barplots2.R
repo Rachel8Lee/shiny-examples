@@ -2,47 +2,6 @@
 # 
 # Author: tiffnk
 ###############################################################################
-gauge_data <- read.csv("data/gauge_locations.csv")
-gauge_data <- gauge_data[,2:length(gauge_data)]
-gauge_status <- read.csv("data/gauge_classification.csv")
-gauge_status<- gauge_status[,2:length(gauge_status)]
-
-# subset data 
-# FULL VOL
-redo_full_vol <- read.csv("data/redo_simp_data_full_vol_90.csv")
-redo_full_vol <- redo_full_vol[,2:length(redo_full_vol)]
-redo_full_vol <- merge(redo_full_vol, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
-redo_full_dur <- read.csv("data/simp_data_full_vol_90_duration.csv")
-redo_full_dur <- redo_full_dur[,2:length(redo_full_dur)]
-redo_full_dur <- merge(redo_full_dur, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
-redo_full_nmpks <- read.csv("data/simp_data_full_vol_90_intraannual_frequency.csv")
-redo_full_nmpks <- redo_full_nmpks[,2:length(redo_full_nmpks)]
-redo_full_nmpks <- merge(redo_full_nmpks, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
-
-redo_imp_vol <- read.csv("data/redo_simp_data_imp_vol_90.csv")
-redo_imp_vol <- redo_imp_vol[,2:length(redo_imp_vol)]
-redo_imp_vol <- merge(redo_imp_vol, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
-redo_imp_dur <- read.csv("data/simp_data_imp_vol_90_duration.csv")
-redo_imp_dur <- redo_imp_dur[,2:length(redo_imp_dur)]
-redo_imp_dur <- merge(redo_imp_dur, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
-redo_imp_nmpks <- read.csv("data/simp_data_imp_vol_90_intraannual_frequency.csv")
-redo_imp_nmpks <- redo_imp_nmpks[,2:length(redo_imp_nmpks)]
-redo_imp_nmpks <- merge(redo_imp_nmpks, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
-
-
-vol.frame <- redo_full_vol
-vol.frame[is.na(vol.frame)] <- 0 
-dur.frame<- redo_full_dur
-dur.frame[is.na(dur.frame)] <- 0 
-nmpks.frame<- redo_full_nmpks
-nmpks.frame[is.na(nmpks.frame)] <- 0 
-imp.vol.frame<- redo_imp_vol
-imp.vol.frame[is.na(imp.vol.frame)] <- 0 
-imp.dur.frame<- redo_imp_dur
-imp.dur.frame[is.na(imp.dur.frame)] <- 0 
-imp.nmpks.frame<- redo_imp_nmpks
-imp.nmpks.frame[is.na(imp.nmpks.frame)] <- 0 
-
 gauge_select_plot <- function(gauges, full_rec=TRUE){
 	six.gauges = gauges
 # bundle data

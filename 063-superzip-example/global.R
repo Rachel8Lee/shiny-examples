@@ -18,11 +18,15 @@ imp_magnitude <- read.csv("data/redo_simp_data_imp_vol_90.csv")
 imp_magnitude_all <- imp_magnitude[which(imp_magnitude$yeartype == "all"),]
 imp_magnitude_all_apr <- imp_magnitude_all[which(imp_magnitude_all$period == "April"),]
 
+full_dur <- read.csv("data/simp_data_full_vol_90_duration.csv")
+full_dur_all <- full_dur[which(full_dur$yeartype == "all"),]
+full_dur_all_apr <- full_dur_all[which(full_dur_all$period == "April"),]
+
 imp_dur <- read.csv("data/simp_data_imp_vol_90_duration.csv")
 imp_dur_all <- imp_dur[which(imp_dur$yeartype == "all"),]
 imp_dur_all_apr <- imp_dur_all[which(imp_dur_all$period == "April"),]
 
-allsites <- merge(allsites, imp_magnitude_all_apr, by.x="site_no", by.y="gauge", all.y=TRUE)
+allsites <- merge(allsites, full_dur_all_apr, by.x="site_no", by.y="gauge", all.y=TRUE)
 allsites <- allsites[order(allsites$avg, decreasing = TRUE),]
 row.names(allsites) <- allsites$site_no
 

@@ -42,12 +42,18 @@ function(input, output, session) {
   # })
   sitedata <- reactive({
 		if (input$metric == "magnitude") {
-	    subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype & allsites$period == input$period & allsites$valtype == "vol AF") }
+	    temp <- order(subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype 
+						                           & allsites$period == input$period & allsites$valtype == "vol AF") }
 		else if (input$metric == "duration") {
-	    subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype & allsites$period == input$period & allsites$valtype == "duration_days") }
+	    temp<- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype 
+						                           & allsites$period == input$period & allsites$valtype == "duration_days") }
 	  else {
-	    subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype & allsites$period == input$period & allsites$valtype == "intraannual_frequency_numpeaks") }
-	})
+	    temp<- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype 
+						                           & allsites$period == input$period & allsites$valtype == "intraannual_frequency_numpeaks") }
+	  temp <- temp[order(temp$avg, decreasing = TRUE),]
+		return(temp)
+		
+	  })
 	
   output$testplot <- renderPlot({
     # isolate site ID

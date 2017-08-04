@@ -106,7 +106,7 @@ function(input, output, session) {
 		
 	  else { 	
       colorlist <- c("black","yellow","darkorange","deeppink","darkviolet","navy")
-	    bounds <- c(0,1,4,8,12,16,20)
+	    bounds <- c(0,4,8,12,16,20)
 	    labs <- c("0", "1 - 4","4 - 8", "8 - 12", "12 - 16","16 - 20")
       legendTitle <- "No. 1-Day Peaks"
 	    sizes <- c(15,18,21,24,27,30) 
@@ -134,9 +134,9 @@ function(input, output, session) {
     leafletProxy("map", data = sitedata) %>%
       clearShapes() %>% 
       addCircles(~longitude, ~latitude, radius=rad, layerId=~site_no, stroke=TRUE, 
-                 weight = 1, color ="#000000", fillOpacity=1, fillColor=pal(classdata)) %>%
+                 weight = 1, color ="#000000", fillOpacity=0.9, fillColor=pal(classdata)) %>%
       addLegend("bottomleft", values=dom, colors=colorAdditions, title=legendTitle, layerId="colorLegend", 
-                opacity=1, labels=labelAdditions)
+                opacity=0.9, labels=labelAdditions)
   })
 
   # Show a popup at the given location

@@ -95,11 +95,11 @@ function(input, output, session) {
 	  }
   
     else if (input$metric == "duration") {
-	    colorlist <- c("black", "maroon", "magenta", "indigo", "royalblue", "turquoise")
+	    colorlist <- c("black", "maroon", "magenta", "darkslateblue", "royalblue", "turquoise")
 	    bounds <- c(0,1,10,20,40,60,80)
 	    labs <-	c("0","1 - 10","10 - 20","20 - 40","40 - 60", "60 - 80")
 	    legendTitle <- "Duration (HMF Days)"
-      sizes <- c(1,3,6,9,12,15) 
+      sizes <- c(15,18,21,24,27,30) 
 			scalar <- 10000/sitedata$avg[1]
 	    rad <- scalar*sitedata$avg + 3000
 	  }
@@ -109,7 +109,7 @@ function(input, output, session) {
 	    bounds <- c(0,1,4,8,12,16,20)
 	    labs <- c("0", "1 - 4","4 - 8", "8 - 12", "12 - 16","16 - 20")
       legendTitle <- "No. 1-Day Peaks"
-	    sizes <- c(1,3,6,9,12,15) 
+	    sizes <- c(15,18,21,24,27,30) 
 	    rad <- 3000
 	  }  
 

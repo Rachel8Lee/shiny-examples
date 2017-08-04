@@ -81,11 +81,8 @@ function(input, output, session) {
   # This observer is responsible for maintaining the circles and legend,
   # according to the variables the user has chosen to map to color and size.
   observe({
-		# 
-    if (length(input$sitetype) == 2) {
-		  sitedata <- sitedata
-		}
-		else {
+		# checkbox for site types
+    if (length(input$sitetype) == 1) {
 		  sitedata <- sitedata[which(sitedata$status == input$sitetype)]
 		}
 		

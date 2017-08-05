@@ -42,7 +42,7 @@ function(input, output, session) {
   # })
   sitedata <- reactive({
 		if (input$metric == "magnitude") {
-	    temp <- order(subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype 
+	    temp <- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype 
 						                           & allsites$period == input$period & allsites$valtype == "vol AF") }
 		else if (input$metric == "duration") {
 	    temp<- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype 

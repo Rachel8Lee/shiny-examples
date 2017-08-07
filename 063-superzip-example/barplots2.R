@@ -2,7 +2,7 @@
 # 
 # Author: tiffnk
 ###############################################################################
-gauge_select_plot <- function(gauges, full_rec=TRUE){
+gauge_select_plot <- function(gauges, full_rec=TRUE, gauge_data=gauge_data){
 	six.gauges = gauges
 # bundle data
 	blanks = data.frame(gauge = six.gauges, yeartype = " ", period = NA, avg = NA, 

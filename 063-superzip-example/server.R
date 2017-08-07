@@ -46,7 +46,6 @@ function(input, output, session) {
 						                           & allsites$period == input$period & allsites$valtype == "intraannual_frequency_numpeaks") }
 	  temp <- temp[order(temp$avg, decreasing = TRUE),]
 		return(temp)
-		
 	  })
 	
   output$testplot <- renderPlot({
@@ -91,7 +90,7 @@ function(input, output, session) {
   observe({
 		# checkbox for site types
     if (length(input$sitetype) == 1) {
-		  sitedata <- sitedata[which(sitedata[5] == input$sitetype),]
+		  sitedata <- sitedata()[which(sitedata()[5] == input$sitetype),]
 		}
 		
 	##add if statement for  metric variables

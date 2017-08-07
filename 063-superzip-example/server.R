@@ -36,6 +36,7 @@ function(input, output, session) {
     # isolate site ID
 	  gauge <- strsplit(input$site, " ")[[1]][2]
 	  gauge <- strsplit(gauge, ",")[[1]][1]
+		
     if (input$metric == "magnitude") {yvar <- "vol MAF"}
     else if (input$metric == "duration") {yvar <- "duration_days"}
     else {yvar <- "intraannual_frequency_nmpks"}
@@ -73,7 +74,7 @@ function(input, output, session) {
     else {yvar <- "intraannual_frequency_nmpks"}
     
 	  d2 <- gauge_select_plot(c(first_site, sec_site, third_site), full = TRUE)
- 	  my_barplot(d2, "yvar, monthly = TRUE, full = TRUE)
+ 	  my_barplot(d2, yvar, monthly = TRUE, full = TRUE)
  })
   
 

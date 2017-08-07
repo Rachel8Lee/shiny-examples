@@ -49,7 +49,10 @@ function(input, output, session) {
 	    temp<- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype 
 						                           & allsites$period == input$period & allsites$valtype == "intraannual_frequency_numpeaks") }
 	  temp <- temp[order(temp$avg, decreasing = TRUE),]
-		return(temp)
+	  if (length(input$sitetype) == 1) {
+		  temp <- temp[which(temp$status == input$sitetype),]
+          }
+	  return(temp)
 	  })
 	
   output$testplot <- renderPlot({
@@ -92,13 +95,7 @@ function(input, output, session) {
   # This observer is responsible for maintaining the circles and legend,
   # according to the variables the user has chosen to map to color and size.
   observe({
-		# checkbox for site types
-	  
-		if (length(input$sitetype) == 1) {
-		  dataset <- isolate({sitedata()})
-			usedata <- dataset[which(dataset[8] == input$sitetype),]
-		}
-		
+
 	##add if statement for  metric variables
     if (input$metric == "magnitude") {
 	    colorlist <-  c("black","orangered","khaki1","olivedrab1","chartreuse3","green4","aquamarine2","deepskyblue4","blue","royalblue4","navyblue")
@@ -107,7 +104,7 @@ function(input, output, session) {
 	    legendTitle <- "Magnitude (HMF Volume)"
 	    zoomsize <- input$map_zoom
       sizes <- c(1,3,6,9,12,15,18,21,24,27,30) 
-	    rad <- usedata$avg/120 + 3000
+	    rad <- sitedata()$avg/120 + 3000
 	  }
   
     else if (input$metric == "duration") {
@@ -116,7 +113,7 @@ function(input, output, session) {
 	    labs <- c("0","1 - 10","10 - 20","20 - 40","40 - 60", "60 - 80")
 	    legendTitle <- "Duration (HMF Days)"
       sizes <- c(15,18,21,24,27,30) 
-	    rad <- 150*usedata$avg + 3000
+	    rad <- 150*sitedata()$avg + 3000
 	  }
 		
 		else if (input$metric == "intraannual frequency") {
@@ -125,7 +122,7 @@ function(input, output, session) {
 	    labs <- c("0", "1 - 4","4 - 8", "8 - 12", "12 - 16","16 - 20")
       legendTitle <- "No. 1-Day Peaks"
 	    sizes <- c(15,18,21,24,27,30) 
-	    rad <- 300*usedata$avg + 3000
+	    rad <- 300*sitedata()$avg + 3000
 	  }
 		
 		# havent decided on inter freq and timing yet
@@ -142,7 +139,7 @@ function(input, output, session) {
     sizes <- sizes + (input$map_zoom - 6)
     dom <- seq(1,length(bounds),1)  
 	 
-    colorData <- usedata$avg
+    colorData <- sitedata()$avg
     classdata <- rep(NA,length(colorData))
     classdata[which(colorData == bounds[[1]])] <- 1
     classdata[which(colorData == "NA")] <- 1  
@@ -156,7 +153,7 @@ function(input, output, session) {
     colorAdditions <- paste0(colorlist, "; width:", sizes, "px; height:", sizes, "px")
     labelAdditions <- paste0("<div style='display: inline-block;height: ", sizes, "px;margin-top: 4px;line-height: ", sizes, "px;'>", labs, "</div>")
     	  
-    leafletProxy("map", data = usedata) %>%
+    leafletProxy("map", data = sitedata()) %>%
       clearShapes() %>% 
       addCircles(~longitude, ~latitude, radius=rad, layerId=~site_no, stroke=TRUE, 
                  weight = 1, color ="#000000", fillOpacity=0.9, fillColor=pal(classdata)) %>%
@@ -192,5 +189,5 @@ function(input, output, session) {
 
   ## Data Explorer ###########################################
   
-  output$downloadData <- downloadHandler(filename = "temp.csv", content = function(file) {write.csv(usedata, file)})  
+  output$downloadData <- downloadHandler(filename = "temp.csv", content = function(file) {write.csv(sitedata(), file)})  
 }

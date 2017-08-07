@@ -89,7 +89,10 @@ bodies <- dashboardBody(
 									                )
 									)
 									)
-                     )
+                     ),
+							fluidRow(column(12,
+          			dataTableOutput('table')
+                              ))),
               )
     ),
     tabItem(tabName= "dataexplorer",

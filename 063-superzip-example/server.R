@@ -95,7 +95,7 @@ function(input, output, session) {
 		# checkbox for site types
 	  
 		if (length(input$sitetype) == 1) {
-		  dataset <- sitedata()
+		  dataset <- isolate({sitedata()})
 			usedata <- dataset[which(dataset[8] == input$sitetype),]
 		}
 		

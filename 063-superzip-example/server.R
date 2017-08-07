@@ -39,7 +39,7 @@ function(input, output, session) {
 		
     if (input$metric == "magnitude") {yvar <- "vol MAF"}
     else if (input$metric == "duration") {yvar <- "duration_days"}
-    else {yvar <- "intraannual_frequency_nmpks"}
+    else {yvar <- "intraannual_frequency_numpeaks"}
     # full, nested monthly
     
 	  if (input$record == "full") {

@@ -101,8 +101,8 @@ function(input, output, session) {
 	    legendTitle <- "Magnitude (HMF Volume)"
 	    zoomsize <- input$map_zoom
       sizes <- c(1,3,6,9,12,15,18,21,24,27,30) 
-	    scalar <- 10000/sitedata$avg[1]
-	    rad <- scalar*sitedata$avg + 3000
+	    scalar <- 10000/sitedata()$avg[1]
+	    rad <- scalar*sitedata()$avg + 3000
 	  }
   
     else if (input$metric == "duration") {
@@ -111,8 +111,8 @@ function(input, output, session) {
 	    labs <- c("0","1 - 10","10 - 20","20 - 40","40 - 60", "60 - 80")
 	    legendTitle <- "Duration (HMF Days)"
       sizes <- c(15,18,21,24,27,30) 
-	    scalar <- 10000/sitedata$avg[1]
-	    rad <- scalar*sitedata$avg + 3000
+	    scalar <- 10000/sitedata()$avg[1]
+	    rad <- scalar*sitedata()$avg + 3000
 	  }
 		
 		else if (input$metric == "intraannual frequency") {
@@ -121,8 +121,8 @@ function(input, output, session) {
 	    labs <- c("0", "1 - 4","4 - 8", "8 - 12", "12 - 16","16 - 20")
       legendTitle <- "No. 1-Day Peaks"
 	    sizes <- c(15,18,21,24,27,30) 
-	    scalar <- 10000/sitedata$avg[1]
-	    rad <- scalar*sitedata$avg + 3000
+	    scalar <- 10000/sitedata()$avg[1]
+	    rad <- scalar*sitedata()$avg + 3000
 	  }
 		
 		# havent decided on inter freq and timing yet
@@ -139,7 +139,7 @@ function(input, output, session) {
     sizes <- sizes + (input$map_zoom - 6)
     dom <- seq(1,length(bounds),1)  
 	 
-    colorData <- sitedata$avg
+    colorData <- sitedata()$avg
     classdata <- rep(NA,length(colorData))
     classdata[which(colorData == bounds[[1]])] <- 1
     classdata[which(colorData == "NA")] <- 1  

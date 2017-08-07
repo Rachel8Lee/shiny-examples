@@ -6,7 +6,9 @@ library(dplyr)
 library(gplots)
 source("barplots2.R")
 
-sitedata <- allsites
+sitedata <- subset(allsites, allsites$tag == "full" & allsites$yeartype == "all" 
+						                           & allsites$period == "April" & allsites$valtype == "vol AF") 
+sitedata <- sitedata[order(sitedata$avg, decreasing = TRUE),]
 
 function(input, output, session) {
 ## Interactive Map ###########################################
@@ -34,7 +36,7 @@ function(input, output, session) {
     # latitude >= latRng[1] & latitude <= latRng[2] &
     # longitude >= lngRng[1] & longitude <= lngRng[2])
   # })
-  sitedata <- reactive({
+  trydata <- reactive({
 		if (input$metric == "magnitude") {
 	    temp <- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype 
 						                           & allsites$period == input$period & allsites$valtype == "vol AF") }
@@ -90,7 +92,7 @@ function(input, output, session) {
   observe({
 		# checkbox for site types
     if (length(input$sitetype) == 1) {
-		  sitedata <- sitedata()[which(sitedata()[5] == input$sitetype),]
+		  sitedata <- sitedata[which(sitedata[5] == input$sitetype),]
 		}
 		
 	##add if statement for  metric variables
@@ -101,8 +103,8 @@ function(input, output, session) {
 	    legendTitle <- "Magnitude (HMF Volume)"
 	    zoomsize <- input$map_zoom
       sizes <- c(1,3,6,9,12,15,18,21,24,27,30) 
-	    scalar <- 10000/sitedata()$avg[1]
-	    rad <- scalar*sitedata()$avg + 3000
+	    scalar <- 10000/sitedata$avg[1]
+	    rad <- scalar*sitedata$avg + 3000
 	  }
   
     else if (input$metric == "duration") {
@@ -111,8 +113,8 @@ function(input, output, session) {
 	    labs <- c("0","1 - 10","10 - 20","20 - 40","40 - 60", "60 - 80")
 	    legendTitle <- "Duration (HMF Days)"
       sizes <- c(15,18,21,24,27,30) 
-	    scalar <- 10000/sitedata()$avg[1]
-	    rad <- scalar*sitedata()$avg + 3000
+	    scalar <- 10000/sitedata$avg[1]
+	    rad <- scalar*sitedata$avg + 3000
 	  }
 		
 		else if (input$metric == "intraannual frequency") {
@@ -121,8 +123,8 @@ function(input, output, session) {
 	    labs <- c("0", "1 - 4","4 - 8", "8 - 12", "12 - 16","16 - 20")
       legendTitle <- "No. 1-Day Peaks"
 	    sizes <- c(15,18,21,24,27,30) 
-	    scalar <- 10000/sitedata()$avg[1]
-	    rad <- scalar*sitedata()$avg + 3000
+	    scalar <- 10000/sitedata$avg[1]
+	    rad <- scalar*sitedata$avg + 3000
 	  }
 		
 		# havent decided on inter freq and timing yet
@@ -139,7 +141,7 @@ function(input, output, session) {
     sizes <- sizes + (input$map_zoom - 6)
     dom <- seq(1,length(bounds),1)  
 	 
-    colorData <- sitedata()$avg
+    colorData <- sitedata$avg
     classdata <- rep(NA,length(colorData))
     classdata[which(colorData == bounds[[1]])] <- 1
     classdata[which(colorData == "NA")] <- 1  

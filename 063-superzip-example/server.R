@@ -91,9 +91,6 @@ function(input, output, session) {
   # according to the variables the user has chosen to map to color and size.
   observe({
 		# checkbox for site types
-    if (length(input$sitetype) == 1) {
-		  sitedata <- sitedata[which(sitedata[8] == input$sitetype),]
-		}
 		
 	##add if statement for  metric variables
     if (input$metric == "magnitude") {
@@ -137,6 +134,10 @@ function(input, output, session) {
 	    rad <- 4000
 	  }  
 
+		if (length(input$sitetype) == 1) {
+		  sitedata <- sitedata[which(sitedata[8] == input$sitetype),]
+		}
+		
 	  # size for legend icons
     sizes <- sizes + (input$map_zoom - 6)
     dom <- seq(1,length(bounds),1)  

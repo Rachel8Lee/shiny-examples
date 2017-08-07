@@ -6,14 +6,9 @@ library(dplyr)
 library(gplots)
 source("barplots2.R")
 
-#sitedata <- subset(allsites, allsites$tag == "full" & allsites$yeartype == "all" 
-						                          # & allsites$period == "April" & allsites$valtype == "vol AF") 
-#sitedata <- sitedata[order(sitedata$avg, decreasing = TRUE),]
-
 function(input, output, session) {
 ## Interactive Map ###########################################
 # Create the map
-
   output$map <- renderLeaflet({
     leaflet() %>%
       addTiles(
@@ -23,59 +18,45 @@ function(input, output, session) {
       setView(lng = -120.51, lat = 38.06, zoom = 6)
   })
  
-  # A reactive expression that returns the set of zips that are
-  # in bounds right now
-  # siteInBounds <- reactive({
-   # if (is.null(input$map_bounds))
-    # return(sitedata[FALSE,])
-    # bounds <- input$map_bounds
-    # latRng <- range(bounds$north, bounds$south)
-    # lngRng <- range(bounds$east, bounds$west)
-    
-    # subset(sitedata,
-    # latitude >= latRng[1] & latitude <= latRng[2] &
-    # longitude >= lngRng[1] & longitude <= lngRng[2])
-  # })
-  
-      #output$table <- renderTable({
-    sitedata <- reactive({	      
-		if (input$metric == "magnitude") {
-	    temp <- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype 
-						                           & allsites$period == input$period & allsites$valtype == "vol AF") }
+ # reactive data set 
+  sitedata <- reactive({	      
+	  if (input$metric == "magnitude") {
+	    temp <- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype & allsites$period == input$period & allsites$valtype == "vol AF") }
 		else if (input$metric == "duration") {
-	    temp<- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype 
-						                           & allsites$period == input$period & allsites$valtype == "duration_days") }
+	    temp<- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype & allsites$period == input$period & allsites$valtype == "duration_days") }
 	  else {
-	    temp<- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype 
-						                           & allsites$period == input$period & allsites$valtype == "intraannual_frequency_numpeaks") }
+	    temp<- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype & allsites$period == input$period & allsites$valtype == "intraannual_frequency_numpeaks") }
 	  temp <- temp[order(temp$avg, decreasing = TRUE),]
 	  if (length(input$sitetype) == 1) {
-		  temp <- temp[which(temp$status == input$sitetype),]
-          }
+		  temp <- temp[which(temp$status == input$sitetype),]}
 	  return(temp)
-	  })
+	})
 	
   output$testplot <- renderPlot({
     # isolate site ID
 	  gauge <- strsplit(input$site, " ")[[1]][2]
 	  gauge <- strsplit(gauge, ",")[[1]][1]
+    if (input$metric == "magnitude") {yvar <- "vol MAF"}
+    else if (input$metric == "duration") {yvar <- "duration_days"}
+    else {yvar <- "intraannual_frequency_nmpks"}
     # full, nested monthly
+    
 	  if (input$record == "full") {
 	    d <- gauge_select_plot(gauge, full = TRUE) 
       if (input$period == "January" |  input$period == "February" | 
 		      input$period == "March" | input$period == "April" | input$period == "November" | input$period == "December") {
-		      my_barplot(d, "vol MAF", monthly = TRUE, full = TRUE) }
+		      my_barplot(d, yvar, monthly = TRUE, full = TRUE) }
       else {
-		    my_barplot(d, "vol MAF", monthly = FALSE, full = TRUE) }
+		    my_barplot(d, yvar, monthly = FALSE, full = TRUE) }
 	  } 
     # post-impairment
 	  else {
 	    d <- gauge_select_plot(gauge, full = FALSE) 
       if (input$period == "January" |  input$period == "February" | 
 		      input$period == "March" | input$period == "April" | input$period == "November" | input$period == "December") {
-		      my_barplot(d, "vol MAF", monthly = TRUE, full = FALSE) }
+		      my_barplot(d, yvar, monthly = TRUE, full = FALSE) }
       else {
-		    my_barplot(d, "vol MAF", monthly = FALSE, full = FALSE) }
+		    my_barplot(d, yvar, monthly = FALSE, full = FALSE) }
 	  }
   })
 	
@@ -87,8 +68,12 @@ function(input, output, session) {
 		third_site <- strsplit(input$site3, " ")[[1]][2]
 		third_site <- strsplit(third_site, ",")[[1]][1]
     
+    if (input$metric == "magnitude") {yvar <- "vol MAF"}
+    else if (input$metric == "duration") {yvar <- "duration_days"}
+    else {yvar <- "intraannual_frequency_nmpks"}
+    
 	  d2 <- gauge_select_plot(c(first_site, sec_site, third_site), full = TRUE)
- 	  my_barplot(d2, "vol MAF", monthly = TRUE, full = TRUE)
+ 	  my_barplot(d2, "yvar, monthly = TRUE, full = TRUE)
  })
   
 

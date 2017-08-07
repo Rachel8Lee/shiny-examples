@@ -17,6 +17,8 @@ year_type <- c("All" = "all", "Above Normal" = "AN", "Below Normal" = "BN", "Cri
 
 sites <- paste("USGS ", gauge_data$site_no, ", ", gauge_data$station_nm, sep="")
 
+siteblank <- c(sites, " ")
+
 #header
 header <- dashboardHeader(titleWidth=150, title = "Menu")
 

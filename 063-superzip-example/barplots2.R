@@ -33,7 +33,7 @@ gauge_select_plot <- function(gauges, full_rec=TRUE){
 	alldat$ymax <- alldat$avg + alldat$sd
 	##add station name
 	stationname <- gauge_data
-	stationname <- data.frame(site=stationname$site_no, station_name=stationname$station_nm)
+	#stationname <- data.frame(site=stationname$site_no, station_name=stationname$station_nm)
 	alldat <- merge(alldat,stationname,by.x="gauge",by.y="site")
 	
 	if(full_rec==TRUE){

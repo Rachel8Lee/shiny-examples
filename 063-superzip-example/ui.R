@@ -15,7 +15,7 @@ period <- c("January"= "January", "February" = "February", "March" = "March", "A
 
 year_type <- c("All" = "all", "Above Normal" = "AN", "Below Normal" = "BN", "Critical" = "C", "Dry" = "D", "Wet" = "W")
 
-sites <- paste("USGS ", allsites$site_no, ", ", allsites$station_nm, sep="")
+sites <- paste("USGS ", sitedata$site_no, ", ", sitedata$station_nm, sep="")
 
 #header
 header <- dashboardHeader(titleWidth=150, title = "Menu")

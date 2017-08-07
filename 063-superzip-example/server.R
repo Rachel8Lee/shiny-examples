@@ -104,7 +104,7 @@ function(input, output, session) {
 	    legendTitle <- "Magnitude (HMF Volume)"
 	    zoomsize <- input$map_zoom
       sizes <- c(1,3,6,9,12,15,18,21,24,27,30) 
-	    rad <- sitedata$avg/300 + 3000
+	    rad <- sitedata$avg/120 + 3000
 	  }
   
     else if (input$metric == "duration") {
@@ -113,7 +113,7 @@ function(input, output, session) {
 	    labs <- c("0","1 - 10","10 - 20","20 - 40","40 - 60", "60 - 80")
 	    legendTitle <- "Duration (HMF Days)"
       sizes <- c(15,18,21,24,27,30) 
-	    rad <- 1500*sitedata$avg + 3000
+	    rad <- 150*sitedata$avg + 3000
 	  }
 		
 		else if (input$metric == "intraannual frequency") {
@@ -122,7 +122,7 @@ function(input, output, session) {
 	    labs <- c("0", "1 - 4","4 - 8", "8 - 12", "12 - 16","16 - 20")
       legendTitle <- "No. 1-Day Peaks"
 	    sizes <- c(15,18,21,24,27,30) 
-	    rad <- 5000*sitedata$avg + 3000
+	    rad <- 300*sitedata$avg + 3000
 	  }
 		
 		# havent decided on inter freq and timing yet

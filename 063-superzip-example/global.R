@@ -46,12 +46,12 @@ imp.dur.frame[is.na(imp.dur.frame)] <- 0
 imp.nmpks.frame<- redo_imp_nmpks
 imp.nmpks.frame[is.na(imp.nmpks.frame)] <- 0 
 
-full <- rbind.data.frame(dur.frame, vol.frame, nmpks.frame)
-full["tag"] <- "full" 
-post <- rbind.data.frame(imp.dur.frame, imp.vol.frame, imp.nmpks.frame)
-post["tag"] <- "post-impairment"
-alldat <- rbind.data.frame(full, post)
-allsites <- merge(alldat, gauge_location, by.x = "gauge", by.y = "site_no", all.x = TRUE)
+fullG <- rbind.data.frame(dur.frame, vol.frame, nmpks.frame)
+fullG["tag"] <- "full" 
+postG <- rbind.data.frame(imp.dur.frame, imp.vol.frame, imp.nmpks.frame)
+postG["tag"] <- "post-impairment"
+alldatG <- rbind.data.frame(fullG, postG)
+allsites <- merge(alldatG, gauge_location, by.x = "gauge", by.y = "site_no", all.x = TRUE)
 colnames(allsites)[1] <- "site_no"
 colnames(allsites)[12] <- "latitude"
 colnames(allsites)[13] <- "longitude"

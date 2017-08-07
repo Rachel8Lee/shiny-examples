@@ -101,8 +101,8 @@ bodies <- dashboardBody(
                                 selectInput("metric", "Metric", metric),
                                 selectInput("period","Time Period", period),
                                 selectInput("site1","Site", sites),
-                                selectInput("site2","Site", sites),
-                                selectInput("site3","Site", sites)
+                                selectInput("site2","Site", siteblank),
+                                selectInput("site3","Site", siteblank)
                             )
             ),
 										 

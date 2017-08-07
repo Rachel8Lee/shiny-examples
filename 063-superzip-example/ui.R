@@ -88,12 +88,12 @@ bodies <- dashboardBody(
 									                    plotOutput("testplot")
 									                )
 									)
-									)
+									#)
                      ),
 							fluidRow(column(12,
           			dataTableOutput('table')
-                              )),
-              )
+                              ))
+              #)
     ),
     tabItem(tabName= "dataexplorer",
             fluidRow(column(width=4,

@@ -37,7 +37,8 @@ function(input, output, session) {
     # longitude >= lngRng[1] & longitude <= lngRng[2])
   # })
   
-      output$table <- renderTable({
+      #output$table <- renderTable({
+       trydata <- reactive({	      
 		if (input$metric == "magnitude") {
 	    temp <- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype 
 						                           & allsites$period == input$period & allsites$valtype == "vol AF") }

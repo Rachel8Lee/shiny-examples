@@ -91,7 +91,7 @@ bodies <- dashboardBody(
 									#)
                      ),
 							fluidRow(column(12,
-          			dataTableOutput('table')
+          			tableOutput('table')
                               ))
               #)
     ),

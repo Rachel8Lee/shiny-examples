@@ -3,7 +3,7 @@
 # Author: tiffnk
 ###############################################################################
 gauge_select_plot <- function(gauges, full_rec=TRUE){
-	six.gauges = gauges
+	six.gauges = gauges[which(gauges != " ")]
 # bundle data
 	blanks = data.frame(gauge = six.gauges, yeartype = " ", period = NA, avg = NA, 
 			sd = NA, valtype = NA, basin=NA, status=NA)

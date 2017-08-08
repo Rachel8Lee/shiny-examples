@@ -17,7 +17,7 @@ year_type <- c("All" = "all", "Above Normal" = "AN", "Below Normal" = "BN", "Cri
 
 sites <- paste("USGS ", gauge_data$site_no, ", ", gauge_data$station_nm, sep="")
 
-siteblank <- c(sites, " ")
+siteblank <- c(" ", sites)
 
 #header
 header <- dashboardHeader(titleWidth=150, title = "Menu")
@@ -101,8 +101,8 @@ bodies <- dashboardBody(
                                 selectInput("metric", "Metric", metric),
                                 selectInput("period","Time Period", period),
                                 selectInput("site1","Site", sites),
-                                selectInput("site2","Site", siteblank, selected = NULL),
-                                selectInput("site3","Site", siteblank, selected = NULL)
+                                selectInput("site2","Site", siteblank, selected = " "),
+                                selectInput("site3","Site", siteblank, selected = " ")
                             )
             ),
 										 

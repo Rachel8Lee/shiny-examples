@@ -6,7 +6,7 @@ record_length <- c("Full" = "full", "Post-Impairment" = "post-impairment")
 
 site_type <- c("Impaired" = "impaired", "Unimpaired" = "unimpaired")
 
-metric <- c("Magnitude" = "magnitude", "Duration" = "duration", "Inter-Annual Frequency" = "interaanual frequency", 
+metric <- c("Magnitude" = "magnitude", "Duration" = "duration", "Inter-Annual Frequency" = "interannual frequency", 
 					"Intra-Annual Frequency" = "intraannual frequency", "Timing" = "timing")
  
 period <- c("January"= "January", "February" = "February", "March" = "March", "April" = "April", 

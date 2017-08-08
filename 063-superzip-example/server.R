@@ -36,28 +36,25 @@ function(input, output, session) {
     # isolate site ID
 	  gauge <- strsplit(input$site, " ")[[1]][2]
 	  gauge <- strsplit(gauge, ",")[[1]][1]
-		
+		# for monthly var in plot
     if (input$metric == "magnitude") {yvar <- "vol MAF"}
     else if (input$metric == "duration") {yvar <- "duration_days"}
     else {yvar <- "intraannual_frequency_numpeaks"}
-    # full, nested monthly
-    
+    # full
 	  if (input$record == "full") {
 	    d <- gauge_select_plot(gauge, full = TRUE) 
-      if (input$period == "January" |  input$period == "February" | 
-		      input$period == "March" | input$period == "April" | input$period == "November" | input$period == "December") {
-		      my_barplot(d, yvar, monthly = TRUE, full = TRUE) }
+      if (input$period == "Hydrologic Year" |  input$period == "December to February" | input$period == "November to April") {
+		      my_barplot(d, yvar, monthly = FALSE, full = TRUE) }
       else {
-		    my_barplot(d, yvar, monthly = FALSE, full = TRUE) }
+		    my_barplot(d, yvar, monthly = TRUE, full = TRUE) }
 	  } 
     # post-impairment
 	  else {
 	    d <- gauge_select_plot(gauge, full = FALSE) 
-      if (input$period == "January" |  input$period == "February" | 
-		      input$period == "March" | input$period == "April" | input$period == "November" | input$period == "December") {
-		      my_barplot(d, yvar, monthly = TRUE, full = FALSE) }
+      if (input$period == "Hydrologic Year" |  input$period == "December to February" | input$period == "November to April") {
+		      my_barplot(d, yvar, monthly = FALSE, full = FALSE) }
       else {
-		    my_barplot(d, yvar, monthly = FALSE, full = FALSE) }
+		    my_barplot(d, yvar, monthly = TRUE, full = FALSE) }
 	  }
   })
 	
@@ -77,7 +74,6 @@ function(input, output, session) {
  	  my_barplot(d2, yvar, monthly = TRUE, full = TRUE)
  })
   
-
   # This observer is responsible for maintaining the circles and legend,
   # according to the variables the user has chosen to map to color and size.
   observe({
@@ -89,25 +85,25 @@ function(input, output, session) {
 	    labs <-  c("0","1 AF - 1 TAF","1TAF - 10TAF","10TAF- 50TAF","50TAF - 125TAF","125TAF - 200TAF","200TAF - 400TAF","400TAF - 800TAF","800TAF - 1.5MAF","1.5MAF - 2.5MAF","2.5MAF - 3.5MAF")
 	    legendTitle <- "Magnitude (HMF Volume)"
 	    zoomsize <- input$map_zoom
-      sizes <- c(1,3,6,9,12,15,18,21,24,27,30) 
+      sizes <- c(3,5,7,9,12,15,18,21,24,27,30) 
 	    rad <- sitedata()$avg/120 + 3000
 	  }
   
     else if (input$metric == "duration") {
 	    colorlist <- c("black","maroon","magenta","darkslateblue","royalblue","turquoise")
-	    bounds <- c(0,10,20,40,60,80)
-	    labs <- c("0","1 - 10","10 - 20","20 - 40","40 - 60", "60 - 80")
+	    bounds <- c(0,27,52,77,102,130)
+	    labs <- c("0","1 - 27","28 - 52","53 - 77","78 - 102", "103 - 130")
 	    legendTitle <- "Duration (HMF Days)"
-      sizes <- c(15,18,21,24,27,30) 
+      sizes <- c(12,14,16,18,20,22) 
 	    rad <- 150*sitedata()$avg + 3000
 	  }
 		
 		else if (input$metric == "intraannual frequency") {
 	    colorlist <- c("black","yellow","darkorange","deeppink","darkviolet","navy")
-	    bounds <- c(0,4,8,12,16,20)
-	    labs <- c("0", "1 - 4","4 - 8", "8 - 12", "12 - 16","16 - 20")
+	    bounds <- c(0,5,11,17,23,27)
+	    labs <- c("0", "1 - 5","6 - 11", "12 - 17", "18 - 23","23 - 27")
       legendTitle <- "No. 1-Day Peaks"
-	    sizes <- c(15,18,21,24,27,30) 
+	    sizes <- c(12,14,16,18,20,22) 
 	    rad <- 300*sitedata()$avg + 3000
 	  }
 		

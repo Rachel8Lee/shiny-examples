@@ -77,8 +77,6 @@ function(input, output, session) {
   # This observer is responsible for maintaining the circles and legend,
   # according to the variables the user has chosen to map to color and size.
   observe({
-
-	##add if statement for  metric variables
     if (input$metric == "magnitude") {
 	    colorlist <-  c("black","orangered","khaki1","olivedrab1","chartreuse3","green4","aquamarine2","deepskyblue4","blue","royalblue4","navyblue")
 	    bounds <- c(0,1000,10000,50000,125000,200000,400000,800000,1500000,2500000,3500000)
@@ -107,7 +105,16 @@ function(input, output, session) {
 	    rad <- 300*sitedata()$avg + 3000
 	  }
 		
-		# havent decided on inter freq and timing yet
+    else if (input$metric == "interannual frequency"){
+      colorlist <- c("black", "aquamarine", "darkturquoise", "steelblue", "mediumblue", "navy")
+      bounds <- c(0,20,40,60,80,100)
+      labs <- c("0%", "1 - 20%", "20- 40%", "40 - 60%", "60 - 80%", "80 - 100%")
+      legendTitle <- "% of Years with HMF"
+      sizes <- c(12,14,16,18,20,22)
+      rad <- 300*sitedata()$avg + 3000
+    }
+    
+		# timing 
 	  else { 	
       colorlist <- c("black","yellow","darkorange","deeppink","darkviolet","navy")
 	    bounds <- c(0,4,8,12,16,20)

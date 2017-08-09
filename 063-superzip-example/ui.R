@@ -1,6 +1,3 @@
-library(leaflet)
-library(shinydashboard)
-
 # Choices for drop-downs
 record_length <- c("Full" = "full", "Post-Impairment" = "post-impairment")	
 

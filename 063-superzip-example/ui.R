@@ -94,9 +94,9 @@ bodies <- dashboardBody(
     tabItem(tabName= "dataexplorer",
             fluidRow(column(width=4,
                             box(id="selectbox3",width=NULL, #collapsible=TRUE,
-                                selectInput("record","Record Length", record_length),
-                                selectInput("metric", "Metric", metric),
-                                selectInput("period","Time Period", period),
+                                selectInput("recordDE","Record Length", record_length),
+                                selectInput("metricDE", "Metric", metric),
+                                selectInput("periodDE","Time Period", period),
                                 selectInput("site1","Site", sites),
                                 selectInput("site2","Site", siteblank, selected = " "),
                                 selectInput("site3","Site", siteblank, selected = " ")

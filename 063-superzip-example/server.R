@@ -19,6 +19,12 @@ function(input, output, session) {
       setView(lng = -120.51, lat = 38.06, zoom = 6)
   })
  
+ observe <- ({
+   if (input$metric == "timing"){
+     updateSelectInput(session, "period", label = NULL, choices = NULL)
+   }
+ })	
+	
  # reactive data set 
   sitedata <- reactive({	      
 	  if (input$metric == "magnitude") {

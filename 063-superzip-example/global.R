@@ -1,5 +1,9 @@
 library(dplyr)
 
+sites <- paste("USGS ", gauge_data$site_no, ", ", gauge_data$station_nm, sep="")
+siteblank <- c(" ", sites)
+includeallsites <- c("All Sites", sites)
+
 # read in site #, name, location
 gauge_location <- read.csv("data/gauge_locations.csv")
 gauge_location <- gauge_location[,2:length(gauge_location)]

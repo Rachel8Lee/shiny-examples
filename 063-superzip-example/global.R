@@ -1,5 +1,3 @@
-library(dplyr)
-
 sites <- paste("USGS ", gauge_data$site_no, ", ", gauge_data$station_nm, sep="")
 siteblank <- c(" ", sites)
 includeallsites <- c("All Sites", sites)

@@ -21,7 +21,8 @@ function(input, output, session) {
  
  observe({
    if (input$metric == "timing"){
-     updateSelectInput(session, "period", label = NULL, choices = NULL)
+	   updateSelectInput(session, "site", label = "Site Selection", includeallsites)
+     updateSelectInput(session, "period", label = "No Time Period", choices = c(""))
    }
  })	
 	

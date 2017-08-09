@@ -5,6 +5,7 @@ library(lattice)
 library(dplyr)
 library(gplots)
 source("barplots2.R")
+source("intERplotscode.R")
 
 function(input, output, session) {
 ## Interactive Map ###########################################

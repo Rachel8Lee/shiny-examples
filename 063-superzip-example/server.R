@@ -76,13 +76,16 @@ function(input, output, session) {
 		sec_site <- strsplit(sec_site, ",")[[1]][1]
 		third_site <- strsplit(input$site3, " ")[[1]][2]
 		third_site <- strsplit(third_site, ",")[[1]][1]
-    
-    if (input$metric == "magnitude") {yvar <- "vol MAF"}
-    else if (input$metric == "duration") {yvar <- "duration_days"}
-    else {yvar <- "intraannual_frequency_nmpks"}
-    
-	  d2 <- gauge_select_plot(c(first_site, sec_site, third_site), full = TRUE)
- 	  my_barplot(d2, yvar, monthly = TRUE, full = TRUE)
+		full_boolDE <- (input$recordDE == "full")
+    monthly_boolDE <- !(input$periodDE == "November to April" | input$periodDE == "December to February" | input$periodDE == "Hydrologic Year")
+    if (input$metricDE == "interannual frequency"){interplot(gauges=c(first_site, sec_site, third_site), monthly = monthly_bool, full = full_bool)})
+		else{
+      if (input$metricDE == "magnitude") {yvar <- "vol MAF"}
+      else if (input$metricDE == "duration") {yvar <- "duration_days"}
+      else {yvar <- "intraannual_frequency_nmpks"}		
+	    d2 <- gauge_select_plot(c(first_site, sec_site, third_site), full = full_boolDE)
+ 	    my_barplot(d2, yvar, monthly = monthly_boolDE, full = full_boolDE)
+	  }
  })
   
   # This observer is responsible for maintaining the circles and legend,

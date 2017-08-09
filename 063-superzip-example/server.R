@@ -37,26 +37,16 @@ function(input, output, session) {
     # isolate site ID
 	  gauge <- strsplit(input$site, " ")[[1]][2]
 	  gauge <- strsplit(gauge, ",")[[1]][1]
-		# for monthly var in plot
-    if (input$metric == "magnitude") {yvar <- "vol MAF"}
-    else if (input$metric == "duration") {yvar <- "duration_days"}
-    else {yvar <- "intraannual_frequency_numpeaks"}
-    # full
-	  if (input$record == "full") {
-	    d <- gauge_select_plot(gauge, full = TRUE) 
-      if (input$period == "Hydrologic Year" |  input$period == "December to February" | input$period == "November to April") {
-		      my_barplot(d, yvar, monthly = FALSE, full = TRUE) }
-      else {
-		    my_barplot(d, yvar, monthly = TRUE, full = TRUE) }
-	  } 
-    # post-impairment
-	  else {
-	    d <- gauge_select_plot(gauge, full = FALSE) 
-      if (input$period == "Hydrologic Year" |  input$period == "December to February" | input$period == "November to April") {
-		      my_barplot(d, yvar, monthly = FALSE, full = FALSE) }
-      else {
-		    my_barplot(d, yvar, monthly = TRUE, full = FALSE) }
-	  }
+		full_bool <- (input$record == "full")
+    monthly_bool <- !(input$period == "November to April" | input$period == "December to February" | input$period == "Hydrologic Year")
+    if (input$metric == "interannual frequency"){interplot(gauges=gauge, monthly = monthly_bool, full = full_bool)}
+    else {
+      if (input$metric == "magnitude") {yvar <- "vol MAF"}
+      else if (input$metric == "duration") {yvar <- "duration_days"}
+      else {yvar <- "intraannual_frequency_numpeaks"}
+	    d <- gauge_select_plot(gauge, full = full_bool) 
+      my_barplot(d, yvar, monthly = monthly_bool, full = full_bool) 
+    }
   })
 	
 	output$testplot2 <- renderPlot({

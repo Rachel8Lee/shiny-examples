@@ -7,11 +7,11 @@
 
 #### add to global #####
 ###adjust file path
-fracywf.full <- read.csv("simp_data_full_vol_90_intERannual_frequency.csv")
+fracywf.full <- read.csv("data/simp_data_full_vol_90_intERannual_frequency.csv")
 fracywf.full[is.na(fracywf.full)] <- 0
 fracywf.full$X <- NULL
 fracywf.full <-  merge(fracywf.full, gauge_data, by.x="gauge", by.y="site_no", all.x=TRUE)
-fracywf.imp <- read.csv("simp_data_imp_vol_90_intERannual_frequency.csv")
+fracywf.imp <- read.csv("data/simp_data_imp_vol_90_intERannual_frequency.csv")
 fracywf.imp[is.na(fracywf.imp)] <- 0
 fracywf.imp <-  merge(fracywf.imp, gauge_data, by.x="gauge", by.y="site_no", all.x=TRUE)
 fracywf.imp$X <- NULL

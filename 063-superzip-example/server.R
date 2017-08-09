@@ -27,7 +27,17 @@ function(input, output, session) {
 	   updateSelectInput(session, "site", label = "Site Selection", includeallsites)
      updateSelectInput(session, "period", label = "No Time Period", choices = c(""))
    }
+ })
+
+ observe({
+   if (input$metricDE == "timing"){
+	   updateSelectInput(session, "site1", label = "Site", includeallsites)
+	   updateSelectInput(session, "site2", label = "Site", includeallsites, selected = " ")
+	   updateSelectInput(session, "site3", label = "Site", includeallsites , selected = " ")
+     updateSelectInput(session, "periodDE", label = "No Time Period", choices = c(""))
+   }
  })	
+	
 	
  # reactive data set 
   sitedata <- reactive({	      

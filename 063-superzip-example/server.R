@@ -19,7 +19,7 @@ function(input, output, session) {
       setView(lng = -120.51, lat = 38.06, zoom = 6)
   })
  
- observe <- ({
+ observe({
    if (input$metric == "timing"){
      updateSelectInput(session=session, inputId = "period", label = NULL, choices = NULL)
    }

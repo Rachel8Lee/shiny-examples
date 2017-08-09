@@ -122,7 +122,4 @@ interplot <- function(gauges, monthly=TRUE, full=TRUE){
 	return(p)
 }
 
-###runs plot code
-gauges <- c("11447650")
-p <- interplot(gauges=gauges, monthly=TRUE, full=TRUE)
 

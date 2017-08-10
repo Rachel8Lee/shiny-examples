@@ -22,12 +22,12 @@ function(input, output, session) {
       setView(lng = -120.51, lat = 38.06, zoom = 6)
   })
  
- observe({
-   if (input$metric == "timing"){
-	   updateSelectInput(session, "site", label = "Site Selection", includeallsites)
-     updateSelectInput(session, "period", label = "No Time Period", choices = c(""))
-   }
- })
+# observe({
+ #  if (input$metric == "timing"){
+#	   updateSelectInput(session, "site", label = "Site Selection", includeallsites)
+ #    updateSelectInput(session, "period", label = "No Time Period", choices = c(""))
+  # }
+# })
 
  observe({
    if (input$metricDE == "timing"){

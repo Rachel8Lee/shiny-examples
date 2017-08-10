@@ -106,7 +106,7 @@ bodies <- dashboardBody(
                                 selectInput("site2","Site", siteblank, selected = " "),
                                 selectInput("site3","Site", siteblank, selected = " ")),
 																conditionalPanel("input.metricDE == 'timing'",
-                                selectInput("site1","Site", allsitesincluded),
+                                selectInput("site1","Site", includeallsites),
                                 selectInput("site2","Site", siteblank, selected = " "),
                                 selectInput("site3","Site", siteblank, selected = " "))
                             )

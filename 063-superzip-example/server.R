@@ -63,8 +63,8 @@ function(input, output, session) {
     monthly_bool <- !(input$period == "November to April" | input$period == "December to February" | input$period == "Hydrologic Year")
     if (input$metric == "interannual frequency"){interplot(gauges=gauge, monthly = monthly_bool, full = full_bool)}
 		else if (input$metric == "timing") {
-			if (input$site == "All Sites"){timingplot(c(), full = full_bool, all = TRUE)}
-			else {timingplot(gauge, full = full_bool, all = TRUE)}
+			if (gauge == "Sites"){timingplot(c(), full = full_bool, all = TRUE)}
+			else {timingplot(gauge, full = full_bool, all = FALSE)}
 		}
     else {
       if (input$metric == "magnitude") {yvar <- "vol MAF"}

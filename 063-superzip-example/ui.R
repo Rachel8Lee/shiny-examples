@@ -63,10 +63,13 @@ bodies <- dashboardBody(
 										
 									),
 									column(width=4,
-											box(id="selectbox",width=NULL, #collapsible=TRUE,
+											conditionalPanel("input.metric != 'timing'",
 													selectInput("period","Time Period", period),
 													selectInput("yeartype", "Year Type", year_type)
-											)
+											),
+											conditionalPanel("input.metric == 'timing'",
+													selectInput("yeartype", "Year Type", year_type)
+											)	 
 									
 									),
 									column(width=4,

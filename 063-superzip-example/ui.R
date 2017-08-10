@@ -111,7 +111,7 @@ bodies <- dashboardBody(
                                 selectInput("periodDE","Time Period", period)),
                                 selectInput("site1","Site", sites),
                                 selectInput("site2","Site", siteblank, selected = " "),
-                                selectInput("site3","Site", siteblank, selected = " "))))
+                                selectInput("site3","Site", siteblank, selected = " ")))
 
 						),
 						fluidRow(				 

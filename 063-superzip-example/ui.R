@@ -104,8 +104,16 @@ bodies <- dashboardBody(
             fluidRow(column(width=6,
                             box(id="selectbox3",width=NULL, #collapsible=TRUE,
                                 selectInput("recordDE","Record Length", record_length),
-                                selectInput("metricDE", "Metric", metric)))
-            ),
+                                selectInput("metricDE", "Metric", metric))),
+									  column(width=6,
+                            box(id="selectbox3",width=NULL, #collapsible=TRUE,
+										          conditionalPanel("input.metricDE != 'timing'",
+                                selectInput("periodDE","Time Period", period)),
+                                selectInput("site1","Site", sites),
+                                selectInput("site2","Site", siteblank, selected = " "),
+                                selectInput("site3","Site", siteblank, selected = " "))))
+
+						),
 						fluidRow(				 
             column(width=12,
                    box(id="plotboxexplorer", width=NULL,

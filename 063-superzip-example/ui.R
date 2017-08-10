@@ -83,10 +83,10 @@ bodies <- dashboardBody(
 							fluidRow(column(width=12,
 									box(id="selectsites",width=NULL, 
 											conditionalPanel("input.metric != 'timing'",
-													selectInput("site","Site Selection", sites)
+													selectInput("sitetiming","Site Selection", sites)
 											),
 											conditionalPanel("input.metric == 'timing'",
-													selectInput("site", "Site Selection", includeallsites)
+													selectInput("sitetiming", "Site Selection", includeallsites)
 											)	 
 									  ) 
 									)),

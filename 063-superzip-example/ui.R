@@ -120,7 +120,7 @@ bodies <- dashboardBody(
                        plotOutput("testplot2")
                    )
             )
-            )),
+            ),
 						fluidRow(column(title="Download Data Set",width=12,
                             box(id="selectbox4",width=NULL, 
 																selectInput("yeartype", "Year Type", year_type),

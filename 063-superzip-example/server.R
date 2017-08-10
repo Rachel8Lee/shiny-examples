@@ -9,6 +9,7 @@ library(leaflet)
 library(shinydashboard)
 source("barplots2.R")
 source("intERplotscode.R")
+source("timing_plot_code.R")
 
 function(input, output, session) {
 ## Interactive Map ###########################################
@@ -61,6 +62,10 @@ function(input, output, session) {
 		full_bool <- (input$record == "full")
     monthly_bool <- !(input$period == "November to April" | input$period == "December to February" | input$period == "Hydrologic Year")
     if (input$metric == "interannual frequency"){interplot(gauges=gauge, monthly = monthly_bool, full = full_bool)}
+		else if (input$metric == "timing") {
+			all_bool <- (input$gauge == "All Sites")
+			timingplot(gauges = gauge, full = full_bool, all = all_bool)
+		}
     else {
       if (input$metric == "magnitude") {yvar <- "vol MAF"}
       else if (input$metric == "duration") {yvar <- "duration_days"}

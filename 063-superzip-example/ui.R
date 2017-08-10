@@ -117,7 +117,7 @@ bodies <- dashboardBody(
                                 selectInput("site1","Site", includeallsites),
                                 selectInput("site2","Site", siteblank, selected = " "),
                                 selectInput("site3","Site", siteblank, selected = " "))
-                            )
+                            ))
             ),
 						fluidRow(				 
             column(width=12,

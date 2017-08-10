@@ -3,7 +3,7 @@
 # Author: tiffnk
 ###############################################################################
 ###add to global####
-timing.fullcsv <- read.csv("redo_COM90_mag_date_sd_full.csv")
+timing.fullcsv <- read.csv("data/redo_COM90_mag_date_sd_full.csv")
 timing.full.all <- data.frame(gauge=timing.fullcsv$gauge, avg=timing.fullcsv$avg_DOHY, sd=timing.fullcsv$sd_DOHY, yeartype="All")
 timing.full.C <- data.frame(gauge=timing.fullcsv$gauge, avg=timing.fullcsv$C_avg, sd=timing.fullcsv$C_sd, yeartype="C")
 timing.full.D <- data.frame(gauge=timing.fullcsv$gauge, avg=timing.fullcsv$D_avg, sd=timing.fullcsv$D_sd, yeartype="D")
@@ -17,7 +17,7 @@ timing.full <-  merge(timing.full, gauge_data, by.x="gauge", by.y="site_no", all
 timing.full$X <- NULL
 
 
-timing.impcsv <- read.csv("redo_COM90_mag_sd_date_imp_updated.csv")
+timing.impcsv <- read.csv("data/redo_COM90_mag_sd_date_imp_updated.csv")
 timing.imp.all <- data.frame(gauge=timing.impcsv$gauge, avg=timing.impcsv$avg_DOHY, sd=timing.impcsv$sd_DOHY, yeartype="All")
 timing.imp.C <- data.frame(gauge=timing.impcsv$gauge, avg=timing.impcsv$C_avg, sd=timing.impcsv$C_sd, yeartype="C")
 timing.imp.D <- data.frame(gauge=timing.impcsv$gauge, avg=timing.impcsv$D_avg, sd=timing.impcsv$D_sd, yeartype="D")

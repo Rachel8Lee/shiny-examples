@@ -81,9 +81,14 @@ bodies <- dashboardBody(
 										
 									), style="font-size:small;")),
 							fluidRow(column(width=12),
+									conditionalPanel("input.metric != 'timing'"),
 									box(id="selectbox2",width=NULL, #collapsible=TRUE,
 											selectInput("site","Site Selection", sites)
-									)
+									),
+									conditionalPanel("input.metric == 'timing'"),
+								  box(id="selectbox2",width=NULL, #collapsible=TRUE,
+									    selectInput("site","Site Selection", includeallsites)
+									)	 
 									),
 									fluidRow(column(width=12,
 									                box(width=NULL,

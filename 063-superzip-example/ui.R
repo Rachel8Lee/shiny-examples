@@ -96,11 +96,13 @@ bodies <- dashboardBody(
               )
     ),
     tabItem(tabName= "dataexplorer",
-            fluidRow(column(width=4,
+            fluidRow(column(width=6,
                             box(id="selectbox3",width=NULL, #collapsible=TRUE,
                                 selectInput("recordDE","Record Length", record_length),
                                 selectInput("metricDE", "Metric", metric),
-                                selectInput("periodDE","Time Period", period),
+                                selectInput("periodDE","Time Period", period))
+														)
+										 column(width=6,
 																conditionalPanel("input.metricDE != 'timing'",
                                 selectInput("site1","Site", sites),
                                 selectInput("site2","Site", siteblank, selected = " "),
@@ -111,14 +113,14 @@ bodies <- dashboardBody(
                                 selectInput("site3","Site", siteblank, selected = " "))
                             )
             ),
-										 
-            column(width=8,
+						fluidRow(				 
+            column(width=12,
                    box(id="plotboxexplorer", width=NULL,
                        tags$style(type = "text/css", "#testplot {height: calc(100vh - 410px) !important;}"),
                        plotOutput("testplot2")
                    )
             )
-            ),
+            )),
 						fluidRow(column(title="Download Data Set",width=12,
                             box(id="selectbox4",width=NULL, 
 																selectInput("yeartype", "Year Type", year_type),

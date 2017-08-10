@@ -107,6 +107,7 @@ bodies <- dashboardBody(
                                 selectInput("metricDE", "Metric", metric)
 														),
 										 column(width=6,
+														box(id="selectbox4",width=NULL,
 																conditionalPanel("input.metricDE != 'timing'",
                                 selectInput("periodDE","Time Period", period)),
                                 selectInput("site1","Site", sites),

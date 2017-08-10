@@ -64,7 +64,7 @@ function(input, output, session) {
     if (input$metric == "interannual frequency"){interplot(gauges=gauge, monthly = monthly_bool, full = full_bool)}
 		else if (input$metric == "timing") {
 			if (input$site == "All Sites"){timingplot(c(), full = full_bool, all = TRUE)}
-			else {timingplot(gauge, full = full_bool, all = FALSE)}
+			else {timingplot(gauge, full = full_bool, all = TRUE)}
 		}
     else {
       if (input$metric == "magnitude") {yvar <- "vol MAF"}

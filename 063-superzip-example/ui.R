@@ -101,9 +101,14 @@ bodies <- dashboardBody(
                                 selectInput("recordDE","Record Length", record_length),
                                 selectInput("metricDE", "Metric", metric),
                                 selectInput("periodDE","Time Period", period),
+																conditionalPanel("input.metricDE != 'timing'",
                                 selectInput("site1","Site", sites),
                                 selectInput("site2","Site", siteblank, selected = " "),
-                                selectInput("site3","Site", siteblank, selected = " ")
+                                selectInput("site3","Site", siteblank, selected = " ")),
+																conditionalPanel("input.metricDE == 'timing'",
+                                selectInput("site1","Site", allsitesincluded),
+                                selectInput("site2","Site", siteblank, selected = " "),
+                                selectInput("site3","Site", siteblank, selected = " "))
                             )
             ),
 										 

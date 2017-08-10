@@ -80,7 +80,7 @@ bodies <- dashboardBody(
 												)
 										
 									), style="font-size:small;")),
-							fluidRow(column(width=12),
+							fluidRow(column(width=12,
 									box(id="selectsites",width=NULL, 
 											conditionalPanel("input.metric != 'timing'",
 													selectInput("site","Site Selection", sites),

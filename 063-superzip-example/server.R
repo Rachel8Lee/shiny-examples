@@ -29,15 +29,15 @@ function(input, output, session) {
   # }
 # })
 
- observe({
-   if (input$metricDE == "timing"){
-	   updateSelectInput(session, "site1", label = "Site", includeallsites)
-     updateSelectInput(session, "periodDE", label = "No Time Period", choices = c(""))
-		 if (input$site1 == "All Sites"){
-  	   updateSelectInput(session, "site2", label = "Site", choices = c(""))
-	     updateSelectInput(session, "site3", label = "Site", choices = c(""))}
-   }
- })	
+ #observe({
+  # if (input$metricDE == "timing"){
+#	   updateSelectInput(session, "site1", label = "Site", includeallsites)
+ #    updateSelectInput(session, "periodDE", label = "No Time Period", choices = c(""))
+#		 if (input$site1 == "All Sites"){
+ # 	   updateSelectInput(session, "site2", label = "Site", choices = c(""))
+#	     updateSelectInput(session, "site3", label = "Site", choices = c(""))}
+ #  }
+ #})	
 	
 	
  # reactive data set 

@@ -101,12 +101,11 @@ bodies <- dashboardBody(
               )
     ),
     tabItem(tabName= "dataexplorer",
-            fluidRow(column(width=4,
+            fluidRow(column(width=6,
                             box(id="selectbox3",width=NULL, #collapsible=TRUE,
                                 selectInput("recordDE","Record Length", record_length),
-                                selectInput("metricDE", "Metric", metric)
-														),
-										 column(width=4,
+                                selectInput("metricDE", "Metric", metric))),
+										 column(width=6,
 														box(id="selectbox4",width=NULL,
 																conditionalPanel("input.metricDE != 'timing'",
                                 selectInput("periodDE","Time Period", period)),

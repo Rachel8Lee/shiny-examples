@@ -40,6 +40,20 @@ function(input, output, session) {
 	  return(temp)
 	})
 	
+	# to download
+	sitedataDE <- reactive({	      
+	  if (input$metricDE == "magnitude") {
+	    temp <- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "vol AF") }
+          else if (input$metricDE == "duration") {
+	    temp<- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "duration_days") }
+	  else if (input$metricDE == "intraannual frequency"){
+	    temp<- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "intraannual_frequency_numpeaks") }
+	  else {
+			temp<- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "intERannual_frequency_fraction_of_years") }
+	  temp <- temp[order(temp$avg, decreasing = TRUE),]
+	  return(temp)
+	})
+	
   output$IMplot <- renderPlot({
     # isolate site ID
 	  gauge <- strsplit(input$site, " ")[[1]][2]
@@ -199,5 +213,5 @@ function(input, output, session) {
 
   ## Data Explorer ###########################################
   
-  output$downloadData <- downloadHandler(filename = "temp.csv", content = function(file) {write.csv(sitedata(), file)})  
+  output$downloadData <- downloadHandler(filename = "temp.csv", content = function(file) {write.csv(sitedataDE(), file)})  
 }

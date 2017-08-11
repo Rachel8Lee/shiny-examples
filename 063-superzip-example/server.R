@@ -30,10 +30,10 @@ function(input, output, session) {
 	    temp <- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype & allsites$period == input$period & allsites$valtype == "vol AF") }
           else if (input$metric == "duration") {
 	    temp<- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype & allsites$period == input$period & allsites$valtype == "duration_days") }
-	  else { 
-            #(input$metric == "intraannual frequency"){
+	  else if (input$metric == "intraannual frequency"){
 	    temp<- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype & allsites$period == input$period & allsites$valtype == "intraannual_frequency_numpeaks") }
-	  #else {}
+	  else {
+			temp<- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype & allsites$period == input$period & allsites$valtype == "intERannual_frequency_fraction_of_years") }
 	  temp <- temp[order(temp$avg, decreasing = TRUE),]
 	  if (length(input$sitetype) == 1) {
 		  temp <- temp[which(temp$status == input$sitetype),]}

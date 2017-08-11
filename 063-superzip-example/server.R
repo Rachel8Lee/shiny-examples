@@ -22,27 +22,18 @@ function(input, output, session) {
       ) %>%
       setView(lng = -120.51, lat = 38.06, zoom = 6)
   })
-
-
- #observe({
-  # if (input$metricDE == "timing"){
-#	   updateSelectInput(session, "site1", label = "Site", includeallsites)
- #    updateSelectInput(session, "periodDE", label = "No Time Period", choices = c(""))
-#		 if (input$site1 == "All Sites"){
- # 	   updateSelectInput(session, "site2", label = "Site", choices = c(""))
-#	     updateSelectInput(session, "site3", label = "Site", choices = c(""))}
- #  }
- #})	
 	
 	
  # reactive data set 
   sitedata <- reactive({	      
 	  if (input$metric == "magnitude") {
 	    temp <- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype & allsites$period == input$period & allsites$valtype == "vol AF") }
-		else if (input$metric == "duration") {
+          else if (input$metric == "duration") {
 	    temp<- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype & allsites$period == input$period & allsites$valtype == "duration_days") }
-	  else {
+	  else { 
+            #(input$metric == "intraannual frequency"){
 	    temp<- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype & allsites$period == input$period & allsites$valtype == "intraannual_frequency_numpeaks") }
+	  #else {}
 	  temp <- temp[order(temp$avg, decreasing = TRUE),]
 	  if (length(input$sitetype) == 1) {
 		  temp <- temp[which(temp$status == input$sitetype),]}

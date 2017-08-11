@@ -57,7 +57,7 @@ function(input, output, session) {
     monthly_bool <- !(input$period == "November to April" | input$period == "December to February" | input$period == "Hydrologic Year")
     if (input$metric == "interannual frequency"){interplot(gauges=gauge, monthly = monthly_bool, full = full_bool)}
 		else if (input$metric == "timing") {
-			if (input$site1timing == "All Sites"){	timingplot(c(), full = full_bool, all = TRUE)}
+			if (input$site1timing == "All Sites"){ timingplot(c(), full = full_bool, all = TRUE)}
 			else {
 			  gauge <- strsplit(input$sitetiming, " ")[[1]][2]
 	  		gauge <- strsplit(gauge, ",")[[1]][1]
@@ -84,15 +84,15 @@ function(input, output, session) {
     monthly_boolDE <- !(input$periodDE == "November to April" | input$periodDE == "December to February" | input$periodDE == "Hydrologic Year")
     if (input$metricDE == "interannual frequency") {interplot(gauges=c(first_site, sec_site, third_site), monthly = monthly_bool, full = full_bool)}
 		else if (input$metricDE == "timing") {
-			if (input$sitetiming == "All Sites") {timingplot(c(), full = full_boolDE, all = TRUE)}
+			if (input$site1timing == "All Sites") {timingplot(c(), full = full_boolDE, all = TRUE)}
 			else {
-				first_site <- strsplit(input$site1timing, " ")[[1]][2]
-		    first_site <- strsplit(first_site, ",")[[1]][1]
-				sec_site <- strsplit(input$site2timing, " ")[[1]][2]
-		    sec_site <- strsplit(sec_site, ",")[[1]][1]
-		    third_site <- strsplit(input$site3timing, " ")[[1]][2]
-		    third_site <- strsplit(third_site, ",")[[1]][1]
-			  timingplot(c(first_site, sec_site, third_site), full = full_boolDE, all = FALSE)
+				first_sitetim <- strsplit(input$site1timing, " ")[[1]][2]
+		    first_sitetim <- strsplit(first_sitetim, ",")[[1]][1]
+				sec_sitetim <- strsplit(input$site2timing, " ")[[1]][2]
+		    sec_sitetim <- strsplit(sec_sitetim, ",")[[1]][1]
+		    third_sitetim <- strsplit(input$site3timing, " ")[[1]][2]
+		    third_sitetim <- strsplit(third_sitetim, ",")[[1]][1]
+			  timingplot(c(first_sitetim, sec_sitetim, third_sitetim), full = full_boolDE, all = FALSE)
 			}
 	  }		
 		else{

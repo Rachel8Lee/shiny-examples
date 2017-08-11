@@ -86,8 +86,12 @@ function(input, output, session) {
 		else if (input$metricDE == "timing") {
 			if (input$sitetiming == "All Sites") {timingplot(c(), full = full_boolDE, all = TRUE)}
 			else {
-				first_site <- strsplit(input$sitetiming, " ")[[1]][2]
+				first_site <- strsplit(input$site1timing, " ")[[1]][2]
 		    first_site <- strsplit(first_site, ",")[[1]][1]
+				sec_site <- strsplit(input$site2timing, " ")[[1]][2]
+		    sec_site <- strsplit(sec_site, ",")[[1]][1]
+		    third_site <- strsplit(input$site3timing, " ")[[1]][2]
+		    third_site <- strsplit(third_site, ",")[[1]][1]
 			  timingplot(c(first_site, sec_site, third_site), full = full_boolDE, all = FALSE)
 			}
 	  }		

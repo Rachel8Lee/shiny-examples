@@ -73,7 +73,7 @@ function(input, output, session) {
 		third_site <- strsplit(third_site, ",")[[1]][1]
 		full_boolDE <- (input$recordDE == "full")
 		monthly_boolDE <- !(input$periodDE == "November to April" | input$periodDE == "December to February" | input$periodDE == "Hydrologic Year")
-    if (input$metricDE == "interannual frequency") {interplot(gauges=c(first_site, sec_site, third_site), monthly = monthly_boolDE, full = full_bool)}
+    if (input$metricDE == "interannual frequency") {interplot(gauges=c(first_site, sec_site, third_site), monthly = monthly_boolDE, full = full_boolDE)}
 		else if (input$metricDE == "timing") {
 			if (input$site1timing == "All Sites") {timingplot(c(), full = full_boolDE, all = TRUE)}
 			else {

@@ -1,7 +1,3 @@
-sites <- paste("USGS ", gauge_data$site_no, ", ", gauge_data$station_nm, sep="")
-siteblank <- c(" ", sites)
-includeallsites <- c("All Sites", sites)
-
 # read in site #, name, location
 gauge_location <- read.csv("data/gauge_locations.csv")
 gauge_location <- gauge_location[,2:length(gauge_location)]
@@ -58,30 +54,6 @@ colnames(allsites)[1] <- "site_no"
 colnames(allsites)[12] <- "latitude"
 colnames(allsites)[13] <- "longitude"
 
-# subset data 
-# FULL VOL
-full_magnitude <- read.csv("data/redo_simp_data_full_vol_90.csv")
-full_magnitude_all <- full_magnitude[which(full_magnitude$yeartype == "all"),]
-full_magnitude_all_apr <-full_magnitude_all[which(full_magnitude_all$period == "January"),]
-
-imp_magnitude <- read.csv("data/redo_simp_data_imp_vol_90.csv")
-imp_magnitude_all <- imp_magnitude[which(imp_magnitude$yeartype == "all"),]
-imp_magnitude_all_apr <- imp_magnitude_all[which(imp_magnitude_all$period == "April"),]
-
-full_dur <- read.csv("data/simp_data_full_vol_90_duration.csv")
-full_dur_all <- full_dur[which(full_dur$yeartype == "all"),]
-full_dur_all_apr <- full_dur_all[which(full_dur_all$period == "April"),]
-
-imp_dur <- read.csv("data/simp_data_imp_vol_90_duration.csv")
-imp_dur_all <- imp_dur[which(imp_dur$yeartype == "all"),]
-imp_dur_all_apr <- imp_dur_all[which(imp_dur_all$period == "April"),]
-
-#allsites <- merge(allsites, full_dur_all_apr, by.x="site_no", by.y="gauge", all.y=TRUE)
-#allsites <- allsites[order(allsites$avg, decreasing = TRUE),]
-#row.names(allsites) <- allsites$site_no
-
-# TODO: Add comment
-# 
-# Author: tiffnk
-###############################################################################
-
+sites <- paste("USGS ", gauge_data$site_no, ", ", gauge_data$station_nm, sep="")
+siteblank <- c(" ", sites)
+includeallsites <- c("All Sites", sites)

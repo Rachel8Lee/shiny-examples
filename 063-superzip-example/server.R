@@ -72,8 +72,9 @@ function(input, output, session) {
 		third_site <- strsplit(input$site3, " ")[[1]][2]
 		third_site <- strsplit(third_site, ",")[[1]][1]
 		full_boolDE <- (input$recordDE == "full")
-    monthly_boolDE <- !(input$periodDE == "November to April" | input$periodDE == "December to February" | input$periodDE == "Hydrologic Year")
-    if (input$metricDE == "interannual frequency") {interplot(gauges=c(first_site, sec_site, third_site), monthly = monthly_bool, full = full_bool)}
+    if (input$metricDE == "interannual frequency") {
+			monthly_boolDE <- !(input$periodDE == "November to April" | input$periodDE == "December to February" | input$periodDE == "Hydrologic Year")
+			interplot(gauges=c(first_site, sec_site, third_site), monthly = monthly_bool, full = full_bool)}
 		else if (input$metricDE == "timing") {
 			if (input$site1timing == "All Sites") {timingplot(c(), full = full_boolDE, all = TRUE)}
 			else {
@@ -87,6 +88,7 @@ function(input, output, session) {
 			}
 	  }		
 		else{
+			monthly_boolDE <- !(input$periodDE == "November to April" | input$periodDE == "December to February" | input$periodDE == "Hydrologic Year")
       if (input$metricDE == "magnitude") {yvar <- "vol MAF"}
       else if (input$metricDE == "duration") {yvar <- "duration_days"}
       else {yvar <- "intraannual_frequency_nmpks"}		

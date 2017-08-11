@@ -7,9 +7,6 @@ gauge_data <- merge(gauge_location, gauge_status, by.x = "site_no", by.y = "gaug
 
 allsites <- data.frame(site_no = gauge_data$site_no, station_nm = gauge_data$station_nm, latitude = gauge_data$dec_lat_va, longitude = gauge_data$dec_long_v, status = gauge_data$status)
 
-# for barplots
-# subset data 
-# FULL VOL
 redo_full_vol <- read.csv("data/redo_simp_data_full_vol_90.csv")
 redo_full_vol <- redo_full_vol[,2:length(redo_full_vol)]
 redo_full_vol <- merge(redo_full_vol, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
@@ -30,13 +27,13 @@ redo_imp_nmpks <- read.csv("data/simp_data_imp_vol_90_intraannual_frequency.csv"
 redo_imp_nmpks <- redo_imp_nmpks[,2:length(redo_imp_nmpks)]
 redo_imp_nmpks <- merge(redo_imp_nmpks, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
 
-
 vol.frame <- redo_full_vol
 vol.frame[is.na(vol.frame)] <- 0 
 dur.frame<- redo_full_dur
 dur.frame[is.na(dur.frame)] <- 0 
 nmpks.frame<- redo_full_nmpks
 nmpks.frame[is.na(nmpks.frame)] <- 0 
+
 imp.vol.frame<- redo_imp_vol
 imp.vol.frame[is.na(imp.vol.frame)] <- 0 
 imp.dur.frame<- redo_imp_dur

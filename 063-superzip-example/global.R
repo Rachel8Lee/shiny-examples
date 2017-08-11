@@ -16,6 +16,10 @@ redo_full_dur <- merge(redo_full_dur, gauge_status, by.x="gauge", by.y="gauge", 
 redo_full_nmpks <- read.csv("data/simp_data_full_vol_90_intraannual_frequency.csv")
 redo_full_nmpks <- redo_full_nmpks[,2:length(redo_full_nmpks)]
 redo_full_nmpks <- merge(redo_full_nmpks, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
+fracywfFG <- fracywf.full[c(1,2,3,5,6,8,13,14)]
+colnames(fracywfFG)[4]<- "avg"
+colnames(fracywfFG)[5]<- "sd"
+fracywfFG$sd <-"NA"
 
 redo_imp_vol <- read.csv("data/redo_simp_data_imp_vol_90.csv")
 redo_imp_vol <- redo_imp_vol[,2:length(redo_imp_vol)]
@@ -26,6 +30,10 @@ redo_imp_dur <- merge(redo_imp_dur, gauge_status, by.x="gauge", by.y="gauge", al
 redo_imp_nmpks <- read.csv("data/simp_data_imp_vol_90_intraannual_frequency.csv")
 redo_imp_nmpks <- redo_imp_nmpks[,2:length(redo_imp_nmpks)]
 redo_imp_nmpks <- merge(redo_imp_nmpks, gauge_status, by.x="gauge", by.y="gauge", all.x=TRUE)
+fracywfIG <- fracywf.imp[c(1,2,3,5,6,8,13,14)]
+colnames(fracywfIG)[4]<- "avg"
+colnames(fracywfIG)[5]<- "sd"
+fracywfIG$sd <-"NA"
 
 vol.frame <- redo_full_vol
 vol.frame[is.na(vol.frame)] <- 0 
@@ -41,9 +49,9 @@ imp.dur.frame[is.na(imp.dur.frame)] <- 0
 imp.nmpks.frame<- redo_imp_nmpks
 imp.nmpks.frame[is.na(imp.nmpks.frame)] <- 0 
 
-fullG <- rbind.data.frame(dur.frame, vol.frame, nmpks.frame)
+fullG <- rbind.data.frame(dur.frame, vol.frame, nmpks.frame, fracywfFG)
 fullG["tag"] <- "full" 
-postG <- rbind.data.frame(imp.dur.frame, imp.vol.frame, imp.nmpks.frame)
+postG <- rbind.data.frame(imp.dur.frame, imp.vol.frame, imp.nmpks.frame, fracywfIG)
 postG["tag"] <- "post-impairment"
 alldatG <- rbind.data.frame(fullG, postG)
 allsites <- merge(alldatG, gauge_location, by.x = "gauge", by.y = "site_no", all.x = TRUE)

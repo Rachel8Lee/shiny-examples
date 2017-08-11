@@ -165,7 +165,7 @@ timingplot <- function(gauges, full=TRUE, all=FALSE){
 	timing.final$namelab <- paste0("USGS ", timing.final$gauge)
 	
 	if(all==FALSE){
-		p <- ggplot(data=timing.final)+geom_errorbar(aes(x=yeartype,ymin=ymin, ymax=ymax), color="black", width=.1, size=.2) +geom_point(aes(x=yeartype, y=avg, fill=yeartype),color="black",pch=21, size=rel(2))+
+		p <- ggplot(data=timing.final)+geom_errorbar(aes(x=yeartype,ymin=ymin, ymax=ymax), color="black", width=.1, size=.2) +geom_point(aes(x=yeartype, y=avg, fill=yeartype),color="black",pch=21, size=rel(3))+
 				facet_grid(namelab ~.)+
 				scale_y_date(limits=c(as.Date("1-10-2016", format="%d-%m-%Y"),
 								as.Date("30-9-2017", format="%d-%m-%Y")), date_breaks="1 month", date_labels="%b", minor_breaks=NULL)+ 

@@ -39,11 +39,11 @@ interplot <- function(gauges, monthly=TRUE, full=TRUE){
 		temp2$var <- "num_nonzero"
 		names(temp2)[which(names(temp2)=="num_nonzero")] <- "bar"
 		temp.imp <- rbind.data.frame(temp2,temp1)
-		addin <- data.frame(gauge=temp.imp$gauge,yeartype=" ",period=temp.imp$period, bar=0,var=temp.imp$var, station_nm=temp.full$station_nm)
+		addin <- data.frame(gauge=temp.imp$gauge,yeartype=" ",period=temp.imp$period, bar=0,var=temp.imp$var, station_nm=temp.imp$station_nm)
 		temp.final <- rbind.data.frame(temp.imp,addin)
 		temp.final$var <- factor(temp.final$var,levels=c("num_zero","num_nonzero"), labels=c("years without HMF", "years with HMF"), ordered=TRUE)
 		temp.final$yeartype <-factor(temp.final$yeartype, levels=c("C","D","BN","AN","W"," ","all"), ordered=TRUE)
-		temp.final$period <- factor(temp.full$period,levels=period2, ordered=TRUE)
+		temp.final$period <- factor(temp.imp$period,levels=period2, ordered=TRUE)
 	}
 	numgauges <- length(as.character(unique(temp.final$station_nm)))
 	gauges2 <- rep(NA, numgauges)

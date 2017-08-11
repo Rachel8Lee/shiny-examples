@@ -49,7 +49,7 @@ function(input, output, session) {
 	  return(temp)
 	})
 	
-  output$testplot <- renderPlot({
+  output$IMplot <- renderPlot({
     # isolate site ID
 	  gauge <- strsplit(input$site, " ")[[1]][2]
 	  gauge <- strsplit(gauge, ",")[[1]][1]
@@ -73,7 +73,7 @@ function(input, output, session) {
     }
   })
 	
-	output$testplot2 <- renderPlot({
+	output$DEplot <- renderPlot({
 		first_site <- strsplit(input$site1, " ")[[1]][2]
 		first_site <- strsplit(first_site, ",")[[1]][1]
 		sec_site <- strsplit(input$site2, " ")[[1]][2]
@@ -82,8 +82,15 @@ function(input, output, session) {
 		third_site <- strsplit(third_site, ",")[[1]][1]
 		full_boolDE <- (input$recordDE == "full")
     monthly_boolDE <- !(input$periodDE == "November to April" | input$periodDE == "December to February" | input$periodDE == "Hydrologic Year")
-    if (input$metricDE == "interannual frequency"){interplot(gauges=c(first_site, sec_site, third_site), monthly = monthly_bool, full = full_bool)}
-		else if (input$metricDE == "timing") {timingplot(c(), full = full_boolDE, all = TRUE)}
+    if (input$metricDE == "interannual frequency") {interplot(gauges=c(first_site, sec_site, third_site), monthly = monthly_bool, full = full_bool)}
+		else if (input$metricDE == "timing") {
+			if (input$sitetiming == "All Sites") {timingplot(c(), full = full_boolDE, all = TRUE)}
+			else {
+				first_site <- strsplit(input$sitetiming, " ")[[1]][2]
+		    first_site <- strsplit(first_site, ",")[[1]][1]
+			  timingplot(c(first_site, sec_site, third_site), full = full_boolDE, all = FALSE)
+			}
+	  }		
 		else{
       if (input$metricDE == "magnitude") {yvar <- "vol MAF"}
       else if (input$metricDE == "duration") {yvar <- "duration_days"}

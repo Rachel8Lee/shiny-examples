@@ -137,11 +137,11 @@ function(input, output, session) {
     
 		# timing 
 	  else { 	
-      colorlist <- c("black","yellow","darkorange","deeppink","darkviolet","navy")
-	    bounds <- c(0,4,8,12,16,20)
-	    labs <- c("0", "1 - 4","4 - 8", "8 - 12", "12 - 16","16 - 20")
-      legendTitle <- "No. 1-Day Peaks"
-	    sizes <- c(15,18,21,24,27,30) 
+      colorlist <- c("deeppink", "orangered", "yellow", "mediumspringgreen", "deepskyblue", "darkviolet", "black")
+	    bounds <- c(1,2,3,4,5,6,7)
+	    labs <- c("January", "February","March", "April", "May","June", "July")
+      legendTitle <- "COM Date of HMF"
+	    sizes <- c(21,21,21,21,21,21,21) 
 	    rad <- 5000
 	  }  
 		

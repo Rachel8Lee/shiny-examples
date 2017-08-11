@@ -162,8 +162,9 @@ function(input, output, session) {
 	  # size for legend icons
     sizes <- sizes + (input$map_zoom - 6)
     dom <- seq(1,length(bounds),1)  
-	 
-    colorData <- sitedata()$avg
+	   
+		if(input$metric == "interannual frequency") {colorData <- sitedata()$avg*100}
+		else {colorData <- sitedata()$avg}
     classdata <- rep(NA,length(colorData))
     classdata[which(colorData == bounds[[1]])] <- 1
     classdata[which(colorData == "NA")] <- 1  

@@ -132,7 +132,7 @@ function(input, output, session) {
       labs <- c("0%", "1 - 20%", "20- 40%", "40 - 60%", "60 - 80%", "80 - 100%")
       legendTitle <- "% of Years with HMF"
       sizes <- c(12,14,16,18,20,22)
-      rad <- 300*sitedata()$avg + 3000
+      rad <- 500*sitedata()$avg + 3000
     }
     
 		# timing 
@@ -142,7 +142,7 @@ function(input, output, session) {
 	    labs <- c("0", "1 - 4","4 - 8", "8 - 12", "12 - 16","16 - 20")
       legendTitle <- "No. 1-Day Peaks"
 	    sizes <- c(15,18,21,24,27,30) 
-	    rad <- 4000
+	    rad <- 5000
 	  }  
 		
 	  # size for legend icons

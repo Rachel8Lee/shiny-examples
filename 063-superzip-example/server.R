@@ -146,7 +146,7 @@ function(input, output, session) {
       labs <- c("0%", "1 - 20%", "20- 40%", "40 - 60%", "60 - 80%", "80 - 100%")
       legendTitle <- "% of Years with HMF"
       sizes <- c(12,14,16,18,20,22)
-      rad <- 750*sitedata()$avg + 3000
+      rad <- 100*150*sitedata()$avg + 3000
     }
     
 		# timing 

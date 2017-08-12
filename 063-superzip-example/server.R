@@ -171,12 +171,13 @@ function(input, output, session) {
 		classsize <- rep(NA,length(colorData))
     classdata[which(colorData == bounds[[1]])] <- 1
     classdata[which(colorData == "NA")] <- 1  
-		classsize[which(colorData == "NA")] <- 1  
+    classdata[which(colorData == bounds[[1]])] <- nonscalesize[1]
+    classsize[which(colorData == "NA")] <- 1  
     for(i in 2:length(bounds)){
-      classdata[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- i
-			classsize[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- i
+      classdata[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- i    
+      classsize[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- nonscalesize[1]
     }
-		if(input$metric == "interannual frequency") {rad<-classsize}
+    if(input$metric == "interannual frequency") {rad<-classsize}
      
     pal <- colorFactor(palette=colorlist, domain=dom, na.color="black")
     colorlist <- col2hex(colorlist)

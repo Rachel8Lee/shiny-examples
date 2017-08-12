@@ -155,7 +155,13 @@ function(input, output, session) {
 	    labs <- c("January", "February","March", "April", "May","June", "July")
       legendTitle <- "COM Date of HMF"
 	    sizes <- c(21,21,21,21,21,21,21) 
-	    rad <- 5000
+	    rad <- 10000
+			sitedata()$avg <- as.character(sitedata()$avg)
+			splitdate <- strsplit(sitedata()$avg, "-")
+			month <- rep("0",length(splitdate)
+      for(i in 1:length(splitdate)){   
+        month[i] <- splitdate[[i]][1]}
+      sitedata()$avg <- as.numeric(month)
 	  }  
 		
 	  # size for legend icons
@@ -175,6 +181,7 @@ function(input, output, session) {
       classsize[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- nonscalesize[i]
     }
     if(input$metric == "interannual frequency") {rad<-classsize}
+									 
      
     pal <- colorFactor(palette=colorlist, domain=dom, na.color="black")
     colorlist <- col2hex(colorlist)

@@ -110,6 +110,7 @@ allsites <- merge(alldatG, gauge_location, by.x = "gauge", by.y = "site_no", all
 colnames(allsites)[1] <- "site_no"
 colnames(allsites)[12] <- "latitude"
 colnames(allsites)[13] <- "longitude"
+allsites$avg <- as.numeric(allsites$avg)
 
 sites <- paste("USGS ", gauge_data$site_no, ", ", gauge_data$station_nm, sep="")
 siteblank <- c(" ", sites)

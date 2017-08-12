@@ -119,6 +119,7 @@ function(input, output, session) {
 	    legendTitle <- "Magnitude (HMF Volume)"
 	    zoomsize <- input$map_zoom
       sizes <- c(3,5,7,9,12,15,18,21,24,27,30) 
+			
 	    rad <- sitedata()$avg/120 + 3000
 	  }
   
@@ -146,7 +147,8 @@ function(input, output, session) {
       labs <- c("0%", "1 - 20%", "20- 40%", "40 - 60%", "60 - 80%", "80 - 100%")
       legendTitle <- "% of Years with HMF"
       sizes <- c(12,14,16,18,20,22)
-      rad <- 100*150*sitedata()$avg + 3000
+      #rad <- 100*150*sitedata()$avg + 3000
+		  nonscalesize <- c(3000,3500,4000,4500,5000,5500)
     }
     
 		# timing 
@@ -166,11 +168,15 @@ function(input, output, session) {
 		if(input$metric == "interannual frequency") {colorData <- sitedata()$avg*100}
 		else {colorData <- sitedata()$avg}
     classdata <- rep(NA,length(colorData))
+		classsize <- rep(NA,length(colorData))
     classdata[which(colorData == bounds[[1]])] <- 1
     classdata[which(colorData == "NA")] <- 1  
+		classsize[which(colorData == "NA")] <- 1  
     for(i in 2:length(bounds)){
       classdata[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- i
+			classsize[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- i
     }
+		if(input$metric == "interannual frequency") {rad<-classsize}
      
     pal <- colorFactor(palette=colorlist, domain=dom, na.color="black")
     colorlist <- col2hex(colorlist)

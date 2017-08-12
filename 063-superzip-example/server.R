@@ -45,7 +45,7 @@ function(input, output, session) {
           else if (input$metricDE == "duration") {
 	    temp <- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "duration_days") }
 	  else if (input$metricDE == "intraannual frequency"){
-	    tem p<- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "intraannual_frequency_numpeaks") }
+	    temp <- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "intraannual_frequency_numpeaks") }
 	  else if (input$metricDE == "interannual frequency"){
 			temp <- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "intERannual_frequency_fraction_of_years") }
 	  else {temp <- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "timing")}

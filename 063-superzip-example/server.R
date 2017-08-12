@@ -199,11 +199,11 @@ function(input, output, session) {
     selectedSite <- allsites[allsites$site_no == site_no,]
     content <- as.character(tagList(
       tags$h4("Site Number:", as.integer(selectedSite$site_no)),
-      sprintf("Station Name: %s", selectedSite$statname), tags$br(),
+      sprintf("Station Name: %s", selectedSite$station_nm), tags$br(),
       sprintf("Longitude: %s", selectedSite$longitude), tags$br(),
       sprintf("Latitude: %s", selectedSite$latitude), tags$br(),
-      sprintf("Status: %s", selectedSite$status), tags$br(),
-      sprintf("%s",as.character(selectedSite$valtype), ": %s", selectedSite$avg), tags$br()	    
+      sprintf("Status: %s", selectedSite$status), tags$br()#,
+      #sprintf("%s",as.character(selectedSite$valtype), ": %s", selectedSite$avg), tags$br()	    
     ))
     leafletProxy("map") %>% addPopups(lng, lat, content, layerId = site_no)
   }

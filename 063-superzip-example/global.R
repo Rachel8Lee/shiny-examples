@@ -45,6 +45,10 @@ timing.fullG <- timing.full
 timing.fullG$avg <- as.character(timing.fullG$avg)
 month <- strsplit(timing.fullG$avg, "-")
 for(i in 1:length(month)){timing.fullG$avg[i]<-as.numeric(month[[i]][1])}
+timing.fullG$yeartype <- as.character(timing.fullG$yeartype)
+findAll <-which(timing.fullG$yeartype=="All")
+timing.fullG$yeartype[findAll]<- "all"
+timing.fullG$yeartype <- as.factor(timing.fullG$yeartype)
 time.frame <- timing.fullG[c(1,4,11,2,3,12,9,10)]
 
 redo_imp_vol <- read.csv("data/redo_simp_data_imp_vol_90.csv")
@@ -85,6 +89,10 @@ timing.impG <- timing.imp
 timing.impG$avg <- as.character(timing.impG$avg)
 month <- strsplit(timing.impG$avg, "-")
 for(i in 1:length(month)){timing.impG$avg[i]<-as.numeric(month[[i]][1])}
+timing.impG$yeartype <- as.character(timing.impG$yeartype)
+findAll <-which(timing.impG$yeartype=="All")
+timing.impG$yeartype[findAll]<- "all"
+timing.impG$yeartype <- as.factor(timing.impG$yeartype)
 imp.time.frame <- timing.impG[c(1,4,11,2,3,12,9,10)]
 
 vol.frame <- redo_full_vol

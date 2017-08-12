@@ -39,7 +39,7 @@ timing.full <- rbind.data.frame(timing.full.all,timing.full.C,timing.full.D,
 		timing.full.BN,timing.full.AN,timing.full.W, timing.full.blanks)
 timing.full <-  merge(timing.full, gauge_data, by.x="gauge", by.y="site_no", all.x=TRUE)
 timing.full$X <- NULL
-timing.full$period <"NA"
+timing.full$period <-"NA"
 timing.full$valtype <- "timing"
 time.frame <- timing.full[c(1,4,11,2,3,12,9,10)]
 
@@ -75,7 +75,7 @@ timing.imp$X <- NULL
 timing.imp.blanks <- data.frame(gauge=timing.impcsv$gauge, avg=NA, sd=NA, yeartype=" ", agency_cd=timing.imp$agency_cd,
 		station_nm=timing.imp$station_nm,dec_lat_va=timing.imp$dec_lat_va, dec_long_v=timing.imp$dec_long_v, 
 		basin=timing.imp$basin, status=timing.imp$status)
-timing.imp$period <"NA"
+timing.imp$period <-"NA"
 timing.imp$valtype <- "timing"
 imp.time.frame <- timing.imp[c(1,4,11,2,3,12,9,10)]
 

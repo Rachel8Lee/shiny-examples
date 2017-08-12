@@ -157,7 +157,7 @@ function(input, output, session) {
 	    sizes <- c(21,21,21,21,21,21,21) 
 	    rad <- 10000
 			splitdate <- as.character(sitedata()$avg)
-			splitdate <- strsplit(splitdate$avg, "-")
+			splitdate <- strsplit(splitdate, "-")
 			month <- rep("0",length(splitdate))
 	  }  
 		

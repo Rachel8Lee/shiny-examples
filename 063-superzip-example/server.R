@@ -119,7 +119,8 @@ function(input, output, session) {
 	    legendTitle <- "Magnitude (HMF Volume)"
 	    zoomsize <- input$map_zoom
       sizes <- c(3,5,7,9,12,15,18,21,24,27,30) 
-	    rad <- sitedata()$avg/120 + 3000
+			nonscalesize <- c(5000,5500,6000,6500,7000,7500,8000,8500,9000,9500,10000)
+	    #rad <- sitedata()$avg/120 + 3000
 	  }
   
     else if (input$metric == "duration") {
@@ -128,7 +129,8 @@ function(input, output, session) {
 	    labs <- c("0","1 - 27","28 - 52","53 - 77","78 - 102", "103 - 130")
 	    legendTitle <- "Duration (HMF Days)"
       sizes <- c(12,14,16,18,20,22) 
-	    rad <- 150*sitedata()$avg + 3000
+			nonscalesize <- c(5000,6000,7000,8000,9000,10000)
+	    #rad <- 150*sitedata()$avg + 3000
 	  }
 		
 		else if (input$metric == "intraannual frequency") {
@@ -137,7 +139,8 @@ function(input, output, session) {
 	    labs <- c("0", "1 - 5","6 - 11", "12 - 17", "18 - 23","23 - 27")
       legendTitle <- "No. 1-Day Peaks"
 	    sizes <- c(12,14,16,18,20,22) 
-	    rad <- 300*sitedata()$avg + 3000
+			nonscalesize <- c(5000,6000,7000,8000,9000,10000)
+	    #rad <- 300*sitedata()$avg + 3000
 	  }
 		
     else if (input$metric == "interannual frequency"){
@@ -146,6 +149,7 @@ function(input, output, session) {
       labs <- c("0%", "1 - 20%", "20- 40%", "40 - 60%", "60 - 80%", "80 - 100%")
       legendTitle <- "% of Years with HMF"
       sizes <- c(12,14,16,18,20,22)
+			nonscalesize <- c(5000,6000,7000,8000,9000,10000)
       #rad <- 100*150*sitedata()$avg + 3000
     }
 		# timing 
@@ -161,7 +165,6 @@ function(input, output, session) {
 	  # size for legend icons
     sizes <- sizes + (input$map_zoom - 6)
     dom <- seq(1,length(bounds),1)  
-		nonscalesize <- c(5000,6000,7000,8000,9000,10000)
 	  
 		if(input$metric == "interannual frequency") {colorData <- sitedata()$avg*100}
 		else {colorData <- sitedata()$avg}
@@ -175,9 +178,7 @@ function(input, output, session) {
       classdata[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- i    
       classsize[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- nonscalesize[i]
     }
-    if(input$metric == "interannual frequency") {rad<-classsize}
-		#}
-									 
+		if( input$metric == "timing")	{classsize <- rad}						 
      
     pal <- colorFactor(palette=colorlist, domain=dom, na.color="black")
     colorlist <- col2hex(colorlist)
@@ -187,7 +188,7 @@ function(input, output, session) {
     	  
     leafletProxy("map", data = sitedata()) %>%
       clearShapes() %>% 
-      addCircles(~longitude, ~latitude, radius=rad, layerId=~site_no, stroke=TRUE, 
+      addCircles(~longitude, ~latitude, radius=classsize, layerId=~site_no, stroke=TRUE, 
                  weight = 1, color ="#000000", fillOpacity=0.9, fillColor=pal(classdata)) %>%
       addLegend("bottomleft", values=dom, colors=colorAdditions, title=legendTitle, layerId="colorLegend", 
                 opacity=0.9, labels=labelAdditions)

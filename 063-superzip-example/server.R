@@ -158,7 +158,7 @@ function(input, output, session) {
 	    rad <- 10000
 			sitedata()$avg <- as.character(sitedata()$avg)
 			splitdate <- strsplit(sitedata()$avg, "-")
-			month <- rep("0",length(splitdate)
+			month <- rep("0",length(splitdate))
       for(i in 1:length(splitdate)){   
         month[i] <- splitdate[[i]][1]}
       sitedata()$avg <- as.numeric(month)

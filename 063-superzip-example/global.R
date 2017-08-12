@@ -41,10 +41,11 @@ timing.full <-  merge(timing.full, gauge_data, by.x="gauge", by.y="site_no", all
 timing.full$X <- NULL
 timing.full$period <-"NA"
 timing.full$valtype <- "timing"
-timing.full$avg <- as.character(timing.full$avg)
-month <- strsplit(timing.full$avg, "-")
-for(i in 1:length(month)){timing.full$avg[i]<-as.numeric(month[[i]][1])}
-time.frame <- timing.full[c(1,4,11,2,3,12,9,10)]
+timing.fullG <- timing.full
+timing.fullG$avg <- as.character(timing.fullG$avg)
+month <- strsplit(timing.fullG$avg, "-")
+for(i in 1:length(month)){timing.fullG$avg[i]<-as.numeric(month[[i]][1])}
+time.frame <- timing.fullG[c(1,4,11,2,3,12,9,10)]
 
 redo_imp_vol <- read.csv("data/redo_simp_data_imp_vol_90.csv")
 redo_imp_vol <- redo_imp_vol[,2:length(redo_imp_vol)]
@@ -80,10 +81,11 @@ timing.imp.blanks <- data.frame(gauge=timing.impcsv$gauge, avg=NA, sd=NA, yearty
 		basin=timing.imp$basin, status=timing.imp$status)
 timing.imp$period <-"NA"
 timing.imp$valtype <- "timing"
-timing.imp$avg <- as.character(timing.imp$avg)
-month <- strsplit(timing.imp$avg, "-")
-for(i in 1:length(month)){timing.imp$avg[i]<-as.numeric(month[[i]][1])}
-imp.time.frame <- timing.imp[c(1,4,11,2,3,12,9,10)]
+timing.impG <- timing.imp
+timing.impG$avg <- as.character(timing.impG$avg)
+month <- strsplit(timing.impG$avg, "-")
+for(i in 1:length(month)){timing.impG$avg[i]<-as.numeric(month[[i]][1])}
+imp.time.frame <- timing.impG[c(1,4,11,2,3,12,9,10)]
 
 vol.frame <- redo_full_vol
 vol.frame[is.na(vol.frame)] <- 0 

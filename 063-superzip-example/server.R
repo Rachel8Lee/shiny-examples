@@ -43,11 +43,12 @@ function(input, output, session) {
 	  if (input$metricDE == "magnitude") {
 	    temp <- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "vol AF") }
           else if (input$metricDE == "duration") {
-	    temp<- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "duration_days") }
+	    temp <- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "duration_days") }
 	  else if (input$metricDE == "intraannual frequency"){
-	    temp<- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "intraannual_frequency_numpeaks") }
-	  else {
-			temp<- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "intERannual_frequency_fraction_of_years") }
+	    tem p<- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "intraannual_frequency_numpeaks") }
+	  else if (input$metricDE == "interannual frequency"){
+			temp <- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "intERannual_frequency_fraction_of_years") }
+	  else {temp <- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "timing")}
 	  temp <- temp[order(temp$avg, decreasing = TRUE),]
 	  return(temp)
 	})
@@ -56,7 +57,7 @@ function(input, output, session) {
     # isolate site ID
 	  gauge <- strsplit(input$site, " ")[[1]][2]
 	  gauge <- strsplit(gauge, ",")[[1]][1]
-	full_bool <- (input$record == "full")
+	  full_bool <- (input$record == "full")
     monthly_bool <- !(input$period == "November to April" | input$period == "December to February" | input$period == "Hydrologic Year")
     if (input$metric == "interannual frequency"){interplot(gauges=gauge, monthly = monthly_bool, full = full_bool)}
 		else if (input$metric == "timing") {
@@ -146,7 +147,6 @@ function(input, output, session) {
       sizes <- c(12,14,16,18,20,22)
       #rad <- 100*150*sitedata()$avg + 3000
     }
-    
 		# timing 
 	  else { 	
       colorlist <- c("deeppink", "orangered", "yellow", "mediumspringgreen", "deepskyblue", "darkviolet", "black")
@@ -155,9 +155,6 @@ function(input, output, session) {
       legendTitle <- "COM Date of HMF"
 	    sizes <- c(21,21,21,21,21,21,21) 
 	    rad <- 10000
-			#splitdate <- as.character(sitedata()$avg)
-			#splitdate <- strsplit(splitdate, "-")
-			#month <- rep("0",length(splitdate))
 	  }  
 		
 	  # size for legend icons
@@ -165,11 +162,6 @@ function(input, output, session) {
     dom <- seq(1,length(bounds),1)  
 		nonscalesize <- c(5000,6000,7000,8000,9000,10000)
 	  
-		#if(input$metric == "timing"){
-	#	  for(i in 1:length(splitdate)){   
-        #month[i] <- splitdate[[i]][1]}
-      #colorData <- as.numeric(month)} 
-		#else{
 		if(input$metric == "interannual frequency") {colorData <- sitedata()$avg*100}
 		else {colorData <- sitedata()$avg}
     classdata <- rep(NA,length(colorData))

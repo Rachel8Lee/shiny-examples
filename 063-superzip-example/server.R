@@ -155,9 +155,9 @@ function(input, output, session) {
       legendTitle <- "COM Date of HMF"
 	    sizes <- c(21,21,21,21,21,21,21) 
 	    rad <- 10000
-			splitdate <- as.character(sitedata()$avg)
-			splitdate <- strsplit(splitdate, "-")
-			month <- rep("0",length(splitdate))
+			#splitdate <- as.character(sitedata()$avg)
+			#splitdate <- strsplit(splitdate, "-")
+			#month <- rep("0",length(splitdate))
 	  }  
 		
 	  # size for legend icons
@@ -165,11 +165,11 @@ function(input, output, session) {
     dom <- seq(1,length(bounds),1)  
 		nonscalesize <- c(5000,6000,7000,8000,9000,10000)
 	  
-		if(input$metric == "timing"){
-		  for(i in 1:length(splitdate)){   
-        month[i] <- splitdate[[i]][1]}
-      colorData <- as.numeric(month)} 
-		else{
+		#if(input$metric == "timing"){
+	#	  for(i in 1:length(splitdate)){   
+        #month[i] <- splitdate[[i]][1]}
+      #colorData <- as.numeric(month)} 
+		#else{
 		if(input$metric == "interannual frequency") {colorData <- sitedata()$avg*100}
 		else {colorData <- sitedata()$avg}
     classdata <- rep(NA,length(colorData))
@@ -183,7 +183,7 @@ function(input, output, session) {
       classsize[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- nonscalesize[i]
     }
     if(input$metric == "interannual frequency") {rad<-classsize}
-		}
+		#}
 									 
      
     pal <- colorFactor(palette=colorlist, domain=dom, na.color="black")

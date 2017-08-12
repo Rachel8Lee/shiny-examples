@@ -145,7 +145,6 @@ function(input, output, session) {
       legendTitle <- "% of Years with HMF"
       sizes <- c(12,14,16,18,20,22)
       #rad <- 100*150*sitedata()$avg + 3000
-		  nonscalesize <- c(5000,6000,7000,8000,9000,10000)
     }
     
 		# timing 
@@ -164,7 +163,9 @@ function(input, output, session) {
 	  # size for legend icons
     sizes <- sizes + (input$map_zoom - 6)
     dom <- seq(1,length(bounds),1)  
-	  if(input$metric == "timing"){
+		nonscalesize <- c(5000,6000,7000,8000,9000,10000)
+	  
+		if(input$metric == "timing"){
 		  for(i in 1:length(splitdate)){   
         month[i] <- splitdate[[i]][1]}
       colorData <- as.numeric(month)} 

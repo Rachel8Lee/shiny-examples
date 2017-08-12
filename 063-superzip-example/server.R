@@ -1,4 +1,3 @@
-#library(leaflet)
 library(RColorBrewer)
 library(scales)
 library(lattice)
@@ -6,7 +5,6 @@ library(dplyr)
 library(gplots)
 library(ggplot2)
 library(leaflet)
-#library(shinydashboard)
 source("barplots2.R")
 source("intERplotscode.R")
 source("timing_plot_code.R")
@@ -119,7 +117,6 @@ function(input, output, session) {
 	    legendTitle <- "Magnitude (HMF Volume)"
 	    zoomsize <- input$map_zoom
       sizes <- c(3,5,7,9,12,15,18,21,24,27,30) 
-			
 	    rad <- sitedata()$avg/120 + 3000
 	  }
   
@@ -148,7 +145,7 @@ function(input, output, session) {
       legendTitle <- "% of Years with HMF"
       sizes <- c(12,14,16,18,20,22)
       #rad <- 100*150*sitedata()$avg + 3000
-		  nonscalesize <- c(4000,4500,5000,5500,6000,6500)
+		  nonscalesize <- c(5000,6000,7000,8000,9000,10000)
     }
     
 		# timing 

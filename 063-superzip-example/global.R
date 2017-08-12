@@ -1,3 +1,6 @@
+library(leaflet)
+library(shinydashboard)
+
 # read in site #, name, location
 gauge_location <- read.csv("data/gauge_locations.csv")
 gauge_location <- gauge_location[,2:length(gauge_location)]

@@ -41,7 +41,7 @@ timing.full <-  merge(timing.full, gauge_data, by.x="gauge", by.y="site_no", all
 timing.full$X <- NULL
 timing.full$period <"NA"
 timing.full$valtype <- "timing"
-time.frame <- timing.full[c(1,4,11,2,3,12,9,10)
+time.frame <- timing.full[c(1,4,11,2,3,12,9,10)]
 
 redo_imp_vol <- read.csv("data/redo_simp_data_imp_vol_90.csv")
 redo_imp_vol <- redo_imp_vol[,2:length(redo_imp_vol)]

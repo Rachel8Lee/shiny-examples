@@ -77,7 +77,7 @@ timing.imp.blanks <- data.frame(gauge=timing.impcsv$gauge, avg=NA, sd=NA, yearty
 		basin=timing.imp$basin, status=timing.imp$status)
 timing.imp$period <"NA"
 timing.imp$valtype <- "timing"
-imp.time.frame <- timing.imp[c(1,4,11,2,3,12,9,10)
+imp.time.frame <- timing.imp[c(1,4,11,2,3,12,9,10)]
 
 vol.frame <- redo_full_vol
 vol.frame[is.na(vol.frame)] <- 0 

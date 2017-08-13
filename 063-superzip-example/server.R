@@ -103,7 +103,7 @@ function(input, output, session) {
 		else{
       if (input$metricDE == "magnitude") {yvar <- "vol MAF"}
       else if (input$metricDE == "duration") {yvar <- "duration_days"}
-      else {yvar <- "intraannual_frequency_nmpks"}		
+      else {yvar <- "intraannual_frequency_numpeaks"}		
 	    d2 <- gauge_select_plot(c(first_site, sec_site, third_site), full = full_boolDE)
  	    my_barplot(d2, yvar, monthly = monthly_boolDE, full = full_boolDE)
 	  }

@@ -159,7 +159,8 @@ function(input, output, session) {
 	    labs <- c("January", "February","March", "April", "May","June", "July")
       legendTitle <- "COM Date of HMF"
 	    sizes <- c(21,21,21,21,21,21,21) 
-	    rad <- 10000
+			nonscalesize <- c(10000,10000,10000,10000,10000,10000,10000)
+	    #rad <- 10000
 	  }  
 		
 	  # size for legend icons
@@ -178,7 +179,7 @@ function(input, output, session) {
       classdata[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- i    
       classsize[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- nonscalesize[i]
     }
-		if( input$metric == "timing")	{classsize <- rad}						 
+		#if( input$metric == "timing")	{classsize <- rad}						 
      
     pal <- colorFactor(palette=colorlist, domain=dom, na.color="black")
     colorlist <- col2hex(colorlist)

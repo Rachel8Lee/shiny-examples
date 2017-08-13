@@ -197,7 +197,7 @@ function(input, output, session) {
 
   # Show a popup at the given location
   showSitePopup <- function(site_no, lat, lng) {
-    selectedSite <- allsites[allsites$site_no == site_no,]
+    selectedSite <- sitedata()[sitedata()$site_no == site_no,]
     content <- as.character(tagList(
       tags$h4("Site Number:", as.integer(selectedSite$site_no)),
       sprintf("Station Name: %s", selectedSite$station_nm), tags$br(),

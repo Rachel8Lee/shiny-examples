@@ -118,7 +118,7 @@ function(input, output, session) {
 	    labs <-  c("0","1 AF - 1 TAF","1TAF - 10TAF","10TAF- 50TAF","50TAF - 125TAF","125TAF - 200TAF","200TAF - 400TAF","400TAF - 800TAF","800TAF - 1.5MAF","1.5MAF - 2.5MAF","2.5MAF - 3.5MAF")
 	    legendTitle <- "Magnitude (HMF Volume)"
 	    zoomsize <- input$map_zoom
-      sizes <- c(3,5,7,9,12,15,18,21,24,27,30) 
+      sizes <- c(5,7,9,11,13,15,17,19,21,23,25) 
 			nonscalesize <- c(5000,5500,6000,6500,7000,7500,8000,8500,9000,9500,10000)
 	    #rad <- sitedata()$avg/120 + 3000
 	  }

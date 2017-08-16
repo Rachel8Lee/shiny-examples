@@ -120,7 +120,6 @@ function(input, output, session) {
 	    nonscalesize <- c(5000,5500,6000,6500,7000,7500,8000,8500,9000,9500,10000)
 	    #rad <- sitedata()$avg/120 + 3000
 	  }
-  
     else if (input$metric == "duration") {
 	    colorlist <- c("black","maroon","magenta","darkslateblue","royalblue","turquoise")
 	    bounds <- c(0,10,20,40,60,80)
@@ -130,7 +129,6 @@ function(input, output, session) {
 			nonscalesize <- c(5000,6000,7000,8000,9000,10000)
 	    #rad <- 150*sitedata()$avg + 3000
 	  }
-		
 		else if (input$metric == "intraannual frequency") {
 	    colorlist <- c("black","yellow","darkorange","deeppink","darkviolet","navy")
 	    bounds <- c(0,5,11,17,23,27)
@@ -140,7 +138,6 @@ function(input, output, session) {
 			nonscalesize <- c(5000,6000,7000,8000,9000,10000)
 	    #rad <- 300*sitedata()$avg + 3000
 	  }
-		
     else if (input$metric == "interannual frequency"){
       colorlist <- c("black", "aquamarine", "darkturquoise", "steelblue", "mediumblue", "navy")
       bounds <- c(0,20,40,60,80,100)
@@ -176,8 +173,7 @@ function(input, output, session) {
     for(i in 2:length(bounds)){
       classdata[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- i    
       classsize[which(colorData > bounds[[i-1]] & colorData <= bounds[[i]] )] <- nonscalesize[i]
-    }
-		#if( input$metric == "timing")	{classsize <- rad}						 
+    }				 
      
     pal <- colorFactor(palette=colorlist, domain=dom, na.color="black")
     colorlist <- col2hex(colorlist)
@@ -210,7 +206,7 @@ function(input, output, session) {
 		  unitMeasure<-"Fraction of Years"}
 	  else{
 			valuename<-"Timing"
-			unitMeasure<-"Timing"	}
+			unitMeasure<-"Month"	}
     content <- as.character(tagList(
       tags$h4("Site Number:", as.integer(selectedSite$site_no)),
       sprintf("Station Name: %s", selectedSite$station_nm), tags$br(),
@@ -233,8 +229,6 @@ function(input, output, session) {
     })
   })
 
-
   ## Data Explorer ###########################################
-  
   output$downloadData <- downloadHandler(filename = "temp.csv", content = function(file) {write.csv(sitedataDE(), file)})  
 }

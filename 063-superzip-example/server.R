@@ -196,18 +196,28 @@ function(input, output, session) {
   # Show a popup at the given location
   showSitePopup <- function(site_no, lat, lng) {
     selectedSite <- sitedata()[sitedata()$site_no == site_no,]
-	  if(selectedSite$valtype[1]=="vol AF")	{valuename<-"Magnitude"}
-		else if(selectedSite$valtype[1]=="duration_days")	{valuename<-"Duration"}
-	  else if(selectedSite$valtype[1]=="intraannual_frequency_numpeaks")	{valuename<-"Intra-Anual Frequency"}
-	  else if(selectedSite$valtype[1]=="intERannual_frequency_fraction_of_years")	{valuename<-"Inter-Annual Frequency"}
-	  else{valuename<-"Timing"}
+	  if(selectedSite$valtype[1]=="vol AF")	{
+		  valuename<-"Magnitude"
+			unitMeasure <-"TAF"}
+		else if(selectedSite$valtype[1]=="duration_days")	{
+			valuename<-"Duration"
+		  unitMeasure <-"Days"}
+	  else if(selectedSite$valtype[1]=="intraannual_frequency_numpeaks")	{
+			valuename<-"Intra-Anual Frequency"
+		  unitMeasure<-"Number of Peaks"}
+	  else if(selectedSite$valtype[1]=="intERannual_frequency_fraction_of_years")	{
+			valuename<-"Inter-Annual Frequency"
+		  unitMeasure<-"Fraction of Years"}
+	  else{
+			valuename<-"Timing"
+			unitMeasure<-"Timing"	}
     content <- as.character(tagList(
       tags$h4("Site Number:", as.integer(selectedSite$site_no)),
       sprintf("Station Name: %s", selectedSite$station_nm), tags$br(),
       sprintf("Longitude: %s", selectedSite$longitude), tags$br(),
       sprintf("Latitude: %s", selectedSite$latitude), tags$br(),
       sprintf("Status: %s", selectedSite$status), tags$br(),
-      sprintf("%s : %s", valuename, selectedSite$avg), tags$br()	    
+      sprintf("%s : %s %s", valuename, selectedSite$avg, unitMeasure), tags$br()	    
     ))
     leafletProxy("map") %>% addPopups(lng, lat, content, layerId = site_no)
   }

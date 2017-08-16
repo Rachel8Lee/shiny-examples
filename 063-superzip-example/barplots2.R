@@ -415,16 +415,16 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 			guides(fill = guide_legend(reverse = FALSE, nrow = 1)) +
 			labs(caption=cap)+
 			theme(
-					axis.text.x = element_text(color="black", size=rel(.8)),
-					axis.text.y = element_text(color="black", size=rel(.8)),
+					axis.text.x = element_text(color="black", size=rel(1)),
+					axis.text.y = element_text(color="black", size=rel(1)),
 					axis.title.x = element_text(color="black", size=rel(1)),
 					axis.title.y = element_text(color="black", size=rel(1)),
 #		title = element_text(color="black", size=rel(1)),
 					legend.position = "bottom",
-					legend.title = element_text(color="black", size=rel(.8)),
+					legend.title = element_text(color="black", size=rel(1)),
 					legend.text = element_text(color="black", size=rel(.6)),
 					strip.text = element_text(color="black", size=rel(.6)),
 					legend.key = element_rect(colour = 'black'),
-					plot.caption = element_text(size=rel(1.5))
+					plot.caption = element_text(size=rel(1))
 			)
 }

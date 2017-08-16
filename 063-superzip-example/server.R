@@ -123,8 +123,8 @@ function(input, output, session) {
   
     else if (input$metric == "duration") {
 	    colorlist <- c("black","maroon","magenta","darkslateblue","royalblue","turquoise")
-	    bounds <- c(0,27,52,77,102,130)
-	    labs <- c("0","1 - 27","28 - 52","53 - 77","78 - 102", "103 - 130")
+	    bounds <- c(0,10,20,40,60,80)
+	    labs <- c("0","1 - 10","10 - 20","20 - 40","40 - 60", "60 - 80")
 	    legendTitle <- "Duration (HMF Days)"
       sizes <- c(12,14,16,18,20,22) 
 			nonscalesize <- c(5000,6000,7000,8000,9000,10000)

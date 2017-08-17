@@ -198,6 +198,8 @@ function(input, output, session) {
                  weight = 1, color ="#000000", fillOpacity=0.9, fillColor=pal(classdata)) %>%
       addLegend("bottomleft", values=dom, colors=colorAdditions, title=legendTitle, layerId="colorLegend", 
                 opacity=0.9, labels=labelAdditions)
+		  addScaleBar("bottomright", imperial = TRUE)
+
   })
 
   # Show a popup at the given location

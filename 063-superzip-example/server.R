@@ -111,6 +111,7 @@ function(input, output, session) {
   # This observer is responsible for maintaining the circles and legend,
   # according to the variables the user has chosen to map to color and size.
   observe({
+		monthlyNO <- (input$period == "November to April" | input$period == "December to February" | input$period == "Hydrologic Year")
     if (input$metric == "magnitude") {
 	    colorlist <-  c("black","orangered","khaki1","olivedrab1","chartreuse3","green4","aquamarine2","deepskyblue4","blue","royalblue4","navyblue")
 	    bounds <- c(0,1000,10000,50000,125000,200000,400000,800000,1500000,2500000,3500000)
@@ -121,9 +122,13 @@ function(input, output, session) {
 	    #rad <- sitedata()$avg/120 + 3000
 	  }
     else if (input$metric == "duration") {
-	    colorlist <- c("black","maroon","magenta","darkslateblue","royalblue","turquoise")
-	    bounds <- c(0,10,20,40,60,80)
-	    labs <- c("0","1 - 10","10 - 20","20 - 40","40 - 60", "60 - 80")
+			colorlist <- c("black","maroon","magenta","darkslateblue","royalblue","turquoise")
+	    if (monthlyNO) {
+			  bounds <- c(0,10,20,40,60,80)
+	      labs <- c("0","1 - 10","10 - 20","20 - 40","40 - 60", "60 - 80") }
+			else {
+			  bounds <- c(0,2,4,6,8,10)
+	      labs <- c("0","1 - 2","2 - 4","4 - 6","6 - 8", "8 - 10") }
 	    legendTitle <- "Duration (HMF Days)"
       sizes <- c(12,14,16,18,20,22) 
 			nonscalesize <- c(5000,6000,7000,8000,9000,10000)

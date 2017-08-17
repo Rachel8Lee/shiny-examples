@@ -127,8 +127,8 @@ function(input, output, session) {
 			  bounds <- c(0,10,20,40,60,80)
 	      labs <- c("0","1 - 10","10 - 20","20 - 40","40 - 60", "60 - 80") }
 			else {
-			  bounds <- c(0,2,4,6,8,10)
-	      labs <- c("0","1 - 2","2 - 4","4 - 6","6 - 8", "8 - 10") }
+			  bounds <- c(0,6,12,18,24,31)
+	      labs <- c("0","1 - 6","6 - 12","12 - 18","18 - 24", "24 - 31") }
 	    legendTitle <- "Duration (HMF Days)"
       sizes <- c(12,14,16,18,20,22) 
 			nonscalesize <- c(5000,6000,7000,8000,9000,10000)
@@ -136,8 +136,14 @@ function(input, output, session) {
 	  }
 		else if (input$metric == "intraannual frequency") {
 	    colorlist <- c("black","yellow","darkorange","deeppink","darkviolet","navy")
-	    bounds <- c(0,5,11,17,23,27)
-	    labs <- c("0", "1 - 5","6 - 11", "12 - 17", "18 - 23","23 - 27")
+			if (monthlyNO) {
+	      bounds <- c(0,5,11,17,23,27)
+	      labs <- c("0", "1 - 5","6 - 11", "12 - 17", "18 - 23","23 - 27")
+			}
+			else {
+	      bounds <- c(0,1,2,6,8,10)
+	      labs <- c("0", "1 - 2","2 - 4", "4 - 6", "6 - 8","8 - 10")
+			}
       legendTitle <- "No. 1-Day Peaks"
 	    sizes <- c(12,14,16,18,20,22) 
 			nonscalesize <- c(5000,6000,7000,8000,9000,10000)

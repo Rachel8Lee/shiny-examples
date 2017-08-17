@@ -137,8 +137,8 @@ function(input, output, session) {
 		else if (input$metric == "intraannual frequency") {
 	    colorlist <- c("black","yellow","darkorange","deeppink","darkviolet","navy")
 			if (monthlyNO) {
-	      bounds <- c(0,5,11,17,23,27)
-	      labs <- c("0", "1 - 5","6 - 11", "12 - 17", "18 - 23","23 - 27")
+	      bounds <- c(0,4,8,12,16,20)
+	      labs <- c("0", "1 - 4","4 - 8", "8 - 12", "12 - 16","16 - 20")
 			}
 			else {
 	      bounds <- c(0,1,2,6,8,10)

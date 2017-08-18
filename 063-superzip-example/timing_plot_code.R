@@ -154,17 +154,17 @@ timingplot <- function(gauges, full=TRUE, all=FALSE){
 						x="\n Year Type", y="Date of center of mass over 90th percentile\n",
 						caption=cap)+
 				theme_light()+
-				theme(plot.title = element_text(hjust=0.5, size=rel(.9)),
-						axis.text.x = element_text(color="black", size=rel(.6)),
-						axis.text.y = element_text(color="black", size=rel(.6)),
-						axis.title.x = element_text(color="black", size=rel(.8)),
-						axis.title.y = element_text(color="black", size=rel(.8)),
+				theme(plot.title = element_text(hjust=0.5, size=rel(1)),
+						axis.text.x = element_text(color="black", size=rel(1)),
+						axis.text.y = element_text(color="black", size=rel(1)),
+						axis.title.x = element_text(color="black", size=rel(1)),
+						axis.title.y = element_text(color="black", size=rel(1)),
 						legend.position = "bottom",
-						legend.title = element_text(color="black", size=rel(.6)),
-						legend.text = element_text(color="black", size=rel(.6)),
-						strip.text = element_text(color="black", size=rel(.6)),
+						legend.title = element_text(color="black", size=rel(.8)),
+						legend.text = element_text(color="black", size=rel(.8)),
+						strip.text = element_text(color="black", size=rel(.8)),
 						plot.subtitle = element_text(hjust=0.5, size=rel(.8)),
-						plot.caption = element_text(size=rel(.5)))+
+						plot.caption = element_text(size=rel(.8)))+
 				guides(fill = guide_legend(reverse = FALSE, nrow = 1)) 	
 	}else{
 		p <- ggplot(data=timing.final) + geom_histogram(aes(x=avg, fill=yeartype), color="black", binwidth=14) + 
@@ -184,17 +184,17 @@ timingplot <- function(gauges, full=TRUE, all=FALSE){
 						x="Date", y="Count of Sites",
 						caption=cap)+
 				guides(fill = guide_legend(reverse = FALSE, nrow = 1)) +
-				theme(plot.title = element_text(hjust=0.5, size=rel(.9)),
-						axis.text.x = element_text(color="black", size=rel(.6)),
-						axis.text.y = element_text(color="black", size=rel(.6)),
-						axis.title.x = element_text(color="black", size=rel(.8)),
-						axis.title.y = element_text(color="black", size=rel(.8)),
+				theme(plot.title = element_text(hjust=0.5, size=rel(1)),
+						axis.text.x = element_text(color="black", size=rel(1)),
+						axis.text.y = element_text(color="black", size=rel(1)),
+						axis.title.x = element_text(color="black", size=rel(1)),
+						axis.title.y = element_text(color="black", size=rel(1)),
 						legend.position = "bottom",
-						legend.title = element_text(color="black", size=rel(.6)),
-						legend.text = element_text(color="black", size=rel(.6)),
-						strip.text = element_text(color="black", size=rel(.6)),
+						legend.title = element_text(color="black", size=rel(.8)),
+						legend.text = element_text(color="black", size=rel(.8)),
+						strip.text = element_text(color="black", size=rel(.8)),
 						plot.subtitle = element_text(hjust=0.5, size=rel(.8)),
-						plot.caption = element_text(size=rel(.5)))
+						plot.caption = element_text(size=rel(.8)))
 				
 	
 	}

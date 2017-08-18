@@ -1,24 +1,15 @@
 # Choices for drop-downs
 record_length <- c("Full" = "full", "Post-Impairment" = "post-impairment")	
-
 site_type <- c("Impaired" = "impaired", "Unimpaired" = "unimpaired")
-
 metric <- c("Magnitude" = "magnitude", "Duration" = "duration", "Inter-Annual Frequency" = "interannual frequency", 
 					"Intra-Annual Frequency" = "intraannual frequency", "Timing" = "timing")
- 
 period <- c("January"= "January", "February" = "February", "March" = "March", "April" = "April", 
 						"November" = "November", "December" = "December", "November to April" = "November to April", 
 						"December to February" = "December to February", "Hydrologic Year" = "Hydrologic Year")
-
 year_type <- c("All" = "all", "Above Normal" = "AN", "Below Normal" = "BN", "Critical" = "C", "Dry" = "D", "Wet" = "W")
-
-#sites <- paste("USGS ", gauge_data$site_no, ", ", gauge_data$station_nm, sep="")
-#siteblank <- c(" ", sites)
-#includeallsites <- c("All Sites", sites)
 
 #header
 header <- dashboardHeader(titleWidth=150, title = "Menu")
-
 sidebar <- dashboardSidebar(width=150,
 				sidebarMenu(
 					menuItem("Interactive Map", tabName="interactivemap", icon=icon("globe")),
@@ -92,7 +83,7 @@ bodies <- dashboardBody(
 									)),
 									fluidRow(column(width=12,
 									                box(width=NULL,
-									                    tags$style(type = "text/css", "#IMplot height:{10000px} !important;}"),
+									                    tags$style(type = "text/css", "#IMplot height:{20000px} !important;}"),
 									                    plotOutput("IMplot")
 									                )
 									)

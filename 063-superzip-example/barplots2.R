@@ -402,7 +402,7 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 	subd = d[d$period %in% p & d$valtype %in% yvar,]
 	ggplot(subd, aes(x = yeartype, fill = yeartype, y = avg))+ ylab(ylabel) +
 			facet_grid(gauge ~ period, scales = "free_y") + xlab("\nYear Type") + 
-			geom_bar(stat = "identity", color = "black") + #plottitle +
+			geom_bar(stat = "identity", color = "black") + plottitle +
 			geom_errorbar(aes(ymin = avg,ymax = ymax), width = 0.3)  +
 			scale_x_discrete(labels = c("C", "D", "BN", "AN", "W"," ", "All"), 
 					drop = FALSE) +
@@ -418,7 +418,7 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 					axis.text.x = element_text(color="black", size=rel(1)),
 					axis.text.y = element_text(color="black", size=rel(1)),
 					axis.title.x = element_text(color="black", size=rel(1)),
-					#axis.title.y = element_text(color="black", size=rel(1)),
+					axis.title.y = element_text(color="black", size=rel(1)),
 					title = element_text(color="black", size=rel(1)),
 					legend.position = "bottom",
 					legend.title = element_text(color="black", size=rel(1)),

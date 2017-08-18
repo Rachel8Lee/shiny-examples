@@ -422,9 +422,9 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 					title = element_text(color="black", size=rel(1)),
 					legend.position = "bottom",
 					legend.title = element_text(color="black", size=rel(1)),
-					legend.text = element_text(color="black", size=rel(.6)),
-					strip.text = element_text(color="black", size=rel(.6)),
+					legend.text = element_text(color="black", size=rel(.8)),
+					strip.text = element_text(color="black", size=rel(.8)),
 					legend.key = element_rect(color = 'black'),
-					#plot.caption = element_text(size=rel(1))
+					plot.caption = element_text(size=rel(1))
 			)
 }

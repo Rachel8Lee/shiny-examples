@@ -91,19 +91,19 @@ interplot <- function(gauges, monthly=TRUE, full=TRUE){
 					subtitle=rec,
 					x="\n Year Type", y="Number of Years \n",
 					caption=cap)+
-			theme(axis.text.x = element_text(color="black", size=rel(.6)),
-					axis.text.y = element_text(color="black", size=rel(.6)),
-					axis.title.x = element_text(color="black", size=rel(.8)),
-					axis.title.y = element_text(color="black", size=rel(.8)),
-					legend.text = element_text(color="black", size=rel(.6)),
-					strip.text = element_text(color="black", size=rel(.6)),
+			theme(axis.text.x = element_text(color="black", size=rel(.8)),
+					axis.text.y = element_text(color="black", size=rel(.8)),
+					axis.title.x = element_text(color="black", size=rel(1)),
+					axis.title.y = element_text(color="black", size=rel(1)),
+					legend.text = element_text(color="black", size=rel(.8)),
+					strip.text = element_text(color="black", size=rel(.8)),
 					legend.key = element_rect(colour = 'black'),
-					plot.title = element_text(hjust=0.5, size=rel(.9)),
-					plot.subtitle=element_text(hjust=0.5, size=rel(.8)),
+					plot.title = element_text(hjust=0.5, size=rel(1.1)),
+					plot.subtitle=element_text(hjust=0.5, size=rel(1)),
 					legend.position = "bottom",
-					plot.caption = element_text(size=rel(.5)),
-					legend.key.width = unit(0.02,"npc"),
-					legend.key.height = unit(0.02,"npc"))+
+					plot.caption = element_text(size=rel(.8)),
+					legend.key.width = unit(0.03,"npc"),
+					legend.key.height = unit(0.03,"npc"))+
 			guides(fill=guide_legend(title=" ", reverse=TRUE))+
 			scale_x_discrete(labels=c("C", "D", "BN", "AN","W"," ","All"), drop=FALSE)
 	return(p)

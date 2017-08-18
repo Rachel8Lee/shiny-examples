@@ -418,7 +418,7 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 					axis.text.x = element_text(color="black", size=rel(1)),
 					axis.text.y = element_text(color="black", size=rel(1)),
 					axis.title.x = element_text(color="black", size=rel(1)),
-					axis.title.y = element_text(color="black", size=rel(1)),
+					#axis.title.y = element_text(color="black", size=rel(1)),
 					title = element_text(color="black", size=rel(1)),
 					legend.position = "bottom",
 					legend.title = element_text(color="black", size=rel(1)),

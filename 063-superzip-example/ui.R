@@ -92,12 +92,12 @@ bodies <- dashboardBody(
 									)),
 									fluidRow(column(width=12,
 									                box(width=NULL,
-									                    tags$style(type = "text/css", "#IMplot height:{100vmax} !important;}"),
+									                    tags$style(type = "text/css", "#IMplot height:{10000px} !important;}"),
 									                    plotOutput("IMplot")
 									                )
 									)
 									)
-                     )
+                     )#100vmax
               )
     ),
     tabItem(tabName= "dataexplorer",

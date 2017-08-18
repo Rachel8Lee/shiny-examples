@@ -84,7 +84,7 @@ bodies <- dashboardBody(
 									fluidRow(column(width=12,
 									                box(width=NULL,
 									                    #tags$style(type = "text/css", "#IMplot height:{15000px} !important;}"),
-									                    plotOutput("IMplot", height = "805px")
+									                    plotOutput("IMplot", height = "810px")
 									                )
 									)
 									)

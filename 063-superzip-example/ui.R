@@ -84,7 +84,7 @@ bodies <- dashboardBody(
 									fluidRow(column(width=12,
 									                box(width=NULL,
 									                    #tags$style(type = "text/css", "#IMplot height:{15000px} !important;}"),
-									                    plotOutput("IMplot", height = "1000px")
+									                    plotOutput("IMplot", height = "800px")
 									                )
 									)
 									)
@@ -117,8 +117,7 @@ bodies <- dashboardBody(
 						fluidRow(				 
             column(width=12,
                    box(id="plotboxexplorer", width=NULL,
-                       tags$style(type = "text/css", "#testplot {height: calc(100vh - 410px) !important;}"),
-                       plotOutput("DEplot")
+                       plotOutput("DEplot", height = "800px")
                    )
             )
             ),

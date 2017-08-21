@@ -120,7 +120,6 @@ function(input, output, session) {
 	    legendTitle <- "Magnitude (HMF Volume)"
 	    sizes <- c(5,7,9,11,13,15,17,19,21,23,25) 
 	    nonscalesize <- c(5000,5500,6000,6500,7000,7500,8000,8500,9000,9500,10000)
-	    #rad <- sitedata()$avg/120 + 3000
 	  }
     else if (input$metric == "duration") {
 			colorlist <- c("black","maroon","magenta","darkslateblue","royalblue","turquoise")
@@ -133,7 +132,6 @@ function(input, output, session) {
 	    legendTitle <- "Duration (HMF Days)"
       sizes <- c(12,14,16,18,20,22) 
 			nonscalesize <- c(5000,6000,7000,8000,9000,10000)
-	    #rad <- 150*sitedata()$avg + 3000
 	  }
 		else if (input$metric == "intraannual frequency") {
 	    colorlist <- c("black","yellow","darkorange","deeppink","darkviolet","navy")
@@ -148,7 +146,6 @@ function(input, output, session) {
       legendTitle <- "No. 1-Day Peaks"
 	    sizes <- c(12,14,16,18,20,22) 
 			nonscalesize <- c(5000,6000,7000,8000,9000,10000)
-	    #rad <- 300*sitedata()$avg + 3000
 	  }
     else if (input$metric == "interannual frequency"){
       colorlist <- c("black", "aquamarine", "darkturquoise", "steelblue", "mediumblue", "navy")
@@ -157,7 +154,6 @@ function(input, output, session) {
       legendTitle <- "% of Years with HMF"
       sizes <- c(12,14,16,18,20,22)
 			nonscalesize <- c(5000,6000,7000,8000,9000,10000)
-      #rad <- 100*150*sitedata()$avg + 3000
     }
 		# timing 
 	  else { 	
@@ -167,11 +163,11 @@ function(input, output, session) {
       legendTitle <- "COM Date of HMF"
 	    sizes <- c(21,21,21,21,21,21,21) 
 			nonscalesize <- c(10000,10000,10000,10000,10000,10000,10000)
-	    #rad <- 10000
 	  }  
 		
 	  # size for legend icons
     #sizes <- sizes + (input$map_zoom - 6)
+		size = -93*input$map_zoom_size + 772
     dom <- seq(1,length(bounds),1)  
 	  
 		if(input$metric == "interannual frequency") {colorData <- sitedata()$avg*100}

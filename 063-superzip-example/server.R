@@ -138,7 +138,8 @@ function(input, output, session) {
 	      labs <- c("0","1 - 6","6 - 12","12 - 18","18 - 24", "24 - 31") }
 	    legendTitle <- "Duration (HMF Days)"
       sizes <- c(12,14,16,18,20,22)
-      switch((input$map_zoom_size-3),
+			zoomLevel <- input$map_zoom_size-3
+      switch(zoomLevel,
         {nonscalesize <- c(25000,30000,35000,40000,45000,50000)},
         {nonscalesize <- c(15000,18000,21000,24000,27000,30000)},
         {nonscalesize <- c(5000,6000,7000,8000,9000,10000)},

@@ -119,7 +119,14 @@ function(input, output, session) {
 	    labs <-  c("0","1 AF - 1 TAF","1TAF - 10TAF","10TAF- 50TAF","50TAF - 125TAF","125TAF - 200TAF","200TAF - 400TAF","400TAF - 800TAF","800TAF - 1.5MAF","1.5MAF - 2.5MAF","2.5MAF - 3.5MAF")
 	    legendTitle <- "Magnitude (HMF Volume)"
 	    sizes <- c(5,7,9,11,13,15,17,19,21,23,25) 
-	    nonscalesize <- c(5000,5500,6000,6500,7000,7500,8000,8500,9000,9500,10000)
+	    switch(input$map_zoom_size,
+        4={nonscalesize <-c(50000,50000,50000,50000,50000,50000,50000)},
+        5={nonscalesize <-   c(30000,30000,30000,30000,30000,30000,30000)},
+        6={nonscalesize <- c(5000,5500,6000,6500,7000,7500,8000,8500,9000,9500,10000),
+        7={nonscalesize <- c(5000,5000,5000,5000,5000,5000,5000)},
+        8={nonscalesize <- c(3000,3000,3000,3000,3000,3000,3000)},
+        9={nonscalesize <- c(2000,2000,2000,2000,2000,2000,2000)},
+       10={nonscalesize <- c(1000,1000,1000,1000,1000,1000,1000)})
 	  }
     else if (input$metric == "duration") {
 			colorlist <- c("black","maroon","magenta","darkslateblue","royalblue","turquoise")
@@ -130,8 +137,15 @@ function(input, output, session) {
 			  bounds <- c(0,6,12,18,24,31)
 	      labs <- c("0","1 - 6","6 - 12","12 - 18","18 - 24", "24 - 31") }
 	    legendTitle <- "Duration (HMF Days)"
-      sizes <- c(12,14,16,18,20,22) 
-			nonscalesize <- c(5000,6000,7000,8000,9000,10000)
+      sizes <- c(12,14,16,18,20,22)
+      switch(input$map_zoom_size,
+        4={nonscalesize <- c(25000,30000,35000,40000,45000,50000)},
+        5={nonscalesize <- c(15000,18000,21000,24000,27000,30000)},
+        6={nonscalesize <- c(5000,6000,7000,8000,9000,10000)},
+        7={nonscalesize <- c(2500,3000,3500,4000,4500,5000)},
+        8={nonscalesize <- c(1666,2000,2333,2666,3000,3333)},
+        9={nonscalesize <- c(1000,1200,1400,1600,1800,2000)},
+       10={nonscalesize <- c(500,600,700,800,900,1000)})
 	  }
 		else if (input$metric == "intraannual frequency") {
 	    colorlist <- c("black","yellow","darkorange","deeppink","darkviolet","navy")
@@ -145,15 +159,29 @@ function(input, output, session) {
 			}
       legendTitle <- "No. 1-Day Peaks"
 	    sizes <- c(12,14,16,18,20,22) 
-			nonscalesize <- c(5000,6000,7000,8000,9000,10000)
+      switch(input$map_zoom_size,
+        4={nonscalesize <- c(25000,30000,35000,40000,45000,50000)},
+        5={nonscalesize <- c(15000,18000,21000,24000,27000,30000)},
+        6={nonscalesize <- c(5000,6000,7000,8000,9000,10000)},
+        7={nonscalesize <- c(2500,3000,3500,4000,4500,5000)},
+        8={nonscalesize <- c(1666,2000,2333,2666,3000,3333)},
+        9={nonscalesize <- c(1000,1200,1400,1600,1800,2000)},
+       10={nonscalesize <- c(500,600,700,800,900,1000)})
 	  }
     else if (input$metric == "interannual frequency"){
       colorlist <- c("black", "aquamarine", "darkturquoise", "steelblue", "mediumblue", "navy")
       bounds <- c(0,20,40,60,80,100)
       labs <- c("0%", "1 - 20%", "20- 40%", "40 - 60%", "60 - 80%", "80 - 100%")
       legendTitle <- "% of Years with HMF"
-      sizes <- c(12,14,16,18,20,22)
-			nonscalesize <- c(5000,6000,7000,8000,9000,10000)
+			sizes <- c(12,14,16,18,20,22)
+      switch(input$map_zoom_size,
+        4={nonscalesize <- c(25000,30000,35000,40000,45000,50000)},
+        5={nonscalesize <- c(15000,18000,21000,24000,27000,30000)},
+        6={nonscalesize <- c(5000,6000,7000,8000,9000,10000)},
+        7={nonscalesize <- c(2500,3000,3500,4000,4500,5000)},
+        8={nonscalesize <- c(1666,2000,2333,2666,3000,3333)},
+        9={nonscalesize <- c(1000,1200,1400,1600,1800,2000)},
+       10={nonscalesize <- c(500,600,700,800,900,1000)})
     }
 		# timing 
 	  else { 	
@@ -161,13 +189,20 @@ function(input, output, session) {
 	    bounds <- c(1,2,3,4,5,6,7)
 	    labs <- c("January", "February","March", "April", "May","June", "July")
       legendTitle <- "COM Date of HMF"
-	    sizes <- c(21,21,21,21,21,21,21) 
-			nonscalesize <- c(10000,10000,10000,10000,10000,10000,10000)
+			sizes <- c(21,21,21,21,21,21,21) 
+      switch(input$map_zoom_size,
+        4={nonscalesize <-c(50000,50000,50000,50000,50000,50000,50000)},
+        5={nonscalesize <-   c(30000,30000,30000,30000,30000,30000,30000)},
+        6={nonscalesize <- c(10000,10000,10000,10000,10000,10000,10000)},
+        7={nonscalesize <- c(5000,5000,5000,5000,5000,5000,5000)},
+        8={nonscalesize <- c(3000,3000,3000,3000,3000,3000,3000)},
+        9={nonscalesize <- c(2000,2000,2000,2000,2000,2000,2000)},
+       10={nonscalesize <- c(1000,1000,1000,1000,1000,1000,1000)})
 	  }  
-		
-	  # size for legend icons
-    #sizes <- sizes + (input$map_zoom - 6)
-		size = -93*input$map_zoom_size + 772
+
+    else {
+
+		}
     dom <- seq(1,length(bounds),1)  
 	  
 		if(input$metric == "interannual frequency") {colorData <- sitedata()$avg*100}

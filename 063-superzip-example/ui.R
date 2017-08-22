@@ -27,7 +27,7 @@ bodies <- dashboardBody(
     tabItem(tabName="interactivemap",
 				
             fluidRow(
-              column(width=6,
+              column(width=5,
                      box(width=NULL, height=NULL,
                          tags$head(
                            # Include our custom CSS

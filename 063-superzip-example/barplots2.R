@@ -427,7 +427,7 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 					legend.key = element_rect(color = 'black'),
 				  legend.spacing.x = unit(0.5,'cm'),
 				  legend.spacing.y = unit(0.5,'cm'),
-				        legend.margin=margin(t = 0.01, unit='cm'),
+				        legend.margin=margin(t = 0, unit='cm'),
 					plot.caption = element_text(size=rel(1))
 			)
 }

@@ -425,8 +425,6 @@ my_barplot = function(d, yvar, monthly = TRUE, full = TRUE){
 					legend.text = element_text(color="black", size=rel(.8)),
 					strip.text = element_text(color="black", size=rel(.8)),
 					legend.key = element_rect(color = 'black'),
-				  legend.key.width = unit(0.03,"npc"),
-					legend.key.height = unit(0.03,"npc"),
 					plot.caption = element_text(size=rel(1))
 			)
 }

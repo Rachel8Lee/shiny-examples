@@ -27,7 +27,7 @@ bodies <- dashboardBody(
     tabItem(tabName="interactivemap",
 				
             fluidRow(
-              column(width=5,
+              column(width=6,
                      box(width=NULL, height=NULL,
                          tags$head(
                            # Include our custom CSS
@@ -40,7 +40,7 @@ bodies <- dashboardBody(
                          
                      )
               ),
-              column(width=7,
+              column(width=6,
                      fluidRow(tags$head(tags$style(HTML('
                                                         .form-group, .selectize-control {
                                                         margin-bottom: 5px;

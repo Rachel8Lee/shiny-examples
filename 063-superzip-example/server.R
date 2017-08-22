@@ -161,7 +161,7 @@ function(input, output, session) {
 			}
       legendTitle <- "No. 1-Day Peaks"
 	    sizes <- c(12,14,16,18,20,22) 
-      switch((input$map_zoom_size-3),
+      switch(zoomLevel,
         {nonscalesize <- c(25000,30000,35000,40000,45000,50000)},
         {nonscalesize <- c(15000,18000,21000,24000,27000,30000)},
         {nonscalesize <- c(5000,6000,7000,8000,9000,10000)},
@@ -176,7 +176,7 @@ function(input, output, session) {
       labs <- c("0%", "1 - 20%", "20- 40%", "40 - 60%", "60 - 80%", "80 - 100%")
       legendTitle <- "% of Years with HMF"
 			sizes <- c(12,14,16,18,20,22)
-      switch((input$map_zoom_size-3),
+      switch(zoomLevel,
         {nonscalesize <- c(25000,30000,35000,40000,45000,50000)},
         {nonscalesize <- c(15000,18000,21000,24000,27000,30000)},
         {nonscalesize <- c(5000,6000,7000,8000,9000,10000)},
@@ -192,7 +192,7 @@ function(input, output, session) {
 	    labs <- c("January", "February","March", "April", "May","June", "July")
       legendTitle <- "COM Date of HMF"
 			sizes <- c(21,21,21,21,21,21,21) 
-      switch((input$map_zoom_size-3),
+      switch(zoomLevel,
         {nonscalesize <-c(50000,50000,50000,50000,50000,50000,50000)},
         {nonscalesize <-   c(30000,30000,30000,30000,30000,30000,30000)},
         {nonscalesize <- c(10000,10000,10000,10000,10000,10000,10000)},

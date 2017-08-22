@@ -121,14 +121,14 @@ function(input, output, session) {
 	    legendTitle <- "Magnitude (HMF Volume)"
 	    sizes <- c(5,7,9,11,13,15,17,19,21,23,25) 
 			
-	    nonscalesize <- switch(zoomLevel,
-        c(50000,50000,50000,50000,50000,50000,50000),
-        c(30000,30000,30000,30000,30000,30000,30000),
-        c(5000,5500,6000,6500,7000,7500,8000,8500,9000,9500,10000),
-        c(5000,5000,5000,5000,5000,5000,5000),
-        c(3000,3000,3000,3000,3000,3000,3000),
-        c(2000,2000,2000,2000,2000,2000,2000),
-        c(1000,1000,1000,1000,1000,1000,1000))
+	    nonscalesize <- #switch(zoomLevel,
+        #c(50000,50000,50000,50000,50000,50000,50000),
+        #c(30000,30000,30000,30000,30000,30000,30000),
+        #c(5000,5500,6000,6500,7000,7500,8000,8500,9000,9500,10000),
+        #c(5000,5000,5000,5000,5000,5000,5000),
+        #c(3000,3000,3000,3000,3000,3000,3000),
+        #c(2000,2000,2000,2000,2000,2000,2000),
+        c(1000,1000,1000,1000,1000,1000,1000)#)
 	  }
     else if (input$metric == "duration") {
 			colorlist <- c("black","maroon","magenta","darkslateblue","royalblue","turquoise")
@@ -140,14 +140,16 @@ function(input, output, session) {
 	      labs <- c("0","1 - 6","6 - 12","12 - 18","18 - 24", "24 - 31") }
 	    legendTitle <- "Duration (HMF Days)"
       sizes <- c(12,14,16,18,20,22)
-      switch(zoomLevel,
-        {nonscalesize <- c(25000,30000,35000,40000,45000,50000)},
-        {nonscalesize <- c(15000,18000,21000,24000,27000,30000)},
-        {nonscalesize <- c(5000,6000,7000,8000,9000,10000)},
-        {nonscalesize <- c(2500,3000,3500,4000,4500,5000)},
-        {nonscalesize <- c(1666,2000,2333,2666,3000,3333)},
-        {nonscalesize <- c(1000,1200,1400,1600,1800,2000)},
-        {nonscalesize <- c(500,600,700,800,900,1000)})
+      #switch(zoomLevel,
+       # {nonscalesize <- c(25000,30000,35000,40000,45000,50000)},
+        #{nonscalesize <- c(15000,18000,21000,24000,27000,30000)},
+        #{nonscalesize <- c(5000,6000,7000,8000,9000,10000)},
+        #{nonscalesize <- c(2500,3000,3500,4000,4500,5000)},
+        #{nonscalesize <- c(1666,2000,2333,2666,3000,3333)},
+        #{nonscalesize <- c(1000,1200,1400,1600,1800,2000)},
+        #{
+		nonscalesize <- c(500,600,700,800,900,1000)
+    #})
 	  }
 		else if (input$metric == "intraannual frequency") {
 	    colorlist <- c("black","yellow","darkorange","deeppink","darkviolet","navy")
@@ -161,14 +163,16 @@ function(input, output, session) {
 			}
       legendTitle <- "No. 1-Day Peaks"
 	    sizes <- c(12,14,16,18,20,22) 
-      switch(zoomLevel,
-        {nonscalesize <- c(25000,30000,35000,40000,45000,50000)},
-        {nonscalesize <- c(15000,18000,21000,24000,27000,30000)},
-        {nonscalesize <- c(5000,6000,7000,8000,9000,10000)},
-        {nonscalesize <- c(2500,3000,3500,4000,4500,5000)},
-        {nonscalesize <- c(1666,2000,2333,2666,3000,3333)},
-        {nonscalesize <- c(1000,1200,1400,1600,1800,2000)},
-        {nonscalesize <- c(500,600,700,800,900,1000)})
+     # switch(zoomLevel,
+      #  {nonscalesize <- c(25000,30000,35000,40000,45000,50000)},
+       # {nonscalesize <- c(15000,18000,21000,24000,27000,30000)},
+        #{nonscalesize <- c(5000,6000,7000,8000,9000,10000)},
+        #{nonscalesize <- c(2500,3000,3500,4000,4500,5000)},
+        #{nonscalesize <- c(1666,2000,2333,2666,3000,3333)},
+        #{nonscalesize <- c(1000,1200,1400,1600,1800,2000)},
+        #{
+		nonscalesize <- c(500,600,700,800,900,1000)
+		#})
 	  }
     else if (input$metric == "interannual frequency"){
       colorlist <- c("black", "aquamarine", "darkturquoise", "steelblue", "mediumblue", "navy")
@@ -176,14 +180,16 @@ function(input, output, session) {
       labs <- c("0%", "1 - 20%", "20- 40%", "40 - 60%", "60 - 80%", "80 - 100%")
       legendTitle <- "% of Years with HMF"
 			sizes <- c(12,14,16,18,20,22)
-      switch(zoomLevel,
-        {nonscalesize <- c(25000,30000,35000,40000,45000,50000)},
-        {nonscalesize <- c(15000,18000,21000,24000,27000,30000)},
-        {nonscalesize <- c(5000,6000,7000,8000,9000,10000)},
-        {nonscalesize <- c(2500,3000,3500,4000,4500,5000)},
-        {nonscalesize <- c(1666,2000,2333,2666,3000,3333)},
-        {nonscalesize <- c(1000,1200,1400,1600,1800,2000)},
-        {nonscalesize <- c(500,600,700,800,900,1000)})
+      #switch(zoomLevel,
+       # {nonscalesize <- c(25000,30000,35000,40000,45000,50000)},
+        #{nonscalesize <- c(15000,18000,21000,24000,27000,30000)},
+        #{nonscalesize <- c(5000,6000,7000,8000,9000,10000)},
+        #{nonscalesize <- c(2500,3000,3500,4000,4500,5000)},
+        #{nonscalesize <- c(1666,2000,2333,2666,3000,3333)},
+        #{nonscalesize <- c(1000,1200,1400,1600,1800,2000)},
+        #{
+	    nonscalesize <- c(500,600,700,800,900,1000)
+    #})
     }
 		# timing 
 	  else { 	
@@ -192,14 +198,16 @@ function(input, output, session) {
 	    labs <- c("January", "February","March", "April", "May","June", "July")
       legendTitle <- "COM Date of HMF"
 			sizes <- c(21,21,21,21,21,21,21) 
-      switch(zoomLevel,
-        {nonscalesize <-c(50000,50000,50000,50000,50000,50000,50000)},
-        {nonscalesize <-   c(30000,30000,30000,30000,30000,30000,30000)},
-        {nonscalesize <- c(10000,10000,10000,10000,10000,10000,10000)},
-        {nonscalesize <- c(5000,5000,5000,5000,5000,5000,5000)},
-        {nonscalesize <- c(3000,3000,3000,3000,3000,3000,3000)},
-        {nonscalesize <- c(2000,2000,2000,2000,2000,2000,2000)},
-        {nonscalesize <- c(1000,1000,1000,1000,1000,1000,1000)})
+      #switch(zoomLevel,
+       # {nonscalesize <-c(50000,50000,50000,50000,50000,50000,50000)},
+       # {nonscalesize <- c(30000,30000,30000,30000,30000,30000,30000)},
+       # {nonscalesize <- c(10000,10000,10000,10000,10000,10000,10000)},
+       # {nonscalesize <- c(5000,5000,5000,5000,5000,5000,5000)},
+       # {nonscalesize <- c(3000,3000,3000,3000,3000,3000,3000)},
+       # {nonscalesize <- c(2000,2000,2000,2000,2000,2000,2000)},
+        #{
+		nonscalesize <- c(1000,1000,1000,1000,1000,1000,1000)
+	  #})
 	  }  
 
     dom <- seq(1,length(bounds),1)  

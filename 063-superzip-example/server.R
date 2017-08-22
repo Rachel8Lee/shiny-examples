@@ -112,6 +112,7 @@ function(input, output, session) {
   # This observer is responsible for maintaining the circles and legend,
   # according to the variables the user has chosen to map to color and size.
   observe({
+	  zoomLevel <- 3
 		monthlyNO <- (input$period == "November to April" | input$period == "December to February" | input$period == "Hydrologic Year")
     if (input$metric == "magnitude") {
 	    colorlist <-  c("black","orangered","khaki1","olivedrab1","chartreuse3","green4","aquamarine2","deepskyblue4","blue","royalblue4","navyblue")
@@ -119,7 +120,7 @@ function(input, output, session) {
 	    labs <-  c("0","1 AF - 1 TAF","1TAF - 10TAF","10TAF- 50TAF","50TAF - 125TAF","125TAF - 200TAF","200TAF - 400TAF","400TAF - 800TAF","800TAF - 1.5MAF","1.5MAF - 2.5MAF","2.5MAF - 3.5MAF")
 	    legendTitle <- "Magnitude (HMF Volume)"
 	    sizes <- c(5,7,9,11,13,15,17,19,21,23,25) 
-			zoomLevel <- as.integer(input$map_zoom_size - 3)
+			
 	    switch(zoomLevel,
         {nonscalesize <-c(50000,50000,50000,50000,50000,50000,50000)},
         {nonscalesize <- c(30000,30000,30000,30000,30000,30000,30000)},
@@ -139,7 +140,6 @@ function(input, output, session) {
 	      labs <- c("0","1 - 6","6 - 12","12 - 18","18 - 24", "24 - 31") }
 	    legendTitle <- "Duration (HMF Days)"
       sizes <- c(12,14,16,18,20,22)
-			zoomLevel <- input$map_zoom_size-3
       switch(zoomLevel,
         {nonscalesize <- c(25000,30000,35000,40000,45000,50000)},
         {nonscalesize <- c(15000,18000,21000,24000,27000,30000)},

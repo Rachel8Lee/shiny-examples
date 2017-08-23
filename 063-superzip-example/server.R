@@ -138,7 +138,7 @@ function(input, output, session) {
 			5000,5000,5000,5000,5000,5000,5000,
       3000,3000,3000,3000,3000,3000,3000,
       2000,2000,2000,2000,2000,2000,2000,
-      1000,1000,1000,1000,1000,1000,1000), nrow=7, ncol=6, byrow = TRUE
+      1000,1000,1000,1000,1000,1000,1000), nrow=7, ncol=7, byrow = TRUE
 		)
 		monthlyNO <- (input$period == "November to April" | input$period == "December to February" | input$period == "Hydrologic Year")
     if (input$metric == "magnitude") {

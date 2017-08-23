@@ -112,7 +112,7 @@ function(input, output, session) {
   # This observer is responsible for maintaining the circles and legend,
   # according to the variables the user has chosen to map to color and size.
   observe({
-	  zoomLevel <- 6#input$map_zoom - 3
+	  zoomLevel <- input$map_zoom - 3
 		monthlyNO <- (input$period == "November to April" | input$period == "December to February" | input$period == "Hydrologic Year")
     if (input$metric == "magnitude") {
 	    colorlist <-  c("black","orangered","khaki1","olivedrab1","chartreuse3","green4","aquamarine2","deepskyblue4","blue","royalblue4","navyblue")
@@ -128,7 +128,7 @@ function(input, output, session) {
         #c(5000,5000,5000,5000,5000,5000,5000),
         #c(3000,3000,3000,3000,3000,3000,3000),
         #c(2000,2000,2000,2000,2000,2000,2000),
-        c(1000,1000,1000,1000,1000,1000,1000)#)
+        zoomLevel * c(1000,1000,1000,1000,1000,1000,1000)#)
 	  }
     else if (input$metric == "duration") {
 			colorlist <- c("black","maroon","magenta","darkslateblue","royalblue","turquoise")

@@ -114,8 +114,8 @@ function(input, output, session) {
   # according to the variables the user has chosen to map to color and size.
   observe({
 	  zoomInt <- input$map_zoom - 3
-	  zoomInt <- min(10, zoomInt)
-	  zoomInt <- max(4, zoomInt)
+	  zoomInt <- min(7, zoomInt)
+	  zoomInt <- max(1, zoomInt)
 		sizetableMag <- matrix(
 			c(25000,27500,30000,32500,35000,37500,40000,42500,45000,47500,50000,	
 		  15000,16500,18000,19500,21000,22500,24000,25500,27000,28500,30000,	

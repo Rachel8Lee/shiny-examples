@@ -114,6 +114,32 @@ function(input, output, session) {
   # according to the variables the user has chosen to map to color and size.
   observe({
 	  zoomInt <- input$map_zoom - 3
+		sizetableMag <- matrix(
+			c(25000,27500,30000,32500,35000,37500,40000,42500,45000,47500,50000,	
+		  15000,16500,18000,19500,21000,22500,24000,25500,27000,28500,30000,	
+			5000,5500,6000,6500,7000,7500,8000,8500,9000,9500,10000,	
+			2500,2750,3000,3250,3500,3750,4000,4250,4500,4750,5000,	
+			1666,1833,2000,2167,2333,2500,2666,2833,3000,3167,3333,
+			1000,1100,1200,1300,1400,1500,1600,1700,1800,1900,2000,
+			500,550,600,650,700,750,800,850,900,950,1000), nrow=7, ncol=11, byrow = TRUE
+		)
+		sizetable <- matrix(
+			c(25000,30000,35000,40000,45000,50000,
+      15000,18000,21000,24000,27000,30000,
+      5000,6000,7000,8000,9000,10000,
+      2500,3000,3500,4000,4500,5000,
+      1666,2000,2333,2666,3000,3333,
+      1000,1200,1400,1600,1800,2000,
+      500,600,700,800,900,1000), nrow=7, ncol=6, byrow = TRUE)
+		sizetableTim <- matrix(
+		  c(50000,50000,50000,50000,50000,50000,50000,
+      30000,30000,30000,30000,30000,30000,30000,
+      10000,10000,10000,10000,10000,10000,10000, 
+			5000,5000,5000,5000,5000,5000,5000,
+      3000,3000,3000,3000,3000,3000,3000,
+      2000,2000,2000,2000,2000,2000,2000,
+      1000,1000,1000,1000,1000,1000,1000), nrow=7, ncol=6, byrow = TRUE
+		)
 		monthlyNO <- (input$period == "November to April" | input$period == "December to February" | input$period == "Hydrologic Year")
     if (input$metric == "magnitude") {
 	    colorlist <-  c("black","orangered","khaki1","olivedrab1","chartreuse3","green4","aquamarine2","deepskyblue4","blue","royalblue4","navyblue")
@@ -121,13 +147,7 @@ function(input, output, session) {
 	    labs <-  c("0","1 AF - 1 TAF","1TAF - 10TAF","10TAF- 50TAF","50TAF - 125TAF","125TAF - 200TAF","200TAF - 400TAF","400TAF - 800TAF","800TAF - 1.5MAF","1.5MAF - 2.5MAF","2.5MAF - 3.5MAF")
 	    legendTitle <- "Magnitude (HMF Volume)"
 	    sizes <- c(5,7,9,11,13,15,17,19,21,23,25) 
-			
-	    rawSize <- c(5000,5500,6000,6500,7000,7500,8000,8500,9000,9500,10000)
-			nonscalesize <-1719 -401*rawSize+ 23*rawSize^2
-        #c(5000,5000,5000,5000,5000,5000,5000),
-        #c(3000,3000,3000,3000,3000,3000,3000),
-        #c(2000,2000,2000,2000,2000,2000,2000),
-         #c(1000,1000,1000,1000,1000,1000,1000))
+			nonscalesize <- sizetableMag[zoomInt,]
 	  }
     else if (input$metric == "duration") {
 			colorlist <- c("black","maroon","magenta","darkslateblue","royalblue","turquoise")
@@ -139,16 +159,7 @@ function(input, output, session) {
 	      labs <- c("0","1 - 6","6 - 12","12 - 18","18 - 24", "24 - 31") }
 	    legendTitle <- "Duration (HMF Days)"
       sizes <- c(12,14,16,18,20,22)
-      #switch(zoomLevel,
-       # {nonscalesize <- c(25000,30000,35000,40000,45000,50000)},
-        #{nonscalesize <- c(15000,18000,21000,24000,27000,30000)},
-        #{nonscalesize <- c(5000,6000,7000,8000,9000,10000)},
-        #{nonscalesize <- c(2500,3000,3500,4000,4500,5000)},
-        #{nonscalesize <- c(1666,2000,2333,2666,3000,3333)},
-        #{nonscalesize <- c(1000,1200,1400,1600,1800,2000)},
-        #{
-		nonscalesize <- c(500,600,700,800,900,1000)
-    #})
+      nonscalesize <- sizetable[zoomInt,]
 	  }
 		else if (input$metric == "intraannual frequency") {
 	    colorlist <- c("black","yellow","darkorange","deeppink","darkviolet","navy")
@@ -162,16 +173,7 @@ function(input, output, session) {
 			}
       legendTitle <- "No. 1-Day Peaks"
 	    sizes <- c(12,14,16,18,20,22) 
-     # switch(zoomLevel,
-      #  {nonscalesize <- c(25000,30000,35000,40000,45000,50000)},
-       # {nonscalesize <- c(15000,18000,21000,24000,27000,30000)},
-        #{nonscalesize <- c(5000,6000,7000,8000,9000,10000)},
-        #{nonscalesize <- c(2500,3000,3500,4000,4500,5000)},
-        #{nonscalesize <- c(1666,2000,2333,2666,3000,3333)},
-        #{nonscalesize <- c(1000,1200,1400,1600,1800,2000)},
-        #{
-		nonscalesize <- c(500,600,700,800,900,1000)
-		#})
+      nonscalesize <- sizetable[zoomInt,]
 	  }
     else if (input$metric == "interannual frequency"){
       colorlist <- c("black", "aquamarine", "darkturquoise", "steelblue", "mediumblue", "navy")
@@ -179,16 +181,7 @@ function(input, output, session) {
       labs <- c("0%", "1 - 20%", "20- 40%", "40 - 60%", "60 - 80%", "80 - 100%")
       legendTitle <- "% of Years with HMF"
 			sizes <- c(12,14,16,18,20,22)
-      #switch(zoomLevel,
-       # {nonscalesize <- c(25000,30000,35000,40000,45000,50000)},
-        #{nonscalesize <- c(15000,18000,21000,24000,27000,30000)},
-        #{nonscalesize <- c(5000,6000,7000,8000,9000,10000)},
-        #{nonscalesize <- c(2500,3000,3500,4000,4500,5000)},
-        #{nonscalesize <- c(1666,2000,2333,2666,3000,3333)},
-        #{nonscalesize <- c(1000,1200,1400,1600,1800,2000)},
-        #{
-	    nonscalesize <- c(500,600,700,800,900,1000)
-    #})
+      nonscalesize <- sizetable[zoomInt,]
     }
 		# timing 
 	  else { 	
@@ -197,16 +190,7 @@ function(input, output, session) {
 	    labs <- c("January", "February","March", "April", "May","June", "July")
       legendTitle <- "COM Date of HMF"
 			sizes <- c(21,21,21,21,21,21,21) 
-      #switch(zoomLevel,
-       # {nonscalesize <-c(50000,50000,50000,50000,50000,50000,50000)},
-       # {nonscalesize <- c(30000,30000,30000,30000,30000,30000,30000)},
-       # {nonscalesize <- c(10000,10000,10000,10000,10000,10000,10000)},
-       # {nonscalesize <- c(5000,5000,5000,5000,5000,5000,5000)},
-       # {nonscalesize <- c(3000,3000,3000,3000,3000,3000,3000)},
-       # {nonscalesize <- c(2000,2000,2000,2000,2000,2000,2000)},
-        #{
-		nonscalesize <- c(1000,1000,1000,1000,1000,1000,1000)
-	  #})
+      nonscalesize <- sizetableTim[zoomInt,]
 	  }  
 
     dom <- seq(1,length(bounds),1)  

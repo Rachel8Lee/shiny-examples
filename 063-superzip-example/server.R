@@ -54,6 +54,7 @@ function(input, output, session) {
 	  return(temp)
 	})
 	
+	output$zoomLevel <- renderText({input$map_zoom})
   output$IMplot <- renderPlot({
     # isolate site ID
 	  gauge <- strsplit(input$site, " ")[[1]][2]

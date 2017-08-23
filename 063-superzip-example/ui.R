@@ -85,6 +85,7 @@ bodies <- dashboardBody(
 									                box(width=NULL,
 									                    #tags$style(type = "text/css", "#IMplot height:{15000px} !important;}"),
 									                    plotOutput("IMplot", height = "810px")
+																			textOutput("zoomLevel")
 									                )
 									)
 									)

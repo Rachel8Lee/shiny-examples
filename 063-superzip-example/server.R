@@ -261,9 +261,9 @@ function(input, output, session) {
     event <- input$map_shape_click
     if (is.null(event))
       return()
-    isolate({
+    #isolate({
       showSitePopup(event$id, event$lat, event$lng)
-    })
+    #})
   })
 
   ## Data Explorer ###########################################

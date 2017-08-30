@@ -53,18 +53,31 @@ function(input, output, session) {
 	  temp <- temp[order(temp$avg, decreasing = TRUE),]
 	  return(temp)
 	})
+
+  whichSiteInput <- reactiveValues(reactInd = 0)
+	
+	observe({
+    input$map_shape_click
+    whichSiteInput$reactInd <- 1
+  })
+	
+  observe({
+    input$site
+		input$sitetiming
+    whichSiteInput$reactInd <- 2
+  })
 	
   output$IMplot <- renderPlot({
     # isolate site ID
-    event <- input$map_shape_click
-		if (is.null(event)){
+    if (whichSiteInput$reactInd == 2){
 	    gauge <- strsplit(input$site, " ")[[1]][2]
 	    gauge <- strsplit(gauge, ",")[[1]][1]
 			gaugetim <- strsplit(input$sitetiming, " ")[[1]][2]
 	  	gaugetim <- strsplit(gaugetim, ",")[[1]][1]
 		}
 		else {
-			gauge <-event$id
+			event <- input$map_shape_click
+			gauge <- event$id
 		  gaugetim <-event$id
 		}
 	  full_bool <- (input$record == "full")

@@ -10,8 +10,7 @@ source("intERplotscode.R")
 source("timing_plot_code.R")
 
 function(input, output, session) {
-## Interactive Map ###########################################
-# Create the map
+  ## Interactive Map ##
   output$map <- renderLeaflet({
     leaflet() %>%
       addTiles(
@@ -22,7 +21,7 @@ function(input, output, session) {
       setView(lng = -120.51, lat = 38.06, zoom = 6)
   })
 	
- # reactive data set 
+  # reactive data set 
   sitedata <- reactive({	      
 	  if (input$metric == "magnitude") {
 	    temp <- subset(allsites, allsites$tag == input$record & allsites$yeartype == input$yeartype & allsites$period == input$period & allsites$valtype == "vol AF") }
@@ -38,29 +37,13 @@ function(input, output, session) {
 		  temp <- temp[which(temp$status == input$sitetype),]}
 	  return(temp)
 	})
-	
-	# to download
-	sitedataDE <- reactive({	      
-	  if (input$metricDE == "magnitude") {
-	    temp <- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "vol AF") }
-          else if (input$metricDE == "duration") {
-	    temp <- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "duration_days") }
-	  else if (input$metricDE == "intraannual frequency"){
-	    temp <- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "intraannual_frequency_numpeaks") }
-	  else if (input$metricDE == "interannual frequency"){
-			temp <- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "intERannual_frequency_fraction_of_years") }
-	  else {temp <- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$valtype == "timing")}
-	  temp <- temp[order(temp$avg, decreasing = TRUE),]
-	  return(temp)
-	})
 
+	## show barplot based on map icon click or drop down menu
   whichSiteInput <- reactiveValues(reactInd = 0)
-	
 	observe({
     input$map_shape_click
     whichSiteInput$reactInd <- 1
   })
-	
   observe({
     input$site
 		input$sitetiming
@@ -141,7 +124,6 @@ function(input, output, session) {
 			5000,5500,6000,6500,7000,7500,8000,8500,9000,9500,10000,	
 			3333,3666,4000,4333,4666,5000,5333,5666,6000,6333,6666,				
 		  2500,2750,3000,3250,3500,3750,4000,4250,4500,4750,5000,	
-			#1666,1833,2000,2167,2333,2500,2666,2833,3000,3167,3333,
 			1000,1100,1200,1300,1400,1500,1600,1700,1800,1900,2000,
 			500,550,600,650,700,750,800,850,900,950,1000), nrow=7, ncol=11, byrow = TRUE
 		)
@@ -151,7 +133,6 @@ function(input, output, session) {
       5000,6000,7000,8000,9000,10000,
 			3333,4000,4666,5333,6000,6666,	
       2500,3000,3500,4000,4500,5000,
-      #1666,2000,2333,2666,3000,3333,
       1000,1200,1400,1600,1800,2000,
       500,600,700,800,900,1000), nrow=7, ncol=6, byrow = TRUE)
 		sizetableTim <- matrix(
@@ -160,7 +141,6 @@ function(input, output, session) {
       10000,10000,10000,10000,10000,10000,10000, 
 			7500,7500,7500,7500,7500,7500,7500,
 			5000,5000,5000,5000,5000,5000,5000,
-      #3000,3000,3000,3000,3000,3000,3000,
       2000,2000,2000,2000,2000,2000,2000,
       1000,1000,1000,1000,1000,1000,1000), nrow=7, ncol=7, byrow = TRUE
 		)
@@ -281,11 +261,23 @@ function(input, output, session) {
     event <- input$map_shape_click
     if (is.null(event))
       return()
-    #isolate({
-      showSitePopup(event$id, event$lat, event$lng)
-    #})
+    showSitePopup(event$id, event$lat, event$lng)
   })
 
-  ## Data Explorer ###########################################
+  ## Data Explorer ##
+  # to download
+	sitedataDE <- reactive({	      
+	  if (input$metricDE == "magnitude") {
+	    temp <- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "vol AF") }
+          else if (input$metricDE == "duration") {
+	    temp <- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "duration_days") }
+	  else if (input$metricDE == "intraannual frequency"){
+	    temp <- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "intraannual_frequency_numpeaks") }
+	  else if (input$metricDE == "interannual frequency"){
+			temp <- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$period == input$periodDE & allsites$valtype == "intERannual_frequency_fraction_of_years") }
+	  else {temp <- subset(allsites, allsites$tag == input$recordDE & allsites$yeartype == input$yeartypeDE & allsites$valtype == "timing")}
+	  temp <- temp[order(temp$avg, decreasing = TRUE),]
+	  return(temp)
+	})
   output$downloadData <- downloadHandler(filename = "temp.csv", content = function(file) {write.csv(sitedataDE(), file)})  
 }

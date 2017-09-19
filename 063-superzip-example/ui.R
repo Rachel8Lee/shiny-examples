@@ -80,7 +80,7 @@ bodies <- dashboardBody(
 									                    plotOutput("IMplot", height = "650px")
 									                )
 									)
-									)
+									))
               )
     ),
 		tabItem(tabName="STARRmap",

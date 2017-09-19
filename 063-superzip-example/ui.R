@@ -26,7 +26,6 @@ bodies <- dashboardBody(
                    ')),
   tabItems(
     tabItem(tabName="interactivemap",
-				
             fluidRow(
               column(width=6,
                      box(width=NULL, height=NULL,
@@ -36,25 +35,19 @@ bodies <- dashboardBody(
                            includeScript("gomap.js")
                          ),
                          tags$style(type = "text/css", "#map {height: calc(100vh - 100px) !important;}"),
-                         
-                         leafletOutput("map")
-                         
+                         leafletOutput("map") 
                      )
               ),
               column(width=6,
-                     fluidRow(tags$head(tags$style(HTML('
-                                                        .form-group, .selectize-control {
-                                                        margin-bottom: 5px;
-                                                        }'))), 
-									div(
-									column(width=4,
-											box(id="selectbox",width=NULL, 
-													selectInput("record","Record Length", record_length),
-													selectInput("metric", "Metric", metric)
+                     fluidRow(tags$head(tags$style(HTML('.form-group, .selectize-control {margin-bottom: 5px;}'))), 
+									   div(
+									       column(width=4,
+											          box(id="selectbox",width=NULL, 
+													        selectInput("record","Record Length", record_length),
+													        selectInput("metric", "Metric", metric)
 												)
-										
 									),
-									column(width=4,
+								     	column(width=4,
 										  box(id="selectbox2",width=NULL, 
 											conditionalPanel("input.metric != 'timing'",
 													selectInput("period","Time Period", period),
@@ -88,11 +81,9 @@ bodies <- dashboardBody(
 									                )
 									)
 									)
-                     )#100vmax
               )
     ),
 		tabItem(tabName="STARRmap",
-				
             fluidRow(
               column(width=6,
                      box(width=NULL, height=NULL,
@@ -101,32 +92,27 @@ bodies <- dashboardBody(
                            includeScript("gomap.js")
                          ),
                          tags$style(type = "text/css", "#map {height: calc(100vh - 100px) !important;}"),
-                         
                          leafletOutput("map")
-                         
                      )
               ),
               column(width=6,
-                     fluidRow(tags$head(tags$style(HTML('
-                                                        .form-group, .selectize-control {
-                                                        margin-bottom: 5px;
-                                                        }'))), 
+                     fluidRow(tags$head(tags$style(HTML('.form-group, .selectize-control {margin-bottom: 5px;}'))), 
 									div(
 									column(width=4,
 											box(id="selectbox",width=NULL, 
-													selectInput("record","Record Length", record_length),
-													selectInput("metric", "Metric", metric)
+													selectInput("record","Record Length", record_lengthSTARR),
+													selectInput("metric", "Metric", metricSTARR)
 												)
 										
 									),
 									column(width=4,
 										  box(id="selectbox2",width=NULL, 
 											conditionalPanel("input.metric != 'timing'",
-													selectInput("period","Time Period", period),
-													selectInput("yeartype", "Year Type", year_type)
+													selectInput("period","Time Period", periodSTARR),
+													selectInput("yeartype", "Year Type", year_typeSTARR)
 											),
 											conditionalPanel("input.metric == 'timing'",
-													selectInput("yeartypetim", "Year Type", year_type)
+													selectInput("yeartypetim", "Year Type", year_typeSTARR)
 											)	 
 									  )
 									),

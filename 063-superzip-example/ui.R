@@ -84,7 +84,6 @@ bodies <- dashboardBody(
 									)),
 									fluidRow(column(width=12,
 									                box(width=NULL,
-									                    #tags$style(type = "text/css", "#IMplot height:{15000px} !important;}"),
 									                    plotOutput("IMplot", height = "650px")
 									                )
 									)
@@ -98,7 +97,6 @@ bodies <- dashboardBody(
               column(width=6,
                      box(width=NULL, height=NULL,
                          tags$head(
-                           # Include our custom CSS
                            includeCSS("styles.css"),
                            includeScript("gomap.js")
                          ),
@@ -151,7 +149,7 @@ bodies <- dashboardBody(
 									))
 									
                      )
-              #)
+              )
     ),
     tabItem(tabName= "dataexplorer",
             fluidRow(column(width=6,

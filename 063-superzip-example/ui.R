@@ -100,19 +100,19 @@ bodies <- dashboardBody(
 									div(
 									column(width=4,
 											box(id="selectbox",width=NULL, 
-													selectInput("record","Record Length", record_lengthSTARR),
-													selectInput("metric", "Metric", metricSTARR)
+													selectInput("record","Record Length", record_length),
+													selectInput("metric", "Metric", metric)
 												)
 										
 									),
 									column(width=4,
 										  box(id="selectbox2",width=NULL, 
 											conditionalPanel("input.metric != 'timing'",
-													selectInput("period","Time Period", periodSTARR),
-													selectInput("yeartype", "Year Type", year_typeSTARR)
+													selectInput("period","Time Period", period),
+													selectInput("yeartype", "Year Type", year_type)
 											),
 											conditionalPanel("input.metric == 'timing'",
-													selectInput("yeartypetim", "Year Type", year_typeSTARR)
+													selectInput("yeartypetim", "Year Type", year_type)
 											)	 
 									  )
 									),

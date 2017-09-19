@@ -13,7 +13,7 @@ header <- dashboardHeader(titleWidth=150, title = "Menu")
 sidebar <- dashboardSidebar(width=150,
 				sidebarMenu(
 					menuItem("Interactive Map", tabName="interactivemap", icon=icon("globe")),
-					menuItem("STARR Map", tabName="STARRmap", icon=icon("globe")),
+					menuItem("STARR Map", tabName="STARRmap", icon=icon("star")),
 					menuItem("Data Explorer", tabName = "dataexplorer", icon=icon("info-circle"))
 				)
 )

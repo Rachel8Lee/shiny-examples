@@ -148,16 +148,10 @@ bodies <- dashboardBody(
 													selectInput("sitetiming", "Site Selection", includeallsites)
 											)	 
 									  ) 
-									)),
-									fluidRow(column(width=12,
-									                box(width=NULL,
-									                    #tags$style(type = "text/css", "#IMplot height:{15000px} !important;}"),
-									                    plotOutput("IMplot", height = "650px")
-									                )
-									)
-									)
-                     )
-              )
+									))
+									
+                    # )
+              #)
     ),
     tabItem(tabName= "dataexplorer",
             fluidRow(column(width=6,

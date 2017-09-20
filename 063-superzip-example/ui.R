@@ -102,49 +102,7 @@ bodies <- dashboardBody(
                          ),
                          tags$style(type = "text/css", "#map {height: calc(100vh - 100px) !important;}"),
                          leafletOutput("map")
-                     )
-              ),
-              column(width=6,
-                     fluidRow(tags$head(tags$style(HTML('.form-group, .selectize-control {margin-bottom: 5px;}'))), 
-									div(
-									column(width=4,
-											box(id="selectbox",width=NULL, 
-													selectInput("recordSTARR","Record Length", record_length),
-													selectInput("metricSTARR", "Metric", metric)
-												)
-										
-									),
-									column(width=4,
-										  box(id="selectbox2",width=NULL, 
-											conditionalPanel("input.metricSTARR != 'timing'",
-													selectInput("periodSTARR","Time Period", period),
-													selectInput("yeartypeSTARR", "Year Type", year_type)
-											),
-											conditionalPanel("input.metricSTARR == 'timing'",
-													selectInput("yeartypetimSTARR", "Year Type", year_type)
-											)	 
-									  )
-									),
-									column(width=4,
-											box(id="selectbox",width=NULL, 
-													 checkboxGroupInput("sitetypeSTARR", "Select Site Type:", c("Impaired" = "impaired", "Unimpaired" = "unimpaired"), selected = c("impaired", "unimpaired")
-													                   )
-												)
-										
-									), style="font-size:small;")),
-							fluidRow(column(width=12,
-									box(id="selectsites",width=NULL, 
-											conditionalPanel("input.metricSTARR != 'timing'",
-													selectInput("siteSTARR","Site Selection", sites)
-											),
-											conditionalPanel("input.metricSTARR == 'timing'",
-													selectInput("sitetimingSTARR", "Site Selection", includeallsites)
-											)	 
-									  ) 
-									))
-									
-                     )
-              )
+                     )))
     ),
     tabItem(tabName= "dataexplorer",
             fluidRow(column(width=6,

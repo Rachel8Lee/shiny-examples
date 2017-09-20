@@ -59,10 +59,10 @@ bodies <- dashboardBody(
 											conditionalPanel("input.metric != 'timing'",
 													selectInput("period","Time Period", period),
 													selectInput("yeartype", "Year Type", year_type)
-											)#,
-											#conditionalPanel("input.metric == 'timing'",
-											##		selectInput("yeartypetim", "Year Type", year_type)
-											#)	 
+											),
+											conditionalPanel("input.metric == 'timing'",
+													selectInput("yeartypetim", "Year Type", year_type)
+											)	 
 									  )
 									),
 									column(width=4,
@@ -109,36 +109,36 @@ bodies <- dashboardBody(
 									div(
 									column(width=4,
 											box(id="selectbox",width=NULL, 
-													selectInput("record","Record Length", record_length),
-													selectInput("metric", "Metric", metric)
+													selectInput("recordSTARR","Record Length", record_length),
+													selectInput("metricSTARR", "Metric", metric)
 												)
 										
 									),
 									column(width=4,
 										  box(id="selectbox2",width=NULL, 
-											conditionalPanel("input.metric != 'timing'",
-													selectInput("period","Time Period", period),
-													selectInput("yeartype", "Year Type", year_type)
+											conditionalPanel("input.metricSTARR != 'timing'",
+													selectInput("periodSTARR","Time Period", period),
+													selectInput("yeartypeSTARR", "Year Type", year_type)
 											),
-											conditionalPanel("input.metric == 'timing'",
-													selectInput("yeartypetim", "Year Type", year_type)
+											conditionalPanel("input.metricSTARR == 'timing'",
+													selectInput("yeartypetimSTARR", "Year Type", year_type)
 											)	 
 									  )
 									),
 									column(width=4,
 											box(id="selectbox",width=NULL, 
-													 checkboxGroupInput("sitetype", "Select Site Type:", c("Impaired" = "impaired", "Unimpaired" = "unimpaired"), selected = c("impaired", "unimpaired")
+													 checkboxGroupInput("sitetypeSTARR", "Select Site Type:", c("Impaired" = "impaired", "Unimpaired" = "unimpaired"), selected = c("impaired", "unimpaired")
 													                   )
 												)
 										
 									), style="font-size:small;")),
 							fluidRow(column(width=12,
 									box(id="selectsites",width=NULL, 
-											conditionalPanel("input.metric != 'timing'",
-													selectInput("site","Site Selection", sites)
+											conditionalPanel("input.metricSTARR != 'timing'",
+													selectInput("siteSTARR","Site Selection", sites)
 											),
-											conditionalPanel("input.metric == 'timing'",
-													selectInput("sitetiming", "Site Selection", includeallsites)
+											conditionalPanel("input.metricSTARR == 'timing'",
+													selectInput("sitetimingSTARR", "Site Selection", includeallsites)
 											)	 
 									  ) 
 									))

@@ -19,6 +19,16 @@ function(input, output, session) {
       ) %>%
       addScaleBar("bottomright",  options = scaleBarOptions(imperial = FALSE)) %>%
       setView(lng = -120.51, lat = 38.06, zoom = 6)
+  })	
+	
+  output$mapSTARR <- renderLeaflet({
+    leaflet() %>%
+      addTiles(
+        urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
+        attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>'
+      ) %>%
+      addScaleBar("bottomright",  options = scaleBarOptions(imperial = FALSE)) %>%
+      setView(lng = -120.51, lat = 38.06, zoom = 6)
   })
 	
   # reactive data set 

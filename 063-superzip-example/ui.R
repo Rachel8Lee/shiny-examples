@@ -101,7 +101,7 @@ bodies <- dashboardBody(
                            includeScript("gomap.js")
                          ),
                          tags$style(type = "text/css", "#map {height: calc(100vh - 100px) !important;}"),
-                         leafletOutput("map")
+                         leafletOutput("mapSTARR")
                      )))
     ),
     tabItem(tabName= "dataexplorer",

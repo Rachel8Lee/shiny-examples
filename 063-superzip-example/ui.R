@@ -60,9 +60,9 @@ bodies <- dashboardBody(
 													selectInput("period","Time Period", period),
 													selectInput("yeartype", "Year Type", year_type)
 											),
-											conditionalPanel("input.metric == 'timing'",
-													selectInput("yeartypetim", "Year Type", year_type)
-											)	 
+											#conditionalPanel("input.metric == 'timing'",
+											##		selectInput("yeartypetim", "Year Type", year_type)
+											#)	 
 									  )
 									),
 									column(width=4,

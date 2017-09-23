@@ -30,8 +30,8 @@ function(input, output, session) {
       ) %>%
       addScaleBar("bottomright",  options = scaleBarOptions(imperial = FALSE)) %>%
       setView(lng = -120.51, lat = 38.06, zoom = 6)
-      area <- readShapePoly("basin.shp")
-      plot(area)
+      #area <- readShapePoly("basin.shp")
+      #plot(area)
   })
 	
   # reactive data set 

@@ -23,12 +23,14 @@ function(input, output, session) {
   })	
 	
   output$mapSTARR <- renderLeaflet({
-		area <- readShapePoly("basin.shp")
-    leaflet(data = area) %>%
+    areaTry <- readShapePoly("basin.shp")
+    leaflet() %>%
       addTiles(
         urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
         attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>'
       ) %>%
+      addPolygon(data = areaTry, fill = FALSE, stroke = TRUE, color = "#03F", group = "Study area")
+      %>% 
       addScaleBar("bottomright",  options = scaleBarOptions(imperial = FALSE)) %>%
       setView(lng = -120.51, lat = 38.06, zoom = 6)
   })

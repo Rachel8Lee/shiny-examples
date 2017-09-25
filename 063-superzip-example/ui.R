@@ -143,7 +143,7 @@ bodies <- dashboardBody(
 													selectInput("sitetimingSTARR", "Site Selection", includeallsites)
 											)	 
 									  ) 
-									))
+									)
 									
               )
     ),

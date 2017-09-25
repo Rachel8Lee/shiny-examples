@@ -102,7 +102,57 @@ bodies <- dashboardBody(
                          ),
                          tags$style(type = "text/css", "#map {height: calc(100vh - 100px) !important;}"),
                          leafletOutput("mapSTARR")
-                     )))
+                     )),
+              column(width=6,
+                     fluidRow(tags$head(tags$style(HTML('
+                                                        .form-group, .selectize-control {
+                                                        margin-bottom: 5px;
+                                                        }'))), 
+									div(
+									column(width=4,
+											box(id="selectbox",width=NULL, 
+													selectInput("record","Record Length", record_length),
+													selectInput("metric", "Metric", metric)
+												)
+										
+									),
+									column(width=4,
+										  box(id="selectbox2",width=NULL, 
+											conditionalPanel("input.metric != 'timing'",
+													selectInput("period","Time Period", period),
+													selectInput("yeartype", "Year Type", year_type)
+											),
+											conditionalPanel("input.metric == 'timing'",
+													selectInput("yeartypetim", "Year Type", year_type)
+											)	 
+									  )
+									),
+									column(width=4,
+											box(id="selectbox",width=NULL, 
+													 checkboxGroupInput("sitetype", "Select Site Type:", c("Impaired" = "impaired", "Unimpaired" = "unimpaired"), selected = c("impaired", "unimpaired")
+													                   )
+												)
+										
+									), style="font-size:small;")),
+							fluidRow(column(width=12,
+									box(id="selectsites",width=NULL, 
+											conditionalPanel("input.metric != 'timing'",
+													selectInput("site","Site Selection", sites)
+											),
+											conditionalPanel("input.metric == 'timing'",
+													selectInput("sitetiming", "Site Selection", includeallsites)
+											)	 
+									  ) 
+									)),
+									fluidRow(column(width=12,
+									                box(width=NULL,
+									                    #tags$style(type = "text/css", "#IMplot height:{15000px} !important;}"),
+									                    plotOutput("IMplot", height = "650px")
+									                )
+									)
+									)
+                     )#100vmax
+              )
     ),
     tabItem(tabName= "dataexplorer",
             fluidRow(column(width=6,

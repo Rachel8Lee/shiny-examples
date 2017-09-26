@@ -68,6 +68,12 @@ function(input, output, session) {
 		  temp <- temp[which(temp$status == input$sitetypeSTARR),]}
 	  return(temp)
 	})
+	
+	observe({
+	    leafletProxy("mapSTARR", data = siteSTARR()) %>%
+      addCircles(~longitude, ~latitude, radius=100, layerId=~site_no, stroke=TRUE, 
+                 weight = 1, color ="#000000", fillOpacity=0.9, fillColor="black") 
+	})
 
 	## show barplot based on map icon click or drop down menu
   whichSiteInput <- reactiveValues(reactInd = 0)

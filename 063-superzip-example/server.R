@@ -4,6 +4,7 @@ library(lattice)
 library(dplyr)
 library(gplots)
 library(ggplot2)
+library(rgdal)
 library(leaflet)
 library(maptools)
 source("barplots2.R")
@@ -31,7 +32,7 @@ function(input, output, session) {
         urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
         attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>'
       ) %>% 
-      addPolygons(data=myDF,weight=5,col = 'black')%>%
+      addPolygons(data=myDF,weight=3,fill = FALSE,col = 'black')%>%
       addScaleBar("bottomright",  options = scaleBarOptions(imperial = FALSE)) %>%
       setView(lng = -120.51, lat = 38.06, zoom = 6)
   })

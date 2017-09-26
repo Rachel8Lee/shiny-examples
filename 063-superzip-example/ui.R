@@ -141,10 +141,10 @@ bodies <- dashboardBody(
 											),
 											conditionalPanel("input.metricSTARR == 'timing'",
 													selectInput("sitetimingSTARR", "Site Selection", includeallsites)
-											)	 
+												)	 
 									  ) 
-									)
-									
+									))
+    )#100vmax
               )
     ),
     tabItem(tabName= "dataexplorer",

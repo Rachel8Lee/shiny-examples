@@ -56,7 +56,7 @@ function(input, output, session) {
 	  siteSTARR <- reactive({	      
 	  if (input$metricSTARR == "magnitude") {
 	    temp <- subset(allsites, allsites$tag == input$recordSTARR & allsites$yeartype == input$yeartypeSTARR & allsites$period == input$periodSTARR & allsites$valtype == "vol AF") }
-          else iSTARRf (input$metric == "duration") {
+          else if (input$metricSTARR == "duration") {
 	    temp<- subset(allsites, allsites$tag == input$recordSTARR & allsites$yeartype == input$yeartypeSTARR & allsites$period == input$periodSTARR & allsites$valtype == "duration_days") }
 	  else if (input$metricSTARR == "intraannual frequency"){
 	    temp<- subset(allsites, allsites$tag == input$recordSTARR & allsites$yeartype == input$yeartypeSTARR & allsites$period == input$periodSTARR & allsites$valtype == "intraannual_frequency_numpeaks") }

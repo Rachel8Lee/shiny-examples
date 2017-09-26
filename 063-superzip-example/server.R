@@ -60,8 +60,8 @@ function(input, output, session) {
 	    temp<- subset(allsites, allsites$tag == input$recordSTARR & allsites$yeartype == input$yeartypeSTARR & allsites$period == input$periodSTARR & allsites$valtype == "duration_days") }
 	  else if (input$metricSTARR == "intraannual frequency"){
 	    temp<- subset(allsites, allsites$tag == input$recordSTARR & allsites$yeartype == input$yeartypeSTARR & allsites$period == input$periodSTARR & allsites$valtype == "intraannual_frequency_numpeaks") }
-	  else if (input$mSTARRetricSTARR == "interannual frequency"){
-			temp<- subset(allsites, allsites$tag ==STARR input$recordSTARR & allsites$yeartype == input$yeartypeSTARR & allsites$period == input$periodSTARR & allsites$valtype == "intERannual_frequency_fraction_of_years") }
+	  else if (input$metricSTARR == "interannual frequency"){
+			temp<- subset(allsites, allsites$tag == input$recordSTARR & allsites$yeartype == input$yeartypeSTARR & allsites$period == input$periodSTARR & allsites$valtype == "intERannual_frequency_fraction_of_years") }
 		else {temp <- subset(allsites, allsites$tag == input$recordSTARR & allsites$yeartype == input$yeartypetimSTARR & allsites$valtype == "timing")}
 	  temp <- temp[order(temp$avg, decreasing = TRUE),]
 	  if (length(input$sitetypeSTARR) == 1) {

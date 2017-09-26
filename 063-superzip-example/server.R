@@ -52,6 +52,22 @@ function(input, output, session) {
 		  temp <- temp[which(temp$status == input$sitetype),]}
 	  return(temp)
 	})
+	
+	  siteSTARR <- reactive({	      
+	  if (input$metricSTARR == "magnitude") {
+	    temp <- subset(allsites, allsites$tag == input$recordSTARR & allsites$yeartype == input$yeartypeSTARR & allsites$period == input$periodSTARR & allsites$valtype == "vol AF") }
+          else iSTARRf (input$metric == "duration") {
+	    temp<- subset(allsites, allsites$tag == input$recordSTARR & allsites$yeartype == input$yeartypeSTARR & allsites$period == input$periodSTARR & allsites$valtype == "duration_days") }
+	  else if (input$metricSTARR == "intraannual frequency"){
+	    temp<- subset(allsites, allsites$tag == input$recordSTARR & allsites$yeartype == input$yeartypeSTARR & allsites$period == input$periodSTARR & allsites$valtype == "intraannual_frequency_numpeaks") }
+	  else if (input$mSTARRetricSTARR == "interannual frequency"){
+			temp<- subset(allsites, allsites$tag ==STARR input$recordSTARR & allsites$yeartype == input$yeartypeSTARR & allsites$period == input$periodSTARR & allsites$valtype == "intERannual_frequency_fraction_of_years") }
+		else {temp <- subset(allsites, allsites$tag == input$recordSTARR & allsites$yeartype == input$yeartypetimSTARR & allsites$valtype == "timing")}
+	  temp <- temp[order(temp$avg, decreasing = TRUE),]
+	  if (length(input$sitetypeSTARR) == 1) {
+		  temp <- temp[which(temp$status == input$sitetypeSTARR),]}
+	  return(temp)
+	})
 
 	## show barplot based on map icon click or drop down menu
   whichSiteInput <- reactiveValues(reactInd = 0)

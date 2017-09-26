@@ -25,16 +25,15 @@ function(input, output, session) {
 	
   output$mapSTARR <- renderLeaflet({
     shapeData <- readOGR("basin.shp")
-    #myDF<-fortify(myFile)
 		myDF <- spTransform(shapeData, CRS("+proj=longlat +ellps=GRS80"))
     leaflet() %>%
       addTiles(
         urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
         attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>'
       ) %>% 
-      addPolygons(data=myDF,weight=3,col = 'black',fill = FALSE)%>%
+      addPolygons(data=myDF,weight=3, opacity = 0.9,col = 'black',fill = FALSE)%>%
       addScaleBar("bottomright",  options = scaleBarOptions(imperial = FALSE)) %>%
-      setView(lng = -120.51, lat = 38.06, zoom = 6)
+      setView(lng = -120.51, lat = 38.06, zoom = 5)
   })
 	
   # reactive data set 

@@ -16,7 +16,7 @@ function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet() %>%
       addTiles(
-        urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/14/8038/5423.png",
+        urlTemplate = "https://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=<pk.eyJ1IjoicmNobGVlIiwiYSI6ImNqODNpNjN3NTk0aTEzM25wc2FhOGVtc3IifQ.7xPKsXkDV9yjwPtf9zn06g>",
         attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>'
       ) %>%
       addScaleBar("bottomright",  options = scaleBarOptions(imperial = FALSE)) %>%

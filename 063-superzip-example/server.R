@@ -16,7 +16,7 @@ function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet() %>%
       addTiles(
-        urlTemplate = "//{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png",
+        urlTemplate = "//{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicmNobGVlIiwiYSI6ImNqODNpNjN3NTk0aTEzM25wc2FhOGVtc3IifQ.7xPKsXkDV9yjwPtf9zn06g",
         attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>'
       ) %>%
       addScaleBar("bottomright",  options = scaleBarOptions(imperial = FALSE)) %>%
@@ -28,7 +28,7 @@ function(input, output, session) {
 		myDF <- spTransform(shapeData, CRS("+proj=longlat +ellps=GRS80"))
     leaflet() %>%
       addTiles(
-        urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
+        urlTemplate = "//{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png",
         attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>'
       ) %>% 
       addPolygons(data=myDF,weight=3, opacity = 0.9,col = 'black',fill = FALSE)%>%

@@ -25,13 +25,16 @@ function(input, output, session) {
 	
   output$mapSTARR <- renderLeaflet({
     shapeData <- readOGR("basin.shp")
-		myDF <- spTransform(shapeData, CRS("+proj=longlat +ellps=GRS80"))
+    myDF <- spTransform(shapeData, CRS("+proj=longlat +ellps=GRS80"))
+		shapeData2 <- readOGR("cond_band_attr.shp")
+    myDF2 <- spTransform(shapeData2, CRS("+proj=longlat +ellps=GRS80"))
     leaflet() %>%
       addTiles(
         urlTemplate = "//{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png",
         attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>'
       ) %>% 
       addPolygons(data=myDF,weight=3, opacity = 0.9,col = 'black',fill = FALSE)%>%
+		  addPolygons(data=myDF2,weight=3, opacity = 0.8,col = 'black',fill = FALSE)%>%
       addScaleBar("bottomright",  options = scaleBarOptions(imperial = FALSE)) %>%
       setView(lng = -120.51, lat = 38.06, zoom = 5)
   })

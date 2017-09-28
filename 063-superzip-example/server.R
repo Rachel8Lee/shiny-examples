@@ -33,7 +33,6 @@ function(input, output, session) {
         attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>'
       ) %>% 
       addPolygons(data=myDF,weight=3, opacity = 0.9,col = 'black',fill = FALSE)%>%
-		  addPolygons(data=myDF2,weight=3, opacity = 0.8,col = 'black',fill = FALSE)%>%
       addScaleBar("bottomright",  options = scaleBarOptions(imperial = FALSE)) %>%
       setView(lng = -120.51, lat = 38.06, zoom = 5)
   })

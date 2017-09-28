@@ -26,8 +26,7 @@ function(input, output, session) {
   output$mapSTARR <- renderLeaflet({
     shapeData <- readOGR("basin.shp")
     myDF <- spTransform(shapeData, CRS("+proj=longlat +ellps=GRS80"))
-		shapeData2 <- readOGR("cond_band_attr.shp")
-    myDF2 <- spTransform(shapeData2, CRS("+proj=longlat +ellps=GRS80"))
+		
     leaflet() %>%
       addTiles(
         urlTemplate = "//{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png",

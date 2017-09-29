@@ -303,6 +303,14 @@ function(input, output, session) {
     showSitePopup(event$id, event$lat, event$lng)
   })
 
+  observe({
+    leafletProxy("mapSTARR") %>% clearPopups()
+    event <- input$map_shape_click
+    if (is.null(event))
+      return()
+    showSitePopup(event$id, event$lat, event$lng)
+  })	
+	
   ## Data Explorer ##
   # to download
 	sitedataDE <- reactive({	      

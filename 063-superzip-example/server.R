@@ -291,9 +291,37 @@ function(input, output, session) {
       sprintf("%s : %.2f %s", valuename, selectedSite$avg, unitMeasure), tags$br()	    
     ))
     leafletProxy("map") %>% addPopups(lng, lat, content, layerId = site_no)
+  }
+	
+	  # Show a popup at the given location
+  showSitePopupSTARR <- function(site_no, lat, lng) {
+    selectedSite <- siteSTARR()[siteSTARR()$site_no == site_no,]
+	  if(selectedSite$valtype[1]=="vol AF")	{
+		  valuename<-"Magnitude"
+			unitMeasure <-"TAF"}
+		else if(selectedSite$valtype[1]=="duration_days")	{
+			valuename<-"Duration"
+		  unitMeasure <-"Days"}
+	  else if(selectedSite$valtype[1]=="intraannual_frequency_numpeaks")	{
+			valuename<-"Intra-Anual Frequency"
+		  unitMeasure<-"Number of Peaks"}
+	  else if(selectedSite$valtype[1]=="intERannual_frequency_fraction_of_years")	{
+			valuename<-"Inter-Annual Frequency"
+		  unitMeasure<-"Fraction of Years"}
+	  else{
+			valuename<-"Timing"
+			unitMeasure<-"Month"	}
+    content <- as.character(tagList(
+      tags$h4("Site Number:", as.integer(selectedSite$site_no)),
+      sprintf("Station Name: %s", selectedSite$station_nm), tags$br(),
+      sprintf("Longitude: %s", selectedSite$longitude), tags$br(),
+      sprintf("Latitude: %s", selectedSite$latitude), tags$br(),
+      sprintf("Status: %s", selectedSite$status), tags$br(),
+      sprintf("%s : %.2f %s", valuename, selectedSite$avg, unitMeasure), tags$br()	    
+    ))
     leafletProxy("mapSTARR") %>% addPopups(lng, lat, content, layerId = site_no)
   }
-
+	
   # When map is clicked, show a popup with city info
   observe({
     leafletProxy("map") %>% clearPopups()
@@ -308,7 +336,7 @@ function(input, output, session) {
     event <- input$map_shape_click
     if (is.null(event))
       return()
-    showSitePopup(event$id, event$lat, event$lng)
+    showSitePopupSTARR(event$id, event$lat, event$lng)
   })	
 	
   ## Data Explorer ##

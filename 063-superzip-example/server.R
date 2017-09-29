@@ -291,6 +291,7 @@ function(input, output, session) {
       sprintf("%s : %.2f %s", valuename, selectedSite$avg, unitMeasure), tags$br()	    
     ))
     leafletProxy("map") %>% addPopups(lng, lat, content, layerId = site_no)
+    leafletProxy("mapSTARR") %>% addPopups(lng, lat, content, layerId = site_no)
   }
 
   # When map is clicked, show a popup with city info

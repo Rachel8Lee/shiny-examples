@@ -263,13 +263,7 @@ function(input, output, session) {
 	  zoomInt <- min(7, zoomInt)
 	  zoomInt <- max(1, zoomInt)	
 			sizetableTim <- matrix(
-		  c(50000,50000,50000,50000,50000,50000,50000,
-      30000,30000,30000,30000,30000,30000,30000,
-      10000,10000,10000,10000,10000,10000,10000, 
-			7500,7500,7500,7500,7500,7500,7500,
-			5000,5000,5000,5000,5000,5000,5000,
-      2000,2000,2000,2000,2000,2000,2000,
-      1000,1000,1000,1000,1000,1000,1000), nrow=7, ncol=7, byrow = TRUE
+		  c(50000,30000,10000,7500,5000,2000,1000), nrow=7, ncol=1, byrow = TRUE
 		)
 		   leafletProxy("mapSTARR", data = siteSTARR()) %>%
        addCircles(~longitude, ~latitude, radius=sizetableTim[zoomInt,], layerId=~site_no, stroke=TRUE, 

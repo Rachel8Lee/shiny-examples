@@ -259,7 +259,7 @@ function(input, output, session) {
   })
 	
   observe({
-	  zoomInt <- input$map_zoom - 3
+	  zoomInt <- input$mapSTARR_zoom - 3
 	  zoomInt <- min(7, zoomInt)
 	  zoomInt <- max(1, zoomInt)	
 			sizetableTim <- matrix(

@@ -259,15 +259,9 @@ function(input, output, session) {
   })
 	
   observe({
-	  zoomInt <- input$mapSTARR_zoom - 3
-	  zoomInt <- min(7, zoomInt)
-	  zoomInt <- max(1, zoomInt)	
-			sizetableTim <- matrix(
-		  c(50000,30000,10000,7500,5000,2000,1000), nrow=7, ncol=1, byrow = TRUE
-		)
-		   leafletProxy("mapSTARR", data = siteSTARR()) %>%
-       addCircles(~longitude, ~latitude, radius=sizetableTim[zoomInt,], layerId=~site_no, stroke=TRUE, 
-                 weight = 1, color ="#000000", fillOpacity=0.9, fillColor="black") 
+		leafletProxy("mapSTARR", data = siteSTARR()) %>%
+      addCircles(~longitude, ~latitude, radius=450, layerId=~site_no, stroke=TRUE, 
+      weight = 1, color ="#000000", fillOpacity=0.9, fillColor="black") 
 		})
 
   # Show a popup at the given location

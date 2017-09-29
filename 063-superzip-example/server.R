@@ -333,7 +333,7 @@ function(input, output, session) {
 
   observe({
     leafletProxy("mapSTARR") %>% clearPopups()
-    event <- input$map_shape_click
+    event <- input$mapSTARR_shape_click
     if (is.null(event))
       return()
     showSitePopupSTARR(event$id, event$lat, event$lng)

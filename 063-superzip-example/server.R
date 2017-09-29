@@ -69,12 +69,6 @@ function(input, output, session) {
 		  temp <- temp[which(temp$status == input$sitetypeSTARR),]}
 	  return(temp)
 	})
-	
-	observe({
-	    leafletProxy("mapSTARR", data = siteSTARR()) %>%
-      addCircles(~longitude, ~latitude, radius=100, layerId=~site_no, stroke=TRUE, 
-                 weight = 1, color ="#000000", fillOpacity=0.9, fillColor="black") 
-	})
 
 	## show barplot based on map icon click or drop down menu
   whichSiteInput <- reactiveValues(reactInd = 0)
@@ -263,6 +257,24 @@ function(input, output, session) {
       addLegend("bottomleft", values=dom, colors=colorAdditions, title=legendTitle, layerId="colorLegend", 
                 opacity=0.9, labels=labelAdditions)
   })
+	
+  observe({
+	  zoomInt <- input$map_zoom - 3
+	  zoomInt <- min(7, zoomInt)
+	  zoomInt <- max(1, zoomInt)	
+			sizetableTim <- matrix(
+		  c(50000,50000,50000,50000,50000,50000,50000,
+      30000,30000,30000,30000,30000,30000,30000,
+      10000,10000,10000,10000,10000,10000,10000, 
+			7500,7500,7500,7500,7500,7500,7500,
+			5000,5000,5000,5000,5000,5000,5000,
+      2000,2000,2000,2000,2000,2000,2000,
+      1000,1000,1000,1000,1000,1000,1000), nrow=7, ncol=7, byrow = TRUE
+		)
+		   leafletProxy("mapSTARR", data = siteSTARR()) %>%
+       addCircles(~longitude, ~latitude, radius=100, layerId=~site_no, stroke=TRUE, 
+                 weight = 1, color ="#000000", fillOpacity=0.9, fillColor="black") 
+		})
 
   # Show a popup at the given location
   showSitePopup <- function(site_no, lat, lng) {

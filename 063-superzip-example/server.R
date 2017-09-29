@@ -272,7 +272,7 @@ function(input, output, session) {
       1000,1000,1000,1000,1000,1000,1000), nrow=7, ncol=7, byrow = TRUE
 		)
 		   leafletProxy("mapSTARR", data = siteSTARR()) %>%
-       addCircles(~longitude, ~latitude, radius=100, layerId=~site_no, stroke=TRUE, 
+       addCircles(~longitude, ~latitude, radius=sizetableTim[zoomInt,], layerId=~site_no, stroke=TRUE, 
                  weight = 1, color ="#000000", fillOpacity=0.9, fillColor="black") 
 		})
 
